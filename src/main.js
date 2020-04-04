@@ -1,5 +1,7 @@
 'use strict';
 
+const EXTRA_BLOCKS_COUNT = 2
+
 const createProfileTemplate = () => {
   return (
     `<section class="header__profile profile">
@@ -270,6 +272,11 @@ render(siteMainElement, createNavigationTemplate());
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsContainerTemplate());
 
-render(siteMainElement, createFilmsContainerExtraTemplate());
+for (let i = 0; i < EXTRA_BLOCKS_COUNT; i++) {
+  render(siteMainElement, createFilmsContainerExtraTemplate());
+}
 
-render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+const boardElement = siteMainElement.querySelector(`.board`);
+const taskListElement = siteMainElement.querySelector(`.board__tasks`);
+
+// render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

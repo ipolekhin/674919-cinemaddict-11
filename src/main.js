@@ -265,4 +265,11 @@ const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 const siteFooterElement = document.querySelector(`.footer`);
 
+render(siteHeaderElement, createProfileTemplate());
+render(siteMainElement, createNavigationTemplate());
+render(siteMainElement, createSortTemplate());
+render(siteMainElement, createFilmsContainerTemplate());
 
+render(siteMainElement, createFilmsContainerExtraTemplate());
+
+render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

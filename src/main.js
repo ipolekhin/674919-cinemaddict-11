@@ -1,6 +1,8 @@
 'use strict';
 
-const EXTRA_BLOCKS_COUNT = 2
+const FILMS_CARD_COUNT = 5;
+const EXTRA_BLOCKS_COUNT = 2;
+const EXTRA_FILMS_CARD_COUNT = 2;
 
 const createProfileTemplate = () => {
   return (
@@ -272,11 +274,12 @@ render(siteMainElement, createNavigationTemplate());
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsContainerTemplate());
 
-for (let i = 0; i < EXTRA_BLOCKS_COUNT; i++) {
-  render(siteMainElement, createFilmsContainerExtraTemplate());
+const filmsElement = siteMainElement.querySelector(`.films`);
+const filmsListContainer = filmsElement.querySelector(`.films-list__container`);
+
+for (let i = 0; i < FILMS_CARD_COUNT; i++) {
+  render(filmsListContainer, createFilmCardTemplate());
 }
 
-const boardElement = siteMainElement.querySelector(`.board`);
-const taskListElement = siteMainElement.querySelector(`.board__tasks`);
+render(filmsListContainer, createShowMoreButtonTemplate(), `afterend`);
 
-// render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

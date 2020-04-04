@@ -40,8 +40,6 @@ const createFilmsContainerTemplate = () => {
         <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
 
         <div class="films-list__container"></div>
-
-        <button class="films-list__show-more">Show more</button>
       </section>
     </section>`
   );
@@ -262,5 +260,9 @@ const createFilmDetailsTemplate = () => {
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
+
+const siteHeaderElement = document.querySelector(`.header`);
+const siteMainElement = document.querySelector(`.main`);
+const siteFooterElement = document.querySelector(`.footer`);
 
 

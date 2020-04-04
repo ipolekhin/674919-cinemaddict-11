@@ -297,9 +297,9 @@ const addTitleNameForExtraBlock = (extraBlock, index) => {
 };
 
 const addCardsToExtraBlock = (extraBlock) => {
-  const filmsListContainerElement = extraBlock.querySelector(`.films-list__container`);
+  const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
   for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
-    render(filmsListContainerElement, createFilmCardTemplate());
+    render(filmsListContainerExtraElement, createFilmCardTemplate());
   }
 };
 

@@ -265,6 +265,12 @@ const createFilmDetailsTemplate = () => {
   );
 };
 
+const createFooterStatisticsTemplate = () => {
+  return (
+    `<p>130 291 movies inside</p>`
+  );
+};
+
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
@@ -272,11 +278,13 @@ const render = (container, template, place = `beforeend`) => {
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 const siteFooterElement = document.querySelector(`.footer`);
+const siteFooterStatisticsElement = siteFooterElement.querySelector(`.footer__statistics`);
 
 render(siteHeaderElement, createProfileTemplate());
 render(siteMainElement, createNavigationTemplate());
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsContainerTemplate());
+render(siteFooterStatisticsElement, createFooterStatisticsTemplate());
 
 const filmsElement = siteMainElement.querySelector(`.films`);
 const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
@@ -309,4 +317,6 @@ filmsListExtraElement.forEach((extraBlock, index) => {
   addCardsToExtraBlock(extraBlock);
 });
 
-render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+
+
+// render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

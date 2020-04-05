@@ -317,6 +317,4 @@ filmsListExtraElement.forEach((extraBlock, index) => {
   addCardsToExtraBlock(extraBlock);
 });
 
-
-
-// render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

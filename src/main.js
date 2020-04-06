@@ -1,4 +1,12 @@
-'use strict';
+import {createProfileTemplate} from "./components/profile";
+import {createNavigationTemplate} from "./components/navigation";
+import {createSortTemplate} from "./components/sorting";
+import {createFilmsContainerTemplate} from "./components/films-container";
+import {createFilmsContainerExtraTemplate} from "./components/films-container-extra";
+import {createFilmCardTemplate} from "./components/film-card";
+import {createFilmDetailsTemplate} from "./components/film-details";
+import {createShowMoreButtonTemplate} from "./components/show-more-button";
+import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 
 const FILMS_CARD_COUNT = 5;
 const EXTRA_BLOCKS_COUNT = 2;
@@ -7,8 +15,6 @@ const namesOfExtraBlock = {
   0: `Top rated`,
   1: `Most commented`,
 };
-
-
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);

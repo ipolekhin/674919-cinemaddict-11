@@ -7,6 +7,7 @@ import {createFilmCardTemplate} from "./components/film-card";
 import {createFilmDetailsTemplate} from "./components/film-details";
 import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
+import {generateNavigations} from "./mock/navigation";
 
 const FILMS_CARD_COUNT = 5;
 const EXTRA_BLOCKS_COUNT = 2;
@@ -25,8 +26,11 @@ const siteMainElement = document.querySelector(`.main`);
 const siteFooterElement = document.querySelector(`.footer`);
 const siteFooterStatisticsElement = siteFooterElement.querySelector(`.footer__statistics`);
 
+const navigations = generateNavigations();
+console.log(navigations);
+
 render(siteHeaderElement, createProfileTemplate());
-render(siteMainElement, createNavigationTemplate());
+render(siteMainElement, createNavigationTemplate(navigations));
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsContainerTemplate());
 render(siteFooterStatisticsElement, createFooterStatisticsTemplate());
@@ -62,4 +66,4 @@ filmsListExtraElement.forEach((extraBlock, index) => {
   addCardsToExtraBlock(extraBlock);
 });
 
-render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+// render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

@@ -57,7 +57,7 @@ showMoreButton.addEventListener(`click`, () => {
   render(filmsListContainerElement, createFilmCardTemplate(films, prevFilmsCount, showingFilmsCount));
 
   if (showingFilmsCount >= films.length) {
-    showMoreButton.remove();
+    showMoreButton.style.display = `none`;
   }
 });
 

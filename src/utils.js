@@ -15,10 +15,19 @@ const getRandomIntegerNumber = (min, max) => min + Math.floor(Math.random() * (m
 
 const getRandomFractionalNumbers = (min, max, count) => (min + (Math.random() * (max - min))).toFixed(count);
 
+const getRandomDate = (start, end) => new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+
 const getRandomItem = (items) => {
   const randomIndex = getRandomIntegerNumber(0, items.length);
 
   return items[randomIndex];
 };
 
-export {formatTime, getRandomBooleanValue, getRandomItem, getRandomFractionalNumbers};
+export {
+  formatTime,
+  getRandomBooleanValue,
+  getRandomIntegerNumber,
+  getRandomItem,
+  getRandomFractionalNumbers,
+  getRandomDate
+};

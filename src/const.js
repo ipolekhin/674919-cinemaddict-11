@@ -35,3 +35,28 @@ export const NAVIGATION_NAMES = [
 export const SORT_NAMES = [
   `default`, `date`, `rating`
 ];
+
+export const GENRE_NAMES = [
+  `Musical`,
+  `Western`,
+  `Drama`,
+  `Comedy`,
+  `Cartoon`,
+  `Mystery`,
+];
+
+
+export const MONTH_NAMES = [
+  `January`,
+  `February`,
+  `March`,
+  `April`,
+  `May`,
+  `June`,
+  `July`,
+  `August`,
+  `September`,
+  `October`,
+  `November`,
+  `December`,
+];

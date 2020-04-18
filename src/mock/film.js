@@ -1,8 +1,11 @@
 import {POSTERS_IMG, TITLE_ITEMS, DESCRIPTION_ITEMS} from "../const.js";
-import {getRandomBooleanValue, getRandomItem} from "../utils";
+import {getRandomBooleanValue, getRandomFractionalNumbers, getRandomItem} from "../utils";
 
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
+const MIN_RATING = 1;
+const MAX_RATING = 10;
+const COUNT_AFTER_COMMA = 1;
 
 // Генерируем дату и время от текущего +/- 8
 // const getRandomDate = () => {
@@ -21,7 +24,7 @@ const generateFilm = () => {
   return {
     poster: getRandomItem(POSTERS_IMG),
     title: getRandomItem(TITLE_ITEMS),
-    rating: `8.7`,
+    rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
     info: `1929 1h 55m Musical`,
     description: description.length > MAX_LENGTH_DESCRIPTION
       ? description.slice(0, MAX_LENGTH_DESCRIPTION)

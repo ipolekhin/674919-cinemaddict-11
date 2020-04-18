@@ -11,9 +11,9 @@ const formatTime = (time) => {
 
 const getRandomBooleanValue = () => Math.random() > 0.5;
 
-const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor(Math.random() * (max - min));
-};
+const getRandomIntegerNumber = (min, max) => min + Math.floor(Math.random() * (max - min));
+
+const getRandomFractionalNumbers = (min, max, count) => (min + (Math.random() * (max - min))).toFixed(count);
 
 const getRandomItem = (items) => {
   const randomIndex = getRandomIntegerNumber(0, items.length);
@@ -21,4 +21,4 @@ const getRandomItem = (items) => {
   return items[randomIndex];
 };
 
-export {formatTime, getRandomBooleanValue, getRandomItem};
+export {formatTime, getRandomBooleanValue, getRandomItem, getRandomFractionalNumbers};

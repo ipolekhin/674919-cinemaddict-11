@@ -11,4 +11,14 @@ const formatTime = (time) => {
 
 const getRandomBooleanValue = () => Math.random() > 0.5;
 
-export {formatTime, getRandomBooleanValue, };
+const getRandomIntegerNumber = (min, max) => {
+  return min + Math.floor(Math.random() * (max - min));
+};
+
+const getRandomItem = (items) => {
+  const randomIndex = getRandomIntegerNumber(0, items.length);
+
+  return items[randomIndex];
+};
+
+export {formatTime, getRandomBooleanValue, getRandomItem};

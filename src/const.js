@@ -45,7 +45,6 @@ export const GENRE_NAMES = [
   `Mystery`,
 ];
 
-
 export const MONTH_NAMES = [
   `January`,
   `February`,

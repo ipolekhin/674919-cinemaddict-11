@@ -14,6 +14,8 @@ const MIN_RATING = 1;
 const MAX_RATING = 10;
 const COUNT_AFTER_COMMA = 1;
 const START_YEAR = 1929;
+const MAX_HOURS_DURATION = 2;
+const MAX_MINUTES_DURATION = 59;
 
 // Генерируем дату и время от текущего +/- 8
 // const getRandomDate = () => {
@@ -37,7 +39,10 @@ const generateFilm = () => {
     rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
     info: {
       year: myDate.getUTCFullYear(),
-      duration: `${getRandomIntegerNumber(0, 2)}h ${getRandomIntegerNumber(0, 59)}m`,
+      duration: `
+        ${getRandomIntegerNumber(0, MAX_HOURS_DURATION)}h
+        ${(getRandomIntegerNumber(0, MAX_MINUTES_DURATION)).toString().padStart(2, `0`)}m
+      `,
       genre: getRandomItem(GENRE_NAMES),
     },
     description: description.length > MAX_LENGTH_DESCRIPTION

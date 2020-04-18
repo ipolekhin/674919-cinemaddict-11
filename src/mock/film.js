@@ -1,5 +1,8 @@
-import {POSTERS_IMG, DESCRIPTION_ITEMS} from "../const.js";
+import {POSTERS_IMG, TITLE_ITEMS, DESCRIPTION_ITEMS} from "../const.js";
 import {getRandomBooleanValue, getRandomItem} from "../utils";
+
+const MAX_LENGTH_DESCRIPTION = 140;
+const ELLIPSIS = `...`;
 
 // Генерируем дату и время от текущего +/- 8
 // const getRandomDate = () => {
@@ -14,12 +17,15 @@ import {getRandomBooleanValue, getRandomItem} from "../utils";
 // };
 
 const generateFilm = () => {
+  const description = getRandomItem(DESCRIPTION_ITEMS);
   return {
     poster: getRandomItem(POSTERS_IMG),
-    title: `The Dance of Life`,
+    title: getRandomItem(TITLE_ITEMS),
     rating: `8.7`,
     info: `1929 1h 55m Musical`,
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    description: description.length > MAX_LENGTH_DESCRIPTION
+      ? description.slice(0, MAX_LENGTH_DESCRIPTION)
+      .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description,
     comments: `5 comments`,
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),

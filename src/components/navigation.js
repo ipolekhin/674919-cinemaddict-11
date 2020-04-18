@@ -1,7 +1,7 @@
 const createNavigationMarkup = ({name, count}, isFirstChild) => {
   return (
     `<a
-      href="#${name}"
+      href="#${isFirstChild ? name.slice(0, 3) : name}"
       class="main-navigation__item ${isFirstChild ? `main-navigation__item--active` : ``}">
       ${name}
       ${!isFirstChild ? `<span class="main-navigation__item-count">${count}</span>` : ``}

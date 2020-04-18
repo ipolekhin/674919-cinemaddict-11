@@ -8,8 +8,11 @@ import {createFilmDetailsTemplate} from "./components/film-details";
 import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
+import {generateFilms} from "./mock/film";
 
-const FILMS_CARD_COUNT = 5;
+const FILMS_COUNT = 17;
+const SHOWING_FILMS_COUNT_ON_START = 5;
+const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 const EXTRA_BLOCKS_COUNT = 2;
 const EXTRA_FILMS_CARD_COUNT = 2;
 const namesOfExtraBlock = {
@@ -17,17 +20,20 @@ const namesOfExtraBlock = {
   1: `Most commented`,
 };
 
-const render = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
-};
-
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
 const siteFooterElement = document.querySelector(`.footer`);
 const siteFooterStatisticsElement = siteFooterElement.querySelector(`.footer__statistics`);
+let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
-const navigations = generateNavigations();
-console.log(navigations);
+// Генерируем фильмы
+const films = generateFilms(FILMS_COUNT);
+const navigations = generateNavigations(films);
+console.log(films);
+
+const render = (container, template, place = `beforeend`) => {
+  container.insertAdjacentHTML(place, template);
+};
 
 render(siteHeaderElement, createProfileTemplate());
 render(siteMainElement, createNavigationTemplate(navigations));
@@ -38,32 +44,43 @@ render(siteFooterStatisticsElement, createFooterStatisticsTemplate());
 const filmsElement = siteMainElement.querySelector(`.films`);
 const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
 
-for (let i = 0; i < FILMS_CARD_COUNT; i++) {
-  render(filmsListContainerElement, createFilmCardTemplate());
-}
+render(filmsListContainerElement, createFilmCardTemplate(films, ``, SHOWING_FILMS_COUNT_ON_START));
 
 render(filmsListContainerElement, createShowMoreButtonTemplate(), `afterend`);
 
-for (let i = 0; i < EXTRA_BLOCKS_COUNT; i++) {
-  render(filmsElement, createFilmsContainerExtraTemplate());
-}
+const showMoreButton = document.querySelector(`.films-list__show-more`);
 
-const addTitleNameForExtraBlock = (extraBlock, index) => {
-  const filmsListTitleElement = extraBlock.querySelector(`.films-list__title`);
-  filmsListTitleElement.textContent = namesOfExtraBlock[index];
-};
+showMoreButton.addEventListener(`click`, () => {
+  const prevFilmsCount = showingFilmsCount;
 
-const addCardsToExtraBlock = (extraBlock) => {
-  const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
-  for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
-    render(filmsListContainerExtraElement, createFilmCardTemplate());
+  showingFilmsCount = showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
+  render(filmsListContainerElement, createFilmCardTemplate(films, prevFilmsCount, showingFilmsCount));
+
+  if (showingFilmsCount >= films.length) {
+    showMoreButton.remove();
   }
-};
-
-const filmsListExtraElement = filmsElement.querySelectorAll(`.films-list--extra`);
-filmsListExtraElement.forEach((extraBlock, index) => {
-  addTitleNameForExtraBlock(extraBlock, index);
-  addCardsToExtraBlock(extraBlock);
 });
+
+// for (let i = 0; i < EXTRA_BLOCKS_COUNT; i++) {
+//   render(filmsElement, createFilmsContainerExtraTemplate());
+// }
+//
+// const addTitleNameForExtraBlock = (extraBlock, index) => {
+//   const filmsListTitleElement = extraBlock.querySelector(`.films-list__title`);
+//   filmsListTitleElement.textContent = namesOfExtraBlock[index];
+// };
+//
+// const addCardsToExtraBlock = (extraBlock) => {
+//   const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
+//   for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
+//     render(filmsListContainerExtraElement, createFilmCardTemplate(films));
+//   }
+// };
+//
+// const filmsListExtraElement = filmsElement.querySelectorAll(`.films-list--extra`);
+// filmsListExtraElement.forEach((extraBlock, index) => {
+//   addTitleNameForExtraBlock(extraBlock, index);
+//   addCardsToExtraBlock(extraBlock);
+// });
 
 // render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);

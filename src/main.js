@@ -55,7 +55,7 @@ const popupFilmClickHandler = (evt) => {
     removeElement(`.film-details`);
 
     //3.4;
-    render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+    render(siteFooterElement, createFilmDetailsTemplate(films[0]), `afterend`);
 
     const filmDetailsCloseButton = document.querySelector(`.film-details__close-btn`);
     filmDetailsCloseButton.addEventListener(`click`, () => {

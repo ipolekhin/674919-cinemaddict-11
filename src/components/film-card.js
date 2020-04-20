@@ -9,7 +9,7 @@ const createFilmCardMarkup = (film) => {
       <p class="film-card__info">
         <span class="film-card__year">${info.releaseDate.getUTCFullYear()}</span>
         <span class="film-card__duration">${info.duration}</span>
-        <span class="film-card__genre">${info.genres}</span>
+        <span class="film-card__genre">${info.genres[0]}</span>
       </p>
       <img src="${poster}" alt="" class="film-card__poster">
       <p class="film-card__description">${shortDescription}</p>

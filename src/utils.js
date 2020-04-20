@@ -23,11 +23,19 @@ const getRandomItem = (items) => {
   return items[randomIndex];
 };
 
+const removeElement = (element) => {
+  const removeElement = document.querySelector(element);
+  if (removeElement) {
+    removeElement.remove();
+  }
+};
+
 export {
   formatTime,
   getRandomBooleanValue,
   getRandomIntegerNumber,
   getRandomItem,
   getRandomFractionalNumbers,
-  getRandomDate
+  getRandomDate,
+  removeElement
 };

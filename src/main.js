@@ -9,6 +9,7 @@ import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
+import {removeElement} from "./utils";
 
 const FILMS_COUNT = 17;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -43,6 +44,24 @@ render(siteFooterStatisticsElement, createFooterStatisticsTemplate());
 
 const filmsElement = siteMainElement.querySelector(`.films`);
 const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
+
+const popupFilmClickHandler = (evt) => {
+  if (evt.target.classList.contains(`film-card__poster`)
+    || evt.target.classList.contains(`film-card__title`)
+    || evt.target.classList.contains(`film-card__comments`)) {
+    console.log('клик2');
+    removeElement(`.film-details`);
+
+    render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+
+    const filmDetailsCloseButton = document.querySelector(`.film-details__close-btn`);
+    filmDetailsCloseButton.addEventListener(`click`, () => {
+      removeElement(`.film-details`);
+    });
+  }
+};
+
+filmsElement.addEventListener(`click`, popupFilmClickHandler);
 
 render(filmsListContainerElement, createFilmCardTemplate(films, ``, SHOWING_FILMS_COUNT_ON_START));
 
@@ -83,4 +102,4 @@ showMoreButton.addEventListener(`click`, () => {
 //   addCardsToExtraBlock(extraBlock);
 // });
 
-// render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
+

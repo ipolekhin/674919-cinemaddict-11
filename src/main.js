@@ -27,8 +27,9 @@ const siteFooterElement = document.querySelector(`.footer`);
 const siteFooterStatisticsElement = siteFooterElement.querySelector(`.footer__statistics`);
 let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
-// Генерируем фильмы
+// 3.1 - 3.2; Генерируем фильмы
 const films = generateFilms(FILMS_COUNT);
+// 3.5;
 const navigations = generateNavigations(films);
 console.log(films);
 
@@ -37,6 +38,7 @@ const render = (container, template, place = `beforeend`) => {
 };
 
 render(siteHeaderElement, createProfileTemplate());
+// 3.6;
 render(siteMainElement, createNavigationTemplate(navigations));
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsContainerTemplate());
@@ -52,6 +54,7 @@ const popupFilmClickHandler = (evt) => {
     console.log('клик2');
     removeElement(`.film-details`);
 
+    //3.4;
     render(siteFooterElement, createFilmDetailsTemplate(), `afterend`);
 
     const filmDetailsCloseButton = document.querySelector(`.film-details__close-btn`);
@@ -63,6 +66,7 @@ const popupFilmClickHandler = (evt) => {
 
 filmsElement.addEventListener(`click`, popupFilmClickHandler);
 
+// 3.3;
 render(filmsListContainerElement, createFilmCardTemplate(films, ``, SHOWING_FILMS_COUNT_ON_START));
 
 render(filmsListContainerElement, createShowMoreButtonTemplate(), `afterend`);

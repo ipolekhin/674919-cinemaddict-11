@@ -59,3 +59,40 @@ export const MONTH_NAMES = [
   `November`,
   `December`,
 ];
+
+export const COUNTRY_NAMES = [
+  `Australia`,
+  `France`,
+  `Russia`,
+  `Spain`,
+  `UK`,
+  `USA`,
+];
+
+export const DIRECTOR_NAMES = [
+  `Фёдор Бондарчук`,
+  `Anthony Mann`,
+  `Guy Ritchie`,
+  `Peter Farrelly`,
+  `Quentin Tarantino`,
+  `Tom McGrath`,
+];
+
+export const ACTOR_NAMES = [
+  `Erich von Stroheim`,
+  `Dan Duryea`,
+  `Hugh Grant`,
+  `Jason Statham`,
+  `Mary Beth Hughes`,
+  `Matthew McConaughey`,
+  `Quentin Tarantino`,
+];
+
+export const WRITER_NAMES = [
+  `Anne Wigton`,
+  `Guy Ritchie`,
+  `Heinz Herald`,
+  `Michael McCullers`,
+  `Quentin Tarantino`,
+  `Richard Weil`,
+];

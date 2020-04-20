@@ -1,5 +1,5 @@
 const createFilmCardMarkup = (film) => {
-  const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, rating, info, shortDescription, isWatchlist, isWatched, isFavorite, comments} = film;
   const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
 
   return (
@@ -7,12 +7,12 @@ const createFilmCardMarkup = (film) => {
       <h3 class="film-card__title">${title}</h3>
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
-        <span class="film-card__year">${info.year}</span>
+        <span class="film-card__year">${info.releaseDate.getUTCFullYear()}</span>
         <span class="film-card__duration">${info.duration}</span>
-        <span class="film-card__genre">${info.genre}</span>
+        <span class="film-card__genre">${info.genres}</span>
       </p>
       <img src="${poster}" alt="" class="film-card__poster">
-      <p class="film-card__description">${description}</p>
+      <p class="film-card__description">${shortDescription}</p>
       <a class="film-card__comments">${comments}</a>
       <form class="film-card__controls">
         <button

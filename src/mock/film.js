@@ -6,7 +6,13 @@ import {
   getRandomIntegerNumber,
   getRandomItem
 } from "../utils";
-import {GENRE_NAMES} from "../const";
+import {
+  ACTOR_NAMES,
+  COUNTRY_NAMES,
+  DIRECTOR_NAMES,
+  GENRE_NAMES,
+  WRITER_NAMES
+} from "../const";
 
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
@@ -32,20 +38,31 @@ const MAX_MINUTES_DURATION = 59;
 const generateFilm = () => {
   const description = getRandomItem(DESCRIPTION_ITEMS);
   const myDate  = getRandomDate(new Date(START_YEAR), new Date());
+  const writers= WRITER_NAMES
+    .slice(0,getRandomIntegerNumber(0, WRITER_NAMES.length))
+    .map((name) => name).join(`\n`);
+  const actors=ACTOR_NAMES
+    .slice(0,getRandomIntegerNumber(0, ACTOR_NAMES.length))
+    .map((name) => name).join(`\n`);
 
   return {
     poster: getRandomItem(POSTERS_IMG),
     title: getRandomItem(TITLE_ITEMS),
     rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
     info: {
-      year: myDate.getUTCFullYear(),
+      director: getRandomItem(DIRECTOR_NAMES),
+      writers,
+      actors,
+      releaseDate: myDate,
       duration: `
         ${getRandomIntegerNumber(0, MAX_HOURS_DURATION)}h
         ${(getRandomIntegerNumber(0, MAX_MINUTES_DURATION)).toString().padStart(2, `0`)}m
       `,
-      genre: getRandomItem(GENRE_NAMES),
+      country: getRandomItem(COUNTRY_NAMES),
+      genres: getRandomItem(GENRE_NAMES),
     },
-    description: description.length > MAX_LENGTH_DESCRIPTION
+    description,
+    shortDescription: description.length > MAX_LENGTH_DESCRIPTION
       ? description.slice(0, MAX_LENGTH_DESCRIPTION)
       .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description,
     comments: `5 comments`,

@@ -12,7 +12,7 @@ import {generateFilms} from "./mock/film";
 import {removeElement} from "./utils";
 import {keys} from "./const";
 
-const FILMS_COUNT = 17;
+const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 const EXTRA_BLOCKS_COUNT = 2;
@@ -38,7 +38,7 @@ const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
 
-render(siteHeaderElement, createProfileTemplate());
+render(siteHeaderElement, createProfileTemplate(navigations[2]));
 // 3.6;
 render(siteMainElement, createNavigationTemplate(navigations));
 render(siteMainElement, createSortTemplate());

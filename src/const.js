@@ -100,3 +100,9 @@ export const WRITER_NAMES = [
   `Quentin Tarantino`,
   `Richard Weil`,
 ];
+
+export const PROFILE_RATING = [
+  `Novice`,
+  `Fan`,
+  `Movie buff`,
+];

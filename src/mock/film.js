@@ -22,6 +22,7 @@ const COUNT_AFTER_COMMA = 1;
 const START_YEAR = 1929;
 const MAX_HOURS_DURATION = 2;
 const MAX_MINUTES_DURATION = 59;
+const MAX_COMMENTS = 17;
 
 // Генерируем дату и время от текущего +/- 8
 // const getRandomDate = () => {
@@ -70,7 +71,7 @@ const generateFilm = () => {
     shortDescription: description.length > MAX_LENGTH_DESCRIPTION
       ? description.slice(0, MAX_LENGTH_DESCRIPTION)
       .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description,
-    comments: `5 comments`,
+    comments: getRandomIntegerNumber(0, MAX_COMMENTS),
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),
     isFavorite: getRandomBooleanValue(),

@@ -28,7 +28,6 @@ let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 const films = generateFilms(FILMS_COUNT);
 // 3.5;
 const navigations = generateNavigations(films);
-console.log(films);
 
 render(siteHeaderElement, createProfileTemplate(navigations[2]));
 // 3.6;

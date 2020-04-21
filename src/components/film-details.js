@@ -1,5 +1,4 @@
 const createDetailsTopMarkup = (film) => {
-  console.log(film);
   const {
     poster,
     title,

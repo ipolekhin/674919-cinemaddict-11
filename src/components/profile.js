@@ -9,7 +9,7 @@ const selectProfileRating = (count) => {
   } else if (count >= 21) {
     result = PROFILE_RATING[2];
   }
-  console.log(result);
+
   return result;
 };
 

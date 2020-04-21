@@ -3,7 +3,7 @@ const FILM_QUANTITY = 2;
 const collectTopFilms = (films) => {
   let max = 0;
   return films.reduce((result, film) => {
-    const {rating} = film;
+    const {rating, comments} = film;
     if (rating > max) {
       max = rating;
       result.unshift(film);
@@ -15,11 +15,29 @@ const collectTopFilms = (films) => {
   }, []);
 };
 
-const getTopRatedFilms = (films) => {
-  const topFilms = collectTopFilms(films);
-  console.log(topFilms.length);
-
-  return topFilms;
+const collectMostCommentedFilms = (films) => {
+  let max = 0;
+  return films.reduce((result, film) => {
+    const {comments} = film;
+    if (comments > max) {
+      max = comments;
+      result.unshift(film);
+    }
+    if (result.length > FILM_QUANTITY) {
+      result.pop();
+    }
+    return result;
+  }, []);
 };
 
-export {getTopRatedFilms};
+const getExtraBlocksFilms = (films) => {
+  const topFilms = collectTopFilms(films);
+  const mostCommentedFilms = collectMostCommentedFilms(films);
+
+  return {
+    'Top rated': topFilms,
+    'Most commented': mostCommentedFilms,
+  };
+};
+
+export {getExtraBlocksFilms};

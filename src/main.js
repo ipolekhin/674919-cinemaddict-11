@@ -10,6 +10,7 @@ import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement} from "./utils";
+import {keys} from "./const";
 
 const FILMS_COUNT = 17;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -51,7 +52,6 @@ const popupFilmClickHandler = (evt) => {
   if (evt.target.classList.contains(`film-card__poster`)
     || evt.target.classList.contains(`film-card__title`)
     || evt.target.classList.contains(`film-card__comments`)) {
-    console.log('клик2');
     removeElement(`.film-details`);
 
     //3.4;
@@ -60,7 +60,17 @@ const popupFilmClickHandler = (evt) => {
     const filmDetailsCloseButton = document.querySelector(`.film-details__close-btn`);
     filmDetailsCloseButton.addEventListener(`click`, () => {
       removeElement(`.film-details`);
+      document.removeEventListener('keydown', popupEscHandler);
     });
+
+    const popupEscHandler = (evt) => {
+      if (evt.key === keys.ESC) {
+        removeElement(`.film-details`);
+        document.removeEventListener('keydown', popupEscHandler);
+      }
+    };
+
+    document.addEventListener(`keydown`, popupEscHandler);
   }
 };
 

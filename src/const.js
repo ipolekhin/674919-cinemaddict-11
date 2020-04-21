@@ -1,3 +1,7 @@
+export const keys = {
+  ESC: 'Escape',
+};
+
 export const POSTERS_IMG = [
   `./images/posters/made-for-each-other.png`,
   `./images/posters/popeye-meets-sinbad.png`,

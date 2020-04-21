@@ -3,7 +3,7 @@ const FILM_QUANTITY = 2;
 const collectTopFilms = (films) => {
   let max = 0;
   return films.reduce((result, film) => {
-    const {rating, comments} = film;
+    const {rating} = film;
     if (rating > max) {
       max = rating;
       result.unshift(film);

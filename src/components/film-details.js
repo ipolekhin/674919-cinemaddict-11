@@ -191,8 +191,8 @@ const createDetailsBottomMarkup = () => {
 };
 
 const createFilmDetailsTemplate = (film) => {
-  const detailsTopMarkup =  createDetailsTopMarkup(film);
-  const detailsBottomMarkup =  createDetailsBottomMarkup();
+  const detailsTopMarkup = createDetailsTopMarkup(film);
+  const detailsBottomMarkup = createDetailsBottomMarkup();
 
   return (
     `<section class="film-details">
@@ -205,4 +205,4 @@ const createFilmDetailsTemplate = (film) => {
   );
 };
 
-export {createFilmDetailsTemplate}
+export {createFilmDetailsTemplate};

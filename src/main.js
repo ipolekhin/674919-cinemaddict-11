@@ -11,12 +11,10 @@ import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
 import {keys} from "./const";
-import {getTopRatedFilms} from "./components/films-top-rated";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
-const EXTRA_FILMS_CARD_COUNT = 2;
 
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
@@ -46,19 +44,19 @@ const popupFilmClickHandler = (evt) => {
     || evt.target.classList.contains(`film-card__comments`)) {
     removeElement(`.film-details`);
 
-    //3.4;
+    // 3.4;
     render(siteFooterElement, createFilmDetailsTemplate(films[0]), `afterend`);
 
     const filmDetailsCloseButton = document.querySelector(`.film-details__close-btn`);
     filmDetailsCloseButton.addEventListener(`click`, () => {
       removeElement(`.film-details`);
-      document.removeEventListener('keydown', popupEscHandler);
+      document.removeEventListener(`keydown`, popupEscHandler);
     });
 
-    const popupEscHandler = (evt) => {
-      if (evt.key === keys.ESC) {
+    const popupEscHandler = (event) => {
+      if (event.key === keys.ESC) {
         removeElement(`.film-details`);
-        document.removeEventListener('keydown', popupEscHandler);
+        document.removeEventListener(`keydown`, popupEscHandler);
       }
     };
 
@@ -87,15 +85,3 @@ showMoreButton.addEventListener(`click`, () => {
 });
 
 render(filmsElement, createFilmsContainerExtraTemplate(films));
-
-// const addCardsToExtraBlock = (extraBlock) => {
-//   const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
-//   render(filmsListContainerExtraElement, createFilmCardTemplate(topRatedFilms, ``, EXTRA_FILMS_CARD_COUNT));
-// };
-//
-// const filmsListExtraElement = filmsElement.querySelectorAll(`.films-list--extra`);
-// filmsListExtraElement.forEach((extraBlock) => {
-//   addCardsToExtraBlock(extraBlock);
-// });
-
-

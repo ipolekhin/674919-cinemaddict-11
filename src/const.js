@@ -1,5 +1,5 @@
 export const keys = {
-  ESC: 'Escape',
+  ESC: `Escape`,
 };
 
 export const POSTERS_IMG = [

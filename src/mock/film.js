@@ -38,7 +38,7 @@ const MAX_COMMENTS = 17;
 
 const generateFilm = () => {
   const description = getRandomItem(DESCRIPTION_ITEMS);
-  const myDate  = getRandomDate(new Date(START_YEAR), new Date());
+  const myDate = getRandomDate(new Date(START_YEAR), new Date());
   const title = getRandomItem(TITLE_ITEMS);
   const writers = WRITER_NAMES
     .slice(0, getRandomIntegerNumber(1, WRITER_NAMES.length))

@@ -2,7 +2,7 @@ import {EXTRA_BLOCK_NAMES} from "../const";
 import {getExtraBlocksFilms} from "./films-top-rated";
 import {createFilmCardMarkup} from "./film-card";
 
-const createExtraBlockMarkup = (name, films, index) => {
+const createExtraBlockMarkup = (name, films) => {
   const filmMarkup = films.map((film) => createFilmCardMarkup(film)).join(`\n`);
   return (
     `<section class="films-list--extra">
@@ -15,7 +15,7 @@ const createExtraBlockMarkup = (name, films, index) => {
 
 const createFilmsContainerExtraTemplate = (films) => {
   const extraBlocks = getExtraBlocksFilms(films);
-  const extraBlocksMarkup = EXTRA_BLOCK_NAMES.map((name, i) => createExtraBlockMarkup(name, extraBlocks[name], i)).join(`\n`);
+  const extraBlocksMarkup = EXTRA_BLOCK_NAMES.map((name) => createExtraBlockMarkup(name, extraBlocks[name])).join(`\n`);
 
   return `${extraBlocksMarkup}`;
 };

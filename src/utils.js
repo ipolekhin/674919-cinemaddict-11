@@ -28,9 +28,9 @@ const getRandomItem = (items) => {
 };
 
 const removeElement = (element) => {
-  const removeElement = document.querySelector(element);
-  if (removeElement) {
-    removeElement.remove();
+  const removerElement = document.querySelector(element);
+  if (removerElement) {
+    removerElement.remove();
   }
 };
 

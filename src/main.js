@@ -11,6 +11,7 @@ import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement} from "./utils";
 import {keys} from "./const";
+import {getTopRatedFilms} from "./components/films-top-rated";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -90,13 +91,13 @@ showMoreButton.addEventListener(`click`, () => {
   }
 });
 
+const topRatedFilms = getTopRatedFilms(films);
+
 render(filmsElement, createFilmsContainerExtraTemplate());
 
 const addCardsToExtraBlock = (extraBlock) => {
   const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
-  for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
-    render(filmsListContainerExtraElement, createFilmCardTemplate(films, i, i + 1));
-  }
+  render(filmsListContainerExtraElement, createFilmCardTemplate(topRatedFilms, ``, EXTRA_FILMS_CARD_COUNT));
 };
 
 const filmsListExtraElement = filmsElement.querySelectorAll(`.films-list--extra`);

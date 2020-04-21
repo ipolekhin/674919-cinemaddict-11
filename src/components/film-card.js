@@ -41,4 +41,4 @@ const createFilmCardTemplate = (films, beginCount = 0, endCount) => {
   return `${filmMarkup}`;
 };
 
-export {createFilmCardTemplate};
+export {createFilmCardTemplate, createFilmCardMarkup};

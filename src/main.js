@@ -9,7 +9,7 @@ import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
-import {removeElement} from "./utils";
+import {removeElement, render} from "./utils";
 import {keys} from "./const";
 import {getTopRatedFilms} from "./components/films-top-rated";
 
@@ -29,10 +29,6 @@ const films = generateFilms(FILMS_COUNT);
 // 3.5;
 const navigations = generateNavigations(films);
 console.log(films);
-
-const render = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
-};
 
 render(siteHeaderElement, createProfileTemplate(navigations[2]));
 // 3.6;
@@ -91,18 +87,16 @@ showMoreButton.addEventListener(`click`, () => {
   }
 });
 
-const topRatedFilms = getTopRatedFilms(films);
+render(filmsElement, createFilmsContainerExtraTemplate(films));
 
-render(filmsElement, createFilmsContainerExtraTemplate());
-
-const addCardsToExtraBlock = (extraBlock) => {
-  const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
-  render(filmsListContainerExtraElement, createFilmCardTemplate(topRatedFilms, ``, EXTRA_FILMS_CARD_COUNT));
-};
-
-const filmsListExtraElement = filmsElement.querySelectorAll(`.films-list--extra`);
-filmsListExtraElement.forEach((extraBlock) => {
-  addCardsToExtraBlock(extraBlock);
-});
+// const addCardsToExtraBlock = (extraBlock) => {
+//   const filmsListContainerExtraElement = extraBlock.querySelector(`.films-list__container`);
+//   render(filmsListContainerExtraElement, createFilmCardTemplate(topRatedFilms, ``, EXTRA_FILMS_CARD_COUNT));
+// };
+//
+// const filmsListExtraElement = filmsElement.querySelectorAll(`.films-list--extra`);
+// filmsListExtraElement.forEach((extraBlock) => {
+//   addCardsToExtraBlock(extraBlock);
+// });
 
 

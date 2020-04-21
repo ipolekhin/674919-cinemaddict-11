@@ -1,3 +1,7 @@
+const render = (container, template, place = `beforeend`) => {
+  container.insertAdjacentHTML(place, template);
+};
+
 const castTimeFormat = (value) => {
   return value.toString().padStart(2, `0`);
 };
@@ -37,5 +41,6 @@ export {
   getRandomItem,
   getRandomFractionalNumbers,
   getRandomDate,
+  render,
   removeElement
 };

@@ -107,7 +107,7 @@ export const PROFILE_RATING = [
   `Movie buff`,
 ];
 
-export const NAME_EXTRA_BLOCK = [
+export const EXTRA_BLOCK_NAMES = [
   `Top rated`,
   `Most commented`,
 ];

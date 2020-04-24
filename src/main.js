@@ -10,7 +10,7 @@ import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
-import {keys} from "./const";
+import {Keys, keys} from "./const";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -54,7 +54,7 @@ const popupFilmClickHandler = (evt) => {
     });
 
     const popupEscHandler = (event) => {
-      if (event.key === keys.ESC) {
+      if (event.key === Keys.ESC) {
         removeElement(`.film-details`);
         document.removeEventListener(`keydown`, popupEscHandler);
       }
@@ -67,7 +67,7 @@ const popupFilmClickHandler = (evt) => {
 filmsElement.addEventListener(`click`, popupFilmClickHandler);
 
 // 3.3;
-render(filmsListContainerElement, createFilmCardTemplate(films, ``, SHOWING_FILMS_COUNT_ON_START));
+render(filmsListContainerElement, createFilmCardTemplate(films, SHOWING_FILMS_COUNT_ON_START));
 
 render(filmsListContainerElement, createShowMoreButtonTemplate(), `afterend`);
 

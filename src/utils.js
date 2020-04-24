@@ -27,8 +27,8 @@ const getRandomItem = (items) => {
   return items[randomIndex];
 };
 
-const removeElement = (element) => {
-  const removerElement = document.querySelector(element);
+const removeElement = (selector) => {
+  const removerElement = document.querySelector(selector);
   if (removerElement) {
     removerElement.remove();
   }

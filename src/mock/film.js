@@ -1,4 +1,11 @@
-import {POSTERS_IMG, TITLE_ITEMS, DESCRIPTION_ITEMS} from "../const.js";
+import {
+  ACTOR_NAMES,
+  DESCRIPTION_ITEMS,
+  DIRECTOR_NAMES,
+  POSTERS_IMAGES,
+  TITLE_ITEMS,
+  WRITER_NAMES
+} from "../mock/const";
 import {
   getRandomBooleanValue,
   getRandomDate,
@@ -7,11 +14,8 @@ import {
   getRandomItem
 } from "../utils";
 import {
-  ACTOR_NAMES,
   COUNTRY_NAMES,
-  DIRECTOR_NAMES,
   GENRE_NAMES,
-  WRITER_NAMES
 } from "../const";
 
 const MAX_LENGTH_DESCRIPTION = 140;
@@ -24,17 +28,11 @@ const MAX_HOURS_DURATION = 2;
 const MAX_MINUTES_DURATION = 59;
 const MAX_COMMENTS = 17;
 
-// Генерируем дату и время от текущего +/- 8
-// const getRandomDate = () => {
-//   const targetDate = new Date();
-//   const sign = getRandomBooleanValue() ? 1 : -1;
-//   const diffValue = sign * getRandomIntegerNumber(0, DAYS_VALUE);
-//
-//   targetDate.setDate(targetDate.getDate() + diffValue);
-//   targetDate.setHours(HOURS_VALUE);
-//
-//   return targetDate;
-// };
+const newArray = [1, 2, 3, 4, 5, 6, 7, 8];
+console.log(newArray);
+const newArray1 = newArray.slice();
+
+
 
 const generateFilm = () => {
   const description = getRandomItem(DESCRIPTION_ITEMS);
@@ -51,7 +49,7 @@ const generateFilm = () => {
     .map((name) => name);
 
   return {
-    poster: getRandomItem(POSTERS_IMG),
+    poster: getRandomItem(POSTERS_IMAGES),
     title,
     originalTitle: title,
     rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
@@ -84,4 +82,4 @@ const generateFilms = (count) => {
     .map(generateFilm);
 };
 
-export {generateFilm, generateFilms};
+export {generateFilms};

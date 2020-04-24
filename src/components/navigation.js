@@ -10,8 +10,9 @@ const createNavigationMarkup = ({name, count}, isFirstChild) => {
 };
 
 const createNavigationTemplate = (navigations) => {
-  const navigationStats = navigations.pop();
-  const navigationMarkup = navigations.map((navigation, i) => createNavigationMarkup(navigation, i === 0)).join(`\n`);
+  const [navigationStats] = navigations.slice(-1);
+
+  const navigationMarkup = navigations.slice(0, -1).map((navigation, i) => createNavigationMarkup(navigation, i === 0)).join(`\n`);
 
   return (
     `<nav class="main-navigation">

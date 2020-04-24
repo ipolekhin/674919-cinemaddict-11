@@ -15,9 +15,8 @@ const createExtraBlockMarkup = (name, films) => {
 
 const createFilmsContainerExtraTemplate = (films) => {
   const extraBlocks = getExtraBlocksFilms(films);
-  const extraBlocksMarkup = EXTRA_BLOCK_NAMES.map((name) => createExtraBlockMarkup(name, extraBlocks[name])).join(`\n`);
 
-  return `${extraBlocksMarkup}`;
+  return EXTRA_BLOCK_NAMES.map((name) => createExtraBlockMarkup(name, extraBlocks[name])).join(`\n`);
 };
 
 export {createFilmsContainerExtraTemplate};

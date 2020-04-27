@@ -19,8 +19,6 @@ import {
   GENRE_NAMES,
 } from "../const";
 
-const MAX_LENGTH_DESCRIPTION = 140;
-const ELLIPSIS = `...`;
 const MIN_RATING = 1;
 const MAX_RATING = 10;
 const COUNT_AFTER_COMMA = 1;
@@ -53,9 +51,6 @@ const generateFilm = () => {
       duration: getRandomIntegerNumber(MIN_MINUTES_DURATION, MAX_MINUTES_DURATION),
       country: getRandomItem(COUNTRY_NAMES),
     },
-    shortDescription: description.length > MAX_LENGTH_DESCRIPTION
-      ? description.slice(0, MAX_LENGTH_DESCRIPTION)
-      .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description,
     comments: getRandomIntegerNumber(0, MAX_COMMENTS),
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),

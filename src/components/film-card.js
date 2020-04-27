@@ -1,9 +1,15 @@
 import {getHoursMinutes} from "../utils";
 
+const MAX_LENGTH_DESCRIPTION = 140;
+const ELLIPSIS = `...`;
+
 const createFilmCardMarkup = (film) => {
-  const {poster, title, rating, info, shortDescription, isWatchlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, comments} = film;
   const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
   const duration = getHoursMinutes(info.duration);
+  const shortDescription = description.length > MAX_LENGTH_DESCRIPTION
+    ? description.slice(0, MAX_LENGTH_DESCRIPTION)
+    .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description;
 
   return (
     `<article class="film-card">

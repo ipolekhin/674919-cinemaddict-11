@@ -11,7 +11,6 @@ const createNavigationMarkup = ({name, count}, isFirstChild) => {
 
 const createNavigationTemplate = (navigations) => {
   const [navigationStats] = navigations.slice(-1);
-
   const navigationMarkup = navigations.slice(0, -1).map((navigation, i) => createNavigationMarkup(navigation, i === 0)).join(`\n`);
 
   return (

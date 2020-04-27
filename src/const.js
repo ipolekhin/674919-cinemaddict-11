@@ -2,8 +2,20 @@ export const Keys = {
   ESC: `Escape`,
 };
 
+export const StatisticsType = {
+  'ALL': `All movies`,
+  'WATCHLIST': `Watchlist`,
+  'HISTORY': `History`,
+  'FAVORITES': `Favorites`,
+  'STATS': `Stats`,
+};
+
 export const NAVIGATION_NAMES = [
-  `All movies`, `Watchlist`, `History`, `Favorites`, `Stats`
+  StatisticsType.ALL,
+  StatisticsType.WATCHLIST,
+  StatisticsType.HISTORY,
+  StatisticsType.FAVORITES,
+  StatisticsType.STATS,
 ];
 
 export const SORT_NAMES = [

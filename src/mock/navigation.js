@@ -1,30 +1,31 @@
-import {NAVIGATION_NAMES} from "../const";
+import {NAVIGATION_NAMES, StatisticsType} from "../const";
 
 // Функция считатет статиститку навигации
 const calculateStatistics = (films) => {
   return films.reduce((result, {isWatchlist, isWatched, isFavorite}) => {
-    result[`All movies`]++;
+    result[StatisticsType.ALL]++;
     if (isWatchlist) {
-      result[`Watchlist`]++;
+      result[StatisticsType.WATCHLIST]++;
     }
     if (isWatched) {
-      result[`History`]++;
+      result[StatisticsType.HISTORY]++;
     }
     if (isFavorite) {
-      result[`Favorites`]++;
+      result[StatisticsType.FAVORITES]++;
     }
 
     return result;
   }, {
-    'All movies': 0,
-    'Watchlist': 0,
-    'History': 0,
-    'Favorites': 0,
+    [StatisticsType.ALL]: 0,
+    [StatisticsType.WATCHLIST]: 0,
+    [StatisticsType.HISTORY]: 0,
+    [StatisticsType.FAVORITES]: 0,
   });
 };
 
 const generateNavigations = (films) => {
   const statistics = calculateStatistics(films);
+  console.log(statistics);
 
   return NAVIGATION_NAMES.map((name) => {
     return {

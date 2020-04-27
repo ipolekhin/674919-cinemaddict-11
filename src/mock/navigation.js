@@ -25,7 +25,6 @@ const calculateStatistics = (films) => {
 
 const generateNavigations = (films) => {
   const statistics = calculateStatistics(films);
-  console.log(statistics);
 
   return NAVIGATION_NAMES.map((name) => {
     return {

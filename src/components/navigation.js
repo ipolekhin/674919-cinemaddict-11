@@ -1,10 +1,13 @@
+import {NAVIGATION_NAMES, StatisticsType} from "../const";
+
 const createNavigationMarkup = ({name, count}, isFirstChild) => {
+
   return (
     `<a
       href="#${isFirstChild ? name.slice(0, 3) : name}"
       class="main-navigation__item ${isFirstChild ? `main-navigation__item--active` : ``}">
       ${name}
-      ${!isFirstChild ? `<span class="main-navigation__item-count">${count}</span>` : ``}
+      ${name !== StatisticsType.ALL ? `<span class="main-navigation__item-count">${count}</span>` : ``}
     </a>`
   );
 };

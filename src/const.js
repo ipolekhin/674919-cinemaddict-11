@@ -55,10 +55,22 @@ export const COUNTRY_NAMES = [
   `USA`,
 ];
 
+export const ProfileType = {
+  'NOVICE': `Novice`,
+  'FAN': `Fan`,
+  'MOVIE_BUFF': `Movie buff`,
+};
+
+export const ProfileIntervals = [
+  {'MIN': 1, 'MAX': 10},
+  {'MIN': 11, 'MAX': 20},
+  {'MIN': 21, 'MAX': Infinity},
+];
+
 export const PROFILE_RATING = [
-  `Novice`,
-  `Fan`,
-  `Movie buff`,
+  ProfileType.NOVICE,
+  ProfileType.FAN,
+  ProfileType.MOVIE_BUFF,
 ];
 
 export const EXTRA_BLOCK_NAMES = [

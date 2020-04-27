@@ -1,16 +1,10 @@
-import {PROFILE_RATING} from "../const";
+import {PROFILE_RATING, ProfileIntervals} from "../const";
 
 const selectProfileRating = (count) => {
-  let result = ``;
-  if (count >= 1 && count <= 10) {
-    result = PROFILE_RATING[0];
-  } else if (count >= 11 && count <= 20) {
-    result = PROFILE_RATING[1];
-  } else if (count >= 21) {
-    result = PROFILE_RATING[2];
-  }
+  let indexProfile = ProfileIntervals.findIndex((interval) =>
+    (count >= interval.MIN && count <= interval.MAX));
 
-  return result;
+  return PROFILE_RATING[indexProfile];
 };
 
 const createProfileTemplate = (statistic) => {

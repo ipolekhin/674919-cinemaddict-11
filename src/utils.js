@@ -1,3 +1,5 @@
+import {DESCRIPTION_ITEMS} from "./mock/const";
+
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
@@ -34,6 +36,12 @@ const removeElement = (selector) => {
   }
 };
 
+const reshuffle = (data, maxNumber) => {
+  const reshuffle = data.slice().sort(() => Math.random() - 0.5);
+  reshuffle.length = getRandomIntegerNumber(1, maxNumber);
+  return reshuffle;
+};
+
 export {
   formatTime,
   getRandomBooleanValue,
@@ -41,6 +49,7 @@ export {
   getRandomItem,
   getRandomFractionalNumbers,
   getRandomDate,
+  removeElement,
   render,
-  removeElement
+  reshuffle,
 };

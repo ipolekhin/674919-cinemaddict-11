@@ -25,8 +25,8 @@ const MIN_RATING = 1;
 const MAX_RATING = 10;
 const COUNT_AFTER_COMMA = 1;
 const START_YEAR = 1929;
-const MAX_HOURS_DURATION = 2;
-const MAX_MINUTES_DURATION = 59;
+const MIN_MINUTES_DURATION = 30;
+const MAX_MINUTES_DURATION = 180;
 const MAX_COMMENTS = 17;
 const MAX_DESCRIPTIONS = 5;
 
@@ -50,10 +50,7 @@ const generateFilm = () => {
       writers,
       director: getRandomItem(DIRECTOR_NAMES),
       releaseDate: myDate,
-      duration: `
-        ${getRandomIntegerNumber(0, MAX_HOURS_DURATION)}h
-        ${(getRandomIntegerNumber(0, MAX_MINUTES_DURATION)).toString().padStart(2, `0`)}m
-      `,
+      duration: getRandomIntegerNumber(MIN_MINUTES_DURATION, MAX_MINUTES_DURATION),
       country: getRandomItem(COUNTRY_NAMES),
     },
     shortDescription: description.length > MAX_LENGTH_DESCRIPTION

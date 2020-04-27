@@ -1,3 +1,5 @@
+import {getHoursMinutes} from "../utils";
+
 const createDetailsTopMarkup = (film) => {
   const {
     poster,
@@ -12,6 +14,7 @@ const createDetailsTopMarkup = (film) => {
   } = film;
   const setControlsActive = (isActive) => isActive ? `checked` : ``;
   const genreKey = info.genres.length > 1 ? `Genres` : `Genre`;
+  const duration = getHoursMinutes(info.duration);
 
   return (
     `<div class="form-details__top-container">
@@ -57,7 +60,7 @@ const createDetailsTopMarkup = (film) => {
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
-                <td class="film-details__cell">${info.duration}</td>
+                <td class="film-details__cell">${duration}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Country</td>

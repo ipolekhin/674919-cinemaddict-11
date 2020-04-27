@@ -8,11 +8,18 @@ const castTimeFormat = (value) => {
   return value.toString().padStart(2, `0`);
 };
 
-const formatTime = (time) => {
-  const hours = castTimeFormat(time.getHours() % 24);
-  const minutes = castTimeFormat(time.getMinutes());
+// const formatTime = (time) => {
+//   const hours = castTimeFormat(time.getHours() % 24);
+//   const minutes = castTimeFormat(time.getMinutes());
+//
+//   return `${hours}:${minutes}`;
+// };
 
-  return `${hours}:${minutes}`;
+const getHoursMinutes = (minutes) => {
+  const hours = Math.floor(minutes / 60);
+  const min = castTimeFormat(minutes - (hours * 60));
+
+  return hours ? `${hours}h ${min}m` : `${min}m`;
 };
 
 const getRandomBooleanValue = () => Math.random() > 0.5;
@@ -43,7 +50,7 @@ const reshuffle = (data, maxNumber) => {
 };
 
 export {
-  formatTime,
+  getHoursMinutes,
   getRandomBooleanValue,
   getRandomIntegerNumber,
   getRandomItem,

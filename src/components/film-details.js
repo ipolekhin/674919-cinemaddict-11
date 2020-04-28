@@ -1,4 +1,5 @@
 import {getHoursMinutes} from "../utils";
+import {AGE_RESTRICTIONS} from "../const";
 
 const createDetailsTopMarkup = (film) => {
   const {
@@ -11,10 +12,12 @@ const createDetailsTopMarkup = (film) => {
     isWatchlist,
     isWatched,
     isFavorite,
+    isAgeRestrictions,
   } = film;
   const setControlsActive = (isActive) => isActive ? `checked` : ``;
   const genreKey = info.genres.length > 1 ? `Genres` : `Genre`;
   const duration = getHoursMinutes(info.duration);
+  const ageRating = isAgeRestrictions ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
 
   return (
     `<div class="form-details__top-container">
@@ -25,7 +28,7 @@ const createDetailsTopMarkup = (film) => {
         <div class="film-details__poster">
           <img class="film-details__poster-img" src="${poster}" alt="">
 
-          <p class="film-details__age">18+</p>
+          ${ageRating}
         </div>
 
         <div class="film-details__info">

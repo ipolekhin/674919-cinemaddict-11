@@ -55,6 +55,7 @@ const generateFilm = () => {
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),
     isFavorite: getRandomBooleanValue(),
+    isAgeRestrictions: getRandomBooleanValue(),
   };
 };
 

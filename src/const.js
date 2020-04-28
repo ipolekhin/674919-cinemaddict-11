@@ -82,3 +82,7 @@ export const EXTRA_BLOCK_NAMES = [
   ExtraBlockNames.TOP_RATED,
   ExtraBlockNames.MOST_COMMENTED,
 ];
+
+export const AGE_RESTRICTIONS = [
+  `18+`
+];

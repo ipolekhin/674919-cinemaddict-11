@@ -1,4 +1,4 @@
-import {NAVIGATION_NAMES, StatisticsType} from "../const";
+import {StatisticsType} from "../const";
 
 const createNavigationMarkup = ({name, count}, isFirstChild) => {
 

@@ -39,9 +39,9 @@ const removeElement = (selector) => {
 };
 
 const reshuffle = (data, maxNumber) => {
-  const reshuffle = data.slice().sort(() => Math.random() - 0.5);
-  reshuffle.length = getRandomIntegerNumber(1, maxNumber);
-  return reshuffle;
+  const shuffle = data.slice().sort(() => Math.random() - 0.5);
+  shuffle.length = getRandomIntegerNumber(1, maxNumber);
+  return shuffle;
 };
 
 const collectTopFilms = (films) => {

@@ -46,7 +46,7 @@ const createCommentsAddMarkup = () => {
           <img src="./images/emoji/${name}.png" alt="emoji" width="30" height="30">
         </label>`
       );
-  });
+    });
 };
 
 const createCommentsTemplate = (commentsCount) => {

@@ -10,7 +10,7 @@ import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
-import {Keys, keys, StatisticsType} from "./const";
+import {Keys, StatisticsType} from "./const";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;

@@ -69,8 +69,8 @@ const collectMostCommentedFilms = (films) => {
 };
 
 const getExtraBlocksFilms = (films) => {
-  const topFilms = collectTopFilms(films);
-  const mostCommentedFilms = collectMostCommentedFilms(films);
+  const topFilms = collectTopFilms(films.slice());
+  const mostCommentedFilms = collectMostCommentedFilms(films.slice());
 
   return {
     [ExtraBlockNames.TOP_RATED]: topFilms,
@@ -79,6 +79,7 @@ const getExtraBlocksFilms = (films) => {
 };
 
 export {
+  castTimeFormat,
   getExtraBlocksFilms,
   getHoursMinutes,
   getRandomBooleanValue,

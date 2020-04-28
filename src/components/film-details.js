@@ -1,5 +1,14 @@
-import {getHoursMinutes} from "../utils";
-import {AGE_RESTRICTIONS} from "../const";
+import {AGE_RESTRICTIONS, MONTH_NAMES} from "../const";
+import {castTimeFormat, getHoursMinutes} from "../utils";
+import {createCommentsTemplate} from "./comments";
+
+const formattedDate = (value) => {
+  const year = value.getUTCFullYear();
+  const month = MONTH_NAMES[value.getMonth()];
+  const date = castTimeFormat(value.getDate());
+
+  return `${date} ${month} ${year} `;
+};
 
 const createDetailsTopMarkup = (film) => {
   const {
@@ -18,6 +27,7 @@ const createDetailsTopMarkup = (film) => {
   const genreKey = info.genres.length > 1 ? `Genres` : `Genre`;
   const duration = getHoursMinutes(info.duration);
   const ageRating = isAgeRestrictions ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
+  const formatDate = formattedDate(info.releaseDate);
 
   return (
     `<div class="form-details__top-container">
@@ -59,7 +69,7 @@ const createDetailsTopMarkup = (film) => {
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
-                <td class="film-details__cell">${info.releaseDate}</td>
+                <td class="film-details__cell">${formatDate}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
@@ -101,111 +111,17 @@ const createDetailsTopMarkup = (film) => {
   );
 };
 
-const createDetailsBottomMarkup = () => {
-  return (
-    `<div class="form-details__bottom-container">
-      <section class="film-details__comments-wrap">
-        <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">4</span></h3>
-
-        <ul class="film-details__comments-list">
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/smile.png" alt="emoji-smile" width="55" height="55">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Interesting setting and a good cast</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">Tim Macoveev</span>
-                <span class="film-details__comment-day">2019/12/31 23:59</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/sleeping.png" alt="emoji-sleeping" width="55" height="55">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Booooooooooring</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">2 days ago</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/puke.png" alt="emoji-puke" width="55" height="55">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Very very old. Meh</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">2 days ago</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/angry.png" alt="emoji-angry" width="55" height="55">
-            </span>
-            <div>
-              <p class="film-details__comment-text">Almost two hours? Seriously?</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">John Doe</span>
-                <span class="film-details__comment-day">Today</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-        </ul>
-
-        <div class="film-details__new-comment">
-          <div for="add-emoji" class="film-details__add-emoji-label"></div>
-
-          <label class="film-details__comment-label">
-            <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-          </label>
-
-          <div class="film-details__emoji-list">
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="smile">
-            <label class="film-details__emoji-label" for="emoji-smile">
-              <img src="./images/emoji/smile.png" alt="emoji" width="30" height="30">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="sleeping">
-            <label class="film-details__emoji-label" for="emoji-sleeping">
-              <img src="./images/emoji/sleeping.png" alt="emoji" width="30" height="30">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-puke" value="puke">
-            <label class="film-details__emoji-label" for="emoji-puke">
-              <img src="./images/emoji/puke.png" alt="emoji" width="30" height="30">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="angry">
-            <label class="film-details__emoji-label" for="emoji-angry">
-              <img src="./images/emoji/angry.png" alt="emoji" width="30" height="30">
-            </label>
-          </div>
-        </div>
-      </section>
-    </div>`
-  );
-};
-
 const createFilmDetailsTemplate = (film) => {
   const detailsTopMarkup = createDetailsTopMarkup(film);
-  const detailsBottomMarkup = createDetailsBottomMarkup();
 
   return (
     `<section class="film-details">
       <form class="film-details__inner" action="" method="get">
         ${detailsTopMarkup}
 
-        ${detailsBottomMarkup}
+        <div class="form-details__bottom-container">
+          ${createCommentsTemplate(film.comments)}
+        </div>
       </form>
     </section>`
   );

@@ -45,8 +45,6 @@ const createFilmCardMarkup = (film) => {
 };
 
 const createFilmCardTemplate = (films, endCount, beginCount = 0) => {
-  console.log(endCount);
-  console.log(beginCount);
   return films
     .slice(beginCount, endCount)
     .map((film) => createFilmCardMarkup(film))

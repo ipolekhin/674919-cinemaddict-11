@@ -55,3 +55,17 @@ export const WRITER_NAMES = [
   `Quentin Tarantino`,
   `Richard Weil`,
 ];
+
+export const COMMENT_TEXTS = [
+  `Interesting setting and a good cast`,
+  `Booooooooooring`,
+  `Very very old. Meh`,
+  `Almost two hours? Seriously?`,
+];
+
+export const COMMENT_AUTHORS = [
+  `Tim Macoveev`,
+  `John Doe`,
+  `Bruce Lee`,
+  `John Cooper`,
+];

@@ -31,19 +31,35 @@ export const GENRE_NAMES = [
   `Mystery`,
 ];
 
+export const MonthTypes = {
+  'JANUARY': `January`,
+  'FEBRUARY': `February`,
+  'MARCH': `March`,
+  'APRIL': `April`,
+  'MAY': `May`,
+  'JUNE': `June`,
+  'JULE': `July`,
+  'AUGUST': `August`,
+  'SEPTEMBER': `September`,
+  'OCTOBER': `October`,
+  'NOVEMBER': `November`,
+  'DECEMBER': `December`,
+
+};
+
 export const MONTH_NAMES = [
-  `January`,
-  `February`,
-  `March`,
-  `April`,
-  `May`,
-  `June`,
-  `July`,
-  `August`,
-  `September`,
-  `October`,
-  `November`,
-  `December`,
+  MonthTypes.JANUARY,
+  MonthTypes.FEBRUARY,
+  MonthTypes.MARCH,
+  MonthTypes.APRIL,
+  MonthTypes.MAY,
+  MonthTypes.JUNE,
+  MonthTypes.JULE,
+  MonthTypes.AUGUST,
+  MonthTypes.SEPTEMBER,
+  MonthTypes.OCTOBER,
+  MonthTypes.NOVEMBER,
+  MonthTypes.DECEMBER,
 ];
 
 export const COUNTRY_NAMES = [
@@ -85,4 +101,18 @@ export const EXTRA_BLOCK_NAMES = [
 
 export const AGE_RESTRICTIONS = [
   `18+`
+];
+
+export const EmojiType = {
+  'SMILE': `smile`,
+  'SLEEPING': `sleeping`,
+  'PUKE': `puke`,
+  'ANGRY': `angry`,
+};
+
+export const EMOJI_SMILE = [
+  EmojiType.SMILE,
+  EmojiType.SLEEPING,
+  EmojiType.PUKE,
+  EmojiType.ANGRY,
 ];

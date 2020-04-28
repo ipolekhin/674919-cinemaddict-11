@@ -32,7 +32,7 @@ const generateFilm = () => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
-  const myDate = getRandomDate(new Date(START_YEAR), new Date());
+  const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
   const title = getRandomItem(TITLE_ITEMS);
   const writers = reshuffle(WRITER_NAMES, WRITER_NAMES.length).join(`, `);
 

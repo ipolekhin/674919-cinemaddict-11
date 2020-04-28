@@ -24,6 +24,7 @@ let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
 // 3.1 - 3.2; Генерируем фильмы
 const films = generateFilms(FILMS_COUNT);
+
 // 3.5;
 const navigations = generateNavigations(films);
 

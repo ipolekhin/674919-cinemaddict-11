@@ -1,33 +1,29 @@
+import {ExtraBlockNames} from "../const";
+
 const FILM_QUANTITY = 2;
 
 const collectTopFilms = (films) => {
-  let max = 0;
-  return films.reduce((result, film) => {
-    const {rating} = film;
-    if (rating > max) {
-      max = rating;
-      result.unshift(film);
+  return films.sort((first, second) => {
+    if (first[`rating`].padStart(4, `0`) < second[`rating`].padStart(4, `0`)) {
+      return 1;
     }
-    if (result.length > FILM_QUANTITY) {
-      result.pop();
+    if (first[`rating`].padStart(4, `0`) > second[`rating`].padStart(4, `0`)) {
+      return -1;
     }
-    return result;
-  }, []);
+    return 0;
+  }).slice(0, FILM_QUANTITY);
 };
 
 const collectMostCommentedFilms = (films) => {
-  let max = 0;
-  return films.reduce((result, film) => {
-    const {comments} = film;
-    if (comments > max) {
-      max = comments;
-      result.unshift(film);
+  return films.sort((first, second) => {
+    if (first[`comments`] < second[`comments`]) {
+      return 1;
     }
-    if (result.length > FILM_QUANTITY) {
-      result.pop();
+    if (first[`comments`] > second[`comments`]) {
+      return -1;
     }
-    return result;
-  }, []);
+    return 0;
+  }).slice(0, FILM_QUANTITY);
 };
 
 const getExtraBlocksFilms = (films) => {
@@ -35,8 +31,8 @@ const getExtraBlocksFilms = (films) => {
   const mostCommentedFilms = collectMostCommentedFilms(films);
 
   return {
-    'Top rated': topFilms,
-    'Most commented': mostCommentedFilms,
+    [ExtraBlockNames.TOP_RATED]: topFilms,
+    [ExtraBlockNames.MOST_COMMENTED]: mostCommentedFilms,
   };
 };
 

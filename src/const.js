@@ -73,7 +73,12 @@ export const PROFILE_RATING = [
   ProfileType.MOVIE_BUFF,
 ];
 
+export const ExtraBlockNames = {
+  'TOP_RATED': `Top rated`,
+  'MOST_COMMENTED': `Most commented`,
+};
+
 export const EXTRA_BLOCK_NAMES = [
-  `Top rated`,
-  `Most commented`,
+  ExtraBlockNames.TOP_RATED,
+  ExtraBlockNames.MOST_COMMENTED,
 ];

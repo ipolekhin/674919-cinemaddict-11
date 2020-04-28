@@ -78,7 +78,7 @@ showMoreButton.addEventListener(`click`, () => {
   const prevFilmsCount = showingFilmsCount;
 
   showingFilmsCount = showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
-  render(filmsListContainerElement, createFilmCardTemplate(films, prevFilmsCount, showingFilmsCount));
+  render(filmsListContainerElement, createFilmCardTemplate(films, showingFilmsCount, prevFilmsCount));
 
   if (showingFilmsCount >= films.length) {
     showMoreButton.style.display = `none`;

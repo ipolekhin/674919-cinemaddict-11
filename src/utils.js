@@ -1,4 +1,6 @@
-import {DESCRIPTION_ITEMS} from "./mock/const";
+import {ExtraBlockNames} from "./const";
+
+const FILM_QUANTITY = 2;
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
@@ -7,13 +9,6 @@ const render = (container, template, place = `beforeend`) => {
 const castTimeFormat = (value) => {
   return value.toString().padStart(2, `0`);
 };
-
-// const formatTime = (time) => {
-//   const hours = castTimeFormat(time.getHours() % 24);
-//   const minutes = castTimeFormat(time.getMinutes());
-//
-//   return `${hours}:${minutes}`;
-// };
 
 const getHoursMinutes = (minutes) => {
   const hours = Math.floor(minutes / 60);
@@ -49,7 +44,42 @@ const reshuffle = (data, maxNumber) => {
   return reshuffle;
 };
 
+const collectTopFilms = (films) => {
+  return films.sort((first, second) => {
+    if (first[`rating`].padStart(4, `0`) < second[`rating`].padStart(4, `0`)) {
+      return 1;
+    }
+    if (first[`rating`].padStart(4, `0`) > second[`rating`].padStart(4, `0`)) {
+      return -1;
+    }
+    return 0;
+  }).slice(0, FILM_QUANTITY);
+};
+
+const collectMostCommentedFilms = (films) => {
+  return films.sort((first, second) => {
+    if (first[`comments`] < second[`comments`]) {
+      return 1;
+    }
+    if (first[`comments`] > second[`comments`]) {
+      return -1;
+    }
+    return 0;
+  }).slice(0, FILM_QUANTITY);
+};
+
+const getExtraBlocksFilms = (films) => {
+  const topFilms = collectTopFilms(films);
+  const mostCommentedFilms = collectMostCommentedFilms(films);
+
+  return {
+    [ExtraBlockNames.TOP_RATED]: topFilms,
+    [ExtraBlockNames.MOST_COMMENTED]: mostCommentedFilms,
+  };
+};
+
 export {
+  getExtraBlocksFilms,
   getHoursMinutes,
   getRandomBooleanValue,
   getRandomIntegerNumber,

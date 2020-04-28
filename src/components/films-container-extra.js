@@ -1,5 +1,5 @@
 import {EXTRA_BLOCK_NAMES} from "../const";
-import {getExtraBlocksFilms} from "./films-top-rated";
+import {getExtraBlocksFilms} from "../utils";
 import {createFilmCardMarkup} from "./film-card";
 
 const createExtraBlockMarkup = (name, films) => {

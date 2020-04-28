@@ -10,7 +10,7 @@ import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
-import {Keys, keys} from "./const";
+import {Keys, keys, StatisticsType} from "./const";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -27,7 +27,8 @@ const films = generateFilms(FILMS_COUNT);
 // 3.5;
 const navigations = generateNavigations(films);
 
-render(siteHeaderElement, createProfileTemplate(navigations[2]));
+render(siteHeaderElement, createProfileTemplate(navigations
+  .find((item) => item.name === StatisticsType.HISTORY)));
 // 3.6;
 render(siteMainElement, createNavigationTemplate(navigations));
 render(siteMainElement, createSortTemplate());

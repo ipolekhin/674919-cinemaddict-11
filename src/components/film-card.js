@@ -45,9 +45,10 @@ const createFilmCardMarkup = (film) => {
 };
 
 const createFilmCardTemplate = (films, endCount, beginCount = 0) => {
-  const filmMarkup = films.slice(beginCount, endCount)
-    .map((film) => createFilmCardMarkup(film)).join(`\n`);
-  return `${filmMarkup}`;
+  return films
+    .slice(beginCount, endCount)
+    .map((film) => createFilmCardMarkup(film))
+    .join(`\n`);
 };
 
 export {createFilmCardTemplate, createFilmCardMarkup};

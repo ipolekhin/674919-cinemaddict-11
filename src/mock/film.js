@@ -30,7 +30,7 @@ const MAX_MINUTES_DURATION = 180;
 const MAX_COMMENTS = 17;
 const MAX_DESCRIPTIONS = 5;
 
-  const generateFilm = () => {
+const generateFilm = () => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
   const comments = generateComments(getRandomIntegerNumber(0, MAX_COMMENTS));
@@ -43,16 +43,16 @@ const MAX_DESCRIPTIONS = 5;
   return {
     description,
     title,
-    comments: comments,
+    comments,
     info: {
       actors,
       ageRating,
       genres,
       writers,
-      director: getRandomItem(DIRECTOR_NAMES),
-      releaseDate: myDate,
-      duration: getRandomIntegerNumber(MIN_MINUTES_DURATION, MAX_MINUTES_DURATION),
       country: getRandomItem(COUNTRY_NAMES),
+      director: getRandomItem(DIRECTOR_NAMES),
+      duration: getRandomIntegerNumber(MIN_MINUTES_DURATION, MAX_MINUTES_DURATION),
+      releaseDate: myDate,
     },
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),

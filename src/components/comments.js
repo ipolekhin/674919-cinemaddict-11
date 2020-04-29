@@ -1,6 +1,5 @@
-import {castTimeFormat} from "../utils";
 import {EMOJI_SMILE} from "../const";
-import {generateComments} from "../mock/comments";
+import {castTimeFormat} from "../utils";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();

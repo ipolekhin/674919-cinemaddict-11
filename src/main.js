@@ -1,16 +1,16 @@
-import {createProfileTemplate} from "./components/profile";
-import {createNavigationTemplate} from "./components/navigation";
-import {createSortTemplate} from "./components/sorting";
+import {Keys, NavigationType} from "./const";
+import {calculateStatistics, generateNavigations} from "./mock/navigation";
+import {collectMovieCards} from "./components/film-card";
 import {createFilmsContainerTemplate} from "./components/films-container";
 import {createFilmsContainerExtraTemplate} from "./components/films-container-extra";
-import {collectMovieCards} from "./components/film-card";
 import {createFilmDetailsTemplate} from "./components/film-details";
-import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
-import {calculateStatistics, generateNavigations} from "./mock/navigation";
+import {createNavigationTemplate} from "./components/navigation";
+import {createProfileTemplate} from "./components/profile";
+import {createShowMoreButtonTemplate} from "./components/show-more-button";
+import {createSortTemplate} from "./components/sorting";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
-import {Keys, NavigationType, TagsType} from "./const";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;

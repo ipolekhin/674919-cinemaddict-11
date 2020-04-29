@@ -2,7 +2,7 @@ import {PROFILE_RATING, ProfileIntervals} from "../const";
 
 const selectProfileRating = (count) => {
   const indexProfile = ProfileIntervals.findIndex((interval) =>
-    (count > interval.MIN  && count <= interval.MAX));
+    (count > interval.MIN && count <= interval.MAX));
 
   return PROFILE_RATING[indexProfile];
 };

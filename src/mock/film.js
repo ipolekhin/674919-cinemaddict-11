@@ -15,6 +15,7 @@ import {
   reshuffle,
 } from "../utils";
 import {
+  AGE_RESTRICTIONS,
   COUNTRY_NAMES,
   GENRE_NAMES,
 } from "../const";
@@ -30,6 +31,7 @@ const MAX_DESCRIPTIONS = 5;
 
 const generateFilm = () => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
+  const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
   const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
@@ -44,6 +46,7 @@ const generateFilm = () => {
     rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
     info: {
       actors,
+      ageRating,
       genres,
       writers,
       director: getRandomItem(DIRECTOR_NAMES),
@@ -55,7 +58,6 @@ const generateFilm = () => {
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),
     isFavorite: getRandomBooleanValue(),
-    isAgeRestrictions: getRandomBooleanValue(),
   };
 };
 

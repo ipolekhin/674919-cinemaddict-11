@@ -1,4 +1,4 @@
-import {AGE_RESTRICTIONS, MONTH_NAMES} from "../const";
+import {MONTH_NAMES} from "../const";
 import {castTimeFormat, getHoursMinutes} from "../utils";
 import {createCommentsTemplate} from "./comments";
 
@@ -21,12 +21,10 @@ const createDetailsTopMarkup = (film) => {
     isWatchlist,
     isWatched,
     isFavorite,
-    isAgeRestrictions,
   } = film;
   const setControlsActive = (isActive) => isActive ? `checked` : ``;
   const genreKey = info.genres.length > 1 ? `Genres` : `Genre`;
   const duration = getHoursMinutes(info.duration);
-  const ageRating = isAgeRestrictions ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
   const formatDate = formattedDate(info.releaseDate);
 
   return (
@@ -38,7 +36,7 @@ const createDetailsTopMarkup = (film) => {
         <div class="film-details__poster">
           <img class="film-details__poster-img" src="${poster}" alt="">
 
-          ${ageRating}
+          ${info.ageRating}
         </div>
 
         <div class="film-details__info">

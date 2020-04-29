@@ -9,9 +9,9 @@ const generateComment = () => {
 
   return {
     author: getRandomItem(COMMENT_AUTHORS),
+    date: commentDate,
     emoji: getRandomItem(EMOJI_SMILE),
     text: getRandomItem(COMMENT_TEXTS),
-    date: commentDate,
   };
 };
 

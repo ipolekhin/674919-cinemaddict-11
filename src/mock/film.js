@@ -19,6 +19,7 @@ import {
   COUNTRY_NAMES,
   GENRE_NAMES,
 } from "../const";
+import {generateComments} from "./comments";
 
 const MIN_RATING = 1;
 const MAX_RATING = 10;
@@ -29,9 +30,10 @@ const MAX_MINUTES_DURATION = 180;
 const MAX_COMMENTS = 17;
 const MAX_DESCRIPTIONS = 5;
 
-const generateFilm = () => {
+  const generateFilm = () => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
+  const comments = generateComments(getRandomIntegerNumber(0, MAX_COMMENTS));
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
   const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
@@ -41,9 +43,7 @@ const generateFilm = () => {
   return {
     description,
     title,
-    poster: getRandomItem(POSTERS_IMAGES),
-    originalTitle: title,
-    rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
+    comments: comments,
     info: {
       actors,
       ageRating,
@@ -54,10 +54,12 @@ const generateFilm = () => {
       duration: getRandomIntegerNumber(MIN_MINUTES_DURATION, MAX_MINUTES_DURATION),
       country: getRandomItem(COUNTRY_NAMES),
     },
-    comments: getRandomIntegerNumber(0, MAX_COMMENTS), //genrateComments
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),
     isFavorite: getRandomBooleanValue(),
+    originalTitle: title,
+    poster: getRandomItem(POSTERS_IMAGES),
+    rating: getRandomFractionalNumbers(MIN_RATING, MAX_RATING, COUNT_AFTER_COMMA),
   };
 };
 

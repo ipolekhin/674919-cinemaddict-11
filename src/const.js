@@ -31,7 +31,7 @@ export const GENRE_NAMES = [
   `Mystery`,
 ];
 
-export const MonthTypes = {
+export const MonthType = {
   'JANUARY': `January`,
   'FEBRUARY': `February`,
   'MARCH': `March`,
@@ -48,18 +48,18 @@ export const MonthTypes = {
 };
 
 export const MONTH_NAMES = [
-  MonthTypes.JANUARY,
-  MonthTypes.FEBRUARY,
-  MonthTypes.MARCH,
-  MonthTypes.APRIL,
-  MonthTypes.MAY,
-  MonthTypes.JUNE,
-  MonthTypes.JULE,
-  MonthTypes.AUGUST,
-  MonthTypes.SEPTEMBER,
-  MonthTypes.OCTOBER,
-  MonthTypes.NOVEMBER,
-  MonthTypes.DECEMBER,
+  MonthType.JANUARY,
+  MonthType.FEBRUARY,
+  MonthType.MARCH,
+  MonthType.APRIL,
+  MonthType.MAY,
+  MonthType.JUNE,
+  MonthType.JULE,
+  MonthType.AUGUST,
+  MonthType.SEPTEMBER,
+  MonthType.OCTOBER,
+  MonthType.NOVEMBER,
+  MonthType.DECEMBER,
 ];
 
 export const COUNTRY_NAMES = [

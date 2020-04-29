@@ -2,20 +2,36 @@ export const Keys = {
   ESC: `Escape`,
 };
 
-export const StatisticsType = {
-  'ALL': `All movies`,
-  'WATCHLIST': `Watchlist`,
-  'HISTORY': `History`,
-  'FAVORITES': `Favorites`,
-  'STATS': `Stats`,
+export const NavigationType = {
+  ALL: `All movies`,
+  WATCHLIST: `Watchlist`,
+  HISTORY: `History`,
+  FAVORITES: `Favorites`,
+  STATS: `Stats`,
 };
 
 export const NAVIGATION_NAMES = [
-  StatisticsType.ALL,
-  StatisticsType.WATCHLIST,
-  StatisticsType.HISTORY,
-  StatisticsType.FAVORITES,
-  StatisticsType.STATS,
+  NavigationType.ALL,
+  NavigationType.WATCHLIST,
+  NavigationType.HISTORY,
+  NavigationType.FAVORITES,
+  NavigationType.STATS,
+];
+
+export const TagsType = {
+  ALL: `all`,
+  WATCHLIST: `watchlist`,
+  HISTORY: `history`,
+  FAVORITES: `favorites`,
+  STATS: `stats`,
+};
+
+export const TAGS_NAMES = [
+  TagsType.ALL,
+  TagsType.WATCHLIST,
+  TagsType.HISTORY,
+  TagsType.FAVORITES,
+  TagsType.STATS,
 ];
 
 export const SORT_NAMES = [
@@ -32,18 +48,18 @@ export const GENRE_NAMES = [
 ];
 
 export const MonthType = {
-  'JANUARY': `January`,
-  'FEBRUARY': `February`,
-  'MARCH': `March`,
-  'APRIL': `April`,
-  'MAY': `May`,
-  'JUNE': `June`,
-  'JULE': `July`,
-  'AUGUST': `August`,
-  'SEPTEMBER': `September`,
-  'OCTOBER': `October`,
-  'NOVEMBER': `November`,
-  'DECEMBER': `December`,
+  JANUARY: `January`,
+  FEBRUARY: `February`,
+  MARCH: `March`,
+  APRIL: `April`,
+  MAY: `May`,
+  JUNE: `June`,
+  JULE: `July`,
+  AUGUST: `August`,
+  SEPTEMBER: `September`,
+  OCTOBER: `October`,
+  NOVEMBER: `November`,
+  DECEMBER: `December`,
 
 };
 
@@ -72,15 +88,15 @@ export const COUNTRY_NAMES = [
 ];
 
 export const ProfileType = {
-  'NOVICE': `Novice`,
-  'FAN': `Fan`,
-  'MOVIE_BUFF': `Movie buff`,
+  NOVICE: `Novice`,
+  FAN: `Fan`,
+  MOVIE_BUFF: `Movie buff`,
 };
 
 export const ProfileIntervals = [
-  {'MIN': 1, 'MAX': 10},
-  {'MIN': 11, 'MAX': 20},
-  {'MIN': 21, 'MAX': Infinity},
+  {MIN: 0, MAX: 10},
+  {MIN: 10, MAX: 20},
+  {MIN: 20, MAX: Infinity},
 ];
 
 export const PROFILE_RATING = [
@@ -90,8 +106,8 @@ export const PROFILE_RATING = [
 ];
 
 export const ExtraBlockNames = {
-  'TOP_RATED': `Top rated`,
-  'MOST_COMMENTED': `Most commented`,
+  TOP_RATED: `Top rated`,
+  MOST_COMMENTED: `Most commented`,
 };
 
 export const EXTRA_BLOCK_NAMES = [
@@ -104,10 +120,10 @@ export const AGE_RESTRICTIONS = [
 ];
 
 export const EmojiType = {
-  'SMILE': `smile`,
-  'SLEEPING': `sleeping`,
-  'PUKE': `puke`,
-  'ANGRY': `angry`,
+  SMILE: `smile`,
+  SLEEPING: `sleeping`,
+  PUKE: `puke`,
+  ANGRY: `angry`,
 };
 
 export const EMOJI_SMILE = [

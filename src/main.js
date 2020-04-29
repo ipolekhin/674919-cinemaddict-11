@@ -7,10 +7,10 @@ import {createFilmCardTemplate} from "./components/film-card";
 import {createFilmDetailsTemplate} from "./components/film-details";
 import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
-import {generateNavigations} from "./mock/navigation";
+import {calculateStatistics, generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
-import {Keys, StatisticsType} from "./const";
+import {Keys, NavigationType, TagsType} from "./const";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -26,16 +26,16 @@ let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 const films = generateFilms(FILMS_COUNT);
 
 // 3.5;
-const navigations = generateNavigations(films);
+const statistics = calculateStatistics(films);
+const navigations = generateNavigations(statistics);
 
-render(siteHeaderElement, createProfileTemplate(navigations
-  .find((item) => item.name === StatisticsType.HISTORY)));
+render(siteHeaderElement, createProfileTemplate(statistics[NavigationType.HISTORY]));
 // 3.6;
 render(siteMainElement, createNavigationTemplate(navigations));
 render(siteMainElement, createSortTemplate());
 render(siteMainElement, createFilmsContainerTemplate());
 // 3.5
-render(siteFooterStatisticsElement, createFooterStatisticsTemplate(FILMS_COUNT));
+render(siteFooterStatisticsElement, createFooterStatisticsTemplate(statistics[NavigationType.ALL]));
 
 const filmsElement = siteMainElement.querySelector(`.films`);
 const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);

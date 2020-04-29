@@ -54,7 +54,7 @@ const generateFilm = () => {
       duration: getRandomIntegerNumber(MIN_MINUTES_DURATION, MAX_MINUTES_DURATION),
       country: getRandomItem(COUNTRY_NAMES),
     },
-    comments: getRandomIntegerNumber(0, MAX_COMMENTS),
+    comments: getRandomIntegerNumber(0, MAX_COMMENTS), //genrateComments
     isWatchlist: getRandomBooleanValue(),
     isWatched: getRandomBooleanValue(),
     isFavorite: getRandomBooleanValue(),

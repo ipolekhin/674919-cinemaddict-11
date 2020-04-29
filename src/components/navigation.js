@@ -1,13 +1,33 @@
-export const createNavigationTemplate = () => {
+import {NavigationType, TAGS_NAMES, TagsType} from "../const";
+
+const createNavigationMarkup = ({name, count}, index) => {
+  const isFirstChild = !index;
+
+  return (
+    `<a
+      href="#${TAGS_NAMES[index]}"
+      class="main-navigation__item ${isFirstChild ? `main-navigation__item--active` : ``}">
+      ${name}
+      ${name !== NavigationType.ALL ? `<span class="main-navigation__item-count">${count}</span>` : ``}
+    </a>`
+  );
+};
+
+const createNavigationTemplate = (navigations) => {
+  const [navigationStats] = navigations.slice(-1);
+  const navigationMarkup = navigations
+    .slice(0, -1)
+    .map((navigation, i) => createNavigationMarkup(navigation, i))
+    .join(`\n`);
+
   return (
     `<nav class="main-navigation">
       <div class="main-navigation__items">
-        <a href="#all" class="main-navigation__item main-navigation__item--active">All movies</a>
-        <a href="#watchlist" class="main-navigation__item">Watchlist <span class="main-navigation__item-count">13</span></a>
-        <a href="#history" class="main-navigation__item">History <span class="main-navigation__item-count">4</span></a>
-        <a href="#favorites" class="main-navigation__item">Favorites <span class="main-navigation__item-count">8</span></a>
+        ${navigationMarkup}
       </div>
-      <a href="#stats" class="main-navigation__additional">Stats</a>
+      <a href="#${TagsType.STATS}" class="main-navigation__additional">${navigationStats.name}</a>
     </nav>`
   );
 };
+
+export {createNavigationTemplate};

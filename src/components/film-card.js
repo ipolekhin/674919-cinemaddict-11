@@ -3,7 +3,7 @@ import {getHoursMinutes} from "../utils";
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
 
-const createFilmCardMarkup = (film) => {
+const createMovieCardMarkup = (film) => {
   const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, comments} = film;
   const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
   const duration = getHoursMinutes(info.duration);
@@ -44,11 +44,11 @@ const createFilmCardMarkup = (film) => {
   );
 };
 
-const createFilmCardTemplate = (films, endCount, beginCount = 0) => {
+const collectMovieCards = (films, endCount, beginCount = 0) => {
   return films
     .slice(beginCount, endCount)
-    .map((film) => createFilmCardMarkup(film))
+    .map((film) => createMovieCardMarkup(film))
     .join(`\n`);
 };
 
-export {createFilmCardTemplate, createFilmCardMarkup};
+export {collectMovieCards, createMovieCardMarkup};

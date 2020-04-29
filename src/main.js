@@ -3,7 +3,7 @@ import {createNavigationTemplate} from "./components/navigation";
 import {createSortTemplate} from "./components/sorting";
 import {createFilmsContainerTemplate} from "./components/films-container";
 import {createFilmsContainerExtraTemplate} from "./components/films-container-extra";
-import {createFilmCardTemplate} from "./components/film-card";
+import {collectMovieCards} from "./components/film-card";
 import {createFilmDetailsTemplate} from "./components/film-details";
 import {createShowMoreButtonTemplate} from "./components/show-more-button";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics";
@@ -69,7 +69,7 @@ const popupFilmClickHandler = (evt) => {
 filmsElement.addEventListener(`click`, popupFilmClickHandler);
 
 // 3.3;
-render(filmsListContainerElement, createFilmCardTemplate(films, SHOWING_FILMS_COUNT_ON_START));
+render(filmsListContainerElement, collectMovieCards(films, SHOWING_FILMS_COUNT_ON_START));
 
 render(filmsListContainerElement, createShowMoreButtonTemplate(), `afterend`);
 
@@ -79,7 +79,7 @@ showMoreButton.addEventListener(`click`, () => {
   const prevFilmsCount = showingFilmsCount;
 
   showingFilmsCount = showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
-  render(filmsListContainerElement, createFilmCardTemplate(films, showingFilmsCount, prevFilmsCount));
+  render(filmsListContainerElement, collectMovieCards(films, showingFilmsCount, prevFilmsCount));
 
   if (showingFilmsCount >= films.length) {
     showMoreButton.style.display = `none`;

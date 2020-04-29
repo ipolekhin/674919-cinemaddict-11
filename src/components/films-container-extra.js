@@ -1,9 +1,9 @@
 import {EXTRA_BLOCK_NAMES} from "../const";
 import {getExtraBlocksFilms} from "../utils";
-import {createFilmCardMarkup} from "./film-card";
+import {createMovieCardMarkup} from "./film-card";
 
 const createExtraBlockMarkup = (name, films) => {
-  const filmMarkup = films.map((film) => createFilmCardMarkup(film)).join(`\n`);
+  const filmMarkup = films.map((film) => createMovieCardMarkup(film)).join(`\n`);
   return (
     `<section class="films-list--extra">
       <h2 class="films-list__title">${name}</h2>

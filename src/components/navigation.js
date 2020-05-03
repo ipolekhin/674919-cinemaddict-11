@@ -1,4 +1,5 @@
 import {NavigationType, TAGS_NAMES, TagsType} from "../const";
+import {createElement} from "../utils";
 
 const createNavigationMarkup = ({name, count}, index) => {
   const isFirstChild = !index;
@@ -30,4 +31,23 @@ const createNavigationTemplate = (navigations) => {
   );
 };
 
-export {createNavigationTemplate};
+export default class Navigation {
+  constructor(navigations) {
+    this._navigations = navigations;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createNavigationTemplate(this._navigations);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

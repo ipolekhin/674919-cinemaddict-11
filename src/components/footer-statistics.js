@@ -1,7 +1,30 @@
-const createFooterStatisticsTemplate = (FILMS_COUNT) => {
+import {createElement} from "../utils";
+
+const createFooterStatisticsTemplate = (countFilms) => {
   return (
-    `<p>${FILMS_COUNT} movies inside</p>`
+    `<p>${countFilms} movies inside</p>`
   );
 };
 
-export {createFooterStatisticsTemplate};
+export default class FooterStatistics {
+  constructor(countFilms) {
+    this._countFilms = countFilms;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFooterStatisticsTemplate(this._countFilms);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

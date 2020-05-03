@@ -1,5 +1,5 @@
 import {EMOJI_SMILES} from "../const";
-import {castTimeFormat} from "../utils";
+import {castTimeFormat, createElement} from "../utils";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -75,4 +75,25 @@ const createCommentsTemplate = (comments) => {
   );
 };
 
-export {createCommentsTemplate};
+export default class Comments {
+  constructor(comments) {
+    this._comments = comments;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCommentsTemplate(this._comments);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

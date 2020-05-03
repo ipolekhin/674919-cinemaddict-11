@@ -1,4 +1,5 @@
 import {PROFILE_RATING, ProfileIntervals} from "../const";
+import {createElement} from "../utils";
 
 const selectProfileRating = (count) => {
   const indexProfile = ProfileIntervals.findIndex((interval) =>
@@ -18,4 +19,25 @@ const createProfileTemplate = (statisticHistory) => {
   );
 };
 
-export {createProfileTemplate};
+export default class Profile {
+  constructor(statisticHistory) {
+    this._statisticHistory = statisticHistory;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createProfileTemplate(this._statisticHistory);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

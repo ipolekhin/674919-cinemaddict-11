@@ -1,5 +1,5 @@
 import {MONTH_NAMES} from "../const";
-import {castTimeFormat, getHoursMinutes} from "../utils";
+import {castTimeFormat, createElement, getHoursMinutes} from "../utils";
 import {createCommentsTemplate} from "./comments";
 
 const formattedDate = (value) => {
@@ -125,4 +125,25 @@ const createFilmDetailsTemplate = (film) => {
   );
 };
 
-export {createFilmDetailsTemplate};
+export default class FilmDetails {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

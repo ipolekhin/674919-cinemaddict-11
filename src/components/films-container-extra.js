@@ -1,5 +1,5 @@
 import {EXTRA_BLOCK_NAMES} from "../const";
-import {getExtraBlocksFilms} from "../utils";
+import {createElement, getExtraBlocksFilms} from "../utils";
 import {createMovieCardMarkup} from "./film-card";
 
 const createExtraBlockMarkup = (name, films) => {
@@ -19,4 +19,25 @@ const createFilmsContainerExtraTemplate = (films) => {
   return EXTRA_BLOCK_NAMES.map((name) => createExtraBlockMarkup(name, extraBlocks[name])).join(`\n`);
 };
 
-export {createFilmsContainerExtraTemplate};
+export default class FilmsContainerExtra {
+  constructor(films) {
+    this._films = films;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmsContainerExtraTemplate(this._films);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

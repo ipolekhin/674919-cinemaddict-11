@@ -2,6 +2,13 @@ import {ExtraBlockNames} from "./const";
 
 const FILM_QUANTITY = 2;
 
+const createElement = (template) => {
+  const newElement = document.createElement(`<div>`);
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
 };
@@ -80,6 +87,7 @@ const getExtraBlocksFilms = (films) => {
 
 export {
   castTimeFormat,
+  createElement,
   getExtraBlocksFilms,
   getHoursMinutes,
   getRandomBooleanValue,

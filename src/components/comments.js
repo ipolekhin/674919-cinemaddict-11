@@ -1,4 +1,4 @@
-import {EMOJI_SMILE} from "../const";
+import {EMOJI_SMILES} from "../const";
 import {castTimeFormat} from "../utils";
 
 const formattedDate = (value) => {
@@ -37,7 +37,7 @@ const createCommentsMarkup = (comments) => {
 };
 
 const createCommentsAddMarkup = () => {
-  return EMOJI_SMILE
+  return EMOJI_SMILES
     .map((name) => {
       return (
         `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${name}" value="${name}">

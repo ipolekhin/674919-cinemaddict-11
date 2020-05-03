@@ -126,7 +126,7 @@ export const EmojiType = {
   ANGRY: `angry`,
 };
 
-export const EMOJI_SMILE = [
+export const EMOJI_SMILES = [
   EmojiType.SMILE,
   EmojiType.SLEEPING,
   EmojiType.PUKE,

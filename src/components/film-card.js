@@ -1,4 +1,4 @@
-import {getHoursMinutes} from "../utils";
+import {getHoursMinutes, createElement} from "../utils";
 
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
@@ -51,4 +51,27 @@ const collectMovieCards = (films, endCount, beginCount = 0) => {
     .join(`\n`);
 };
 
-export {collectMovieCards, createMovieCardMarkup};
+export {createMovieCardMarkup};
+
+export default class Film {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createMovieCardMarkup(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

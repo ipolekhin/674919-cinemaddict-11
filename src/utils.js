@@ -2,6 +2,12 @@ import {ExtraBlockNames} from "./const";
 
 const FILM_QUANTITY = 2;
 
+export const RenderPosition = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`,
+  AFTEREND: `afterEnd`,
+};
+
 const createElement = (template) => {
   const newElement = document.createElement(`<div>`);
   newElement.innerHTML = template;
@@ -9,8 +15,18 @@ const createElement = (template) => {
   return newElement.firstChild;
 };
 
-const render = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
+const render = (container, template, place = RenderPosition.BEFOREEND) => {
+  switch (place) {
+    case RenderPosition.AFTERBEGIN:
+      container.prepend(element);
+      break;
+    case RenderPosition.AFTEREND:
+      container.after(element);
+      break;
+    case RenderPosition.BEFOREEND:
+      container.after(element);
+      break;
+  }
 };
 
 const castTimeFormat = (value) => {

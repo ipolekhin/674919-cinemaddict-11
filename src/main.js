@@ -8,7 +8,7 @@ import {createFooterStatisticsTemplate} from "./components/footer-statistics";
 import {createNavigationTemplate} from "./components/navigation";
 import {createProfileTemplate} from "./components/profile";
 import {createShowMoreButtonTemplate} from "./components/show-more-button";
-import {createSortTemplate} from "./components/sorting";
+import {createSortTemplate} from "./components/sort";
 import {generateFilms} from "./mock/film";
 import {removeElement, render} from "./utils";
 

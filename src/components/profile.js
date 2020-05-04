@@ -19,7 +19,7 @@ const createProfileTemplate = (statisticHistory) => {
   );
 };
 
-export default class Profile {
+export default class ProfileRating {
   constructor(statisticHistory) {
     this._statisticHistory = statisticHistory;
     this._element = null;

@@ -44,13 +44,6 @@ const createMovieCardMarkup = (film) => {
   );
 };
 
-const collectMovieCards = (films, endCount, beginCount = 0) => {
-  return films
-    .slice(beginCount, endCount)
-    .map((film) => createMovieCardMarkup(film))
-    .join(`\n`);
-};
-
 export {createMovieCardMarkup};
 
 export default class Film {

@@ -9,13 +9,13 @@ export const RenderPosition = {
 };
 
 const createElement = (template) => {
-  const newElement = document.createElement(`<div>`);
+  const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
 
   return newElement.firstChild;
 };
 
-const render = (container, template, place = RenderPosition.BEFOREEND) => {
+const render = (container, element, place = RenderPosition.BEFOREEND) => {
   switch (place) {
     case RenderPosition.AFTERBEGIN:
       container.prepend(element);
@@ -24,7 +24,7 @@ const render = (container, template, place = RenderPosition.BEFOREEND) => {
       container.after(element);
       break;
     case RenderPosition.BEFOREEND:
-      container.after(element);
+      container.append(element);
       break;
   }
 };

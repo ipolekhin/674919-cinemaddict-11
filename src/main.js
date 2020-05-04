@@ -1,18 +1,15 @@
-import {EXTRA_BLOCK_NAMES, Keys, NavigationType} from "./const";
+import {EXTRA_BLOCK_NAMES, NavigationType} from "./const";
 import {calculateStatistics, generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import ContainerComponent from "./components/films-container";
 import FooterStatisticsComponents from "./components/footer-statistics";
 import NavigationComponents from "./components/navigation";
 import ProfileRatingComponents from "./components/profile";
-import {getExtraBlocksFilms, removeElement, render, RenderPosition} from "./utils";
+import {getExtraBlocksFilms, render, RenderPosition} from "./utils";
 import SortComponents from "./components/sort";
 import FilmComponent from "./components/film-card";
 import ShowMoreButtonComponent from "./components/show-more-button";
 import FilmsContainerExtraComponent from "./components/films-container-extra";
-// import {collectMovieCards} from "./components/film-card";
-// import {createFilmDetailsTemplate} from "./components/film-details";
-// import {createShowMoreButtonTemplate} from "./components/show-more-button";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -30,8 +27,8 @@ const films = generateFilms(FILMS_COUNT);
 const statistics = calculateStatistics(films);
 const navigations = generateNavigations(statistics);
 
-const collectMovieCards = (container, films, endCount, beginCount = 0) => {
-  return films
+const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
+  return movie
     .slice(beginCount, endCount)
     .map((film) => renderFilm(container, film));
 };

@@ -11,7 +11,7 @@ const createExtraBlockMarkup = (name) => {
 };
 
 export default class FilmsContainerExtra {
-  constructor(name, films) {
+  constructor(name) {
     this._name = name;
     this._element = null;
   }

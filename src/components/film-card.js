@@ -44,8 +44,6 @@ const createMovieCardMarkup = (film) => {
   );
 };
 
-export {createMovieCardMarkup};
-
 export default class Film {
   constructor(film) {
     this._film = film;

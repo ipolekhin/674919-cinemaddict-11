@@ -30,7 +30,7 @@ const navigations = generateNavigations(statistics);
 const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
   return movie
     .slice(beginCount, endCount)
-    .map((film) => renderFilm(container, film));
+    .forEach((film) => renderFilm(container, film));
 };
 
 const renderFilm = (container, film) => {
@@ -75,8 +75,8 @@ render(siteMainElement, new NavigationComponents(navigations).getElement());
 render(siteMainElement, new SortComponents().getElement());
 
 const containerComponent = new ContainerComponent();
-render(siteMainElement, containerComponent.getElement());
 renderContainer(containerComponent, films);
+render(siteMainElement, containerComponent.getElement());
 render(siteFooterStatisticsElement, new FooterStatisticsComponents(statistics[NavigationType.ALL]).getElement());
 
 

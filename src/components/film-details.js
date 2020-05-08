@@ -1,6 +1,6 @@
 import {MONTH_NAMES} from "../const";
 import {castTimeFormat, createElement, getHoursMinutes} from "../utils";
-import {createCommentsTemplate} from "./comments";
+import CommentsComponent from "./comments";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -111,6 +111,7 @@ const createDetailsTopMarkup = (film) => {
 
 const createFilmDetailsTemplate = (film) => {
   const detailsTopMarkup = createDetailsTopMarkup(film);
+  const commentsComponent = new CommentsComponent(film.comments).getTemplate();
 
   return (
     `<section class="film-details">
@@ -118,7 +119,7 @@ const createFilmDetailsTemplate = (film) => {
         ${detailsTopMarkup}
 
         <div class="form-details__bottom-container">
-          ${createCommentsTemplate(film.comments)}
+          ${commentsComponent}
         </div>
       </form>
     </section>`

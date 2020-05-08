@@ -1,4 +1,4 @@
-import {EXTRA_BLOCK_NAMES, NavigationType} from "./const";
+import {EXTRA_BLOCK_NAMES, NavigationType, Keys} from "./const";
 import {calculateStatistics, generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import ContainerComponent from "./components/films-container";
@@ -10,6 +10,7 @@ import SortComponents from "./components/sort";
 import FilmComponent from "./components/film-card";
 import ShowMoreButtonComponent from "./components/show-more-button";
 import FilmsContainerExtraComponent from "./components/films-container-extra";
+import FilmDetails from "./components/film-details";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -34,7 +35,31 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
 };
 
 const renderFilm = (container, film) => {
+  const popupClickHandler = () => {
+    siteFooterElement.after(filmDetailsComponent.getElement());
+    document.addEventListener(`keydown`, popupEscHandler);
+  };
+
+  const popupCloseClickHandler = () => {
+    filmDetailsComponent.getElement().remove();
+  };
+
+  const popupEscHandler = (event) => {
+    if (event.key === Keys.ESC) {
+      filmDetailsComponent.getElement().remove();
+      document.removeEventListener(`keydown`, popupEscHandler);
+    }
+  };
+
   const filmComponent = new FilmComponent(film);
+  const popupButtons = filmComponent.getElement().querySelectorAll(`.film-card__poster, .film-card__title, .film-card__comments`);
+  for (let button of popupButtons) {
+    button.addEventListener(`click`, popupClickHandler);
+  }
+
+  const filmDetailsComponent = new FilmDetails(film);
+  const closeButton = filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`);
+  closeButton.addEventListener(`click`, popupCloseClickHandler);
 
   render(container, filmComponent.getElement());
 };

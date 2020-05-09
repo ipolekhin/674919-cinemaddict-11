@@ -53,7 +53,7 @@ const renderFilm = (container, film) => {
 
   const filmComponent = new FilmComponent(film);
   const popupButtons = filmComponent.getElement().querySelectorAll(`.film-card__poster, .film-card__title, .film-card__comments`);
-  for (let button of popupButtons) {
+  for (const button of popupButtons) {
     button.addEventListener(`click`, popupClickHandler);
   }
 

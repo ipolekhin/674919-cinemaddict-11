@@ -37,29 +37,39 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
 const renderFilm = (container, film) => {
   const popupClickHandler = () => {
     siteFooterElement.after(filmDetailsComponent.getElement());
-    document.addEventListener(`keydown`, popupEscHandler);
   };
 
   const popupCloseClickHandler = () => {
     filmDetailsComponent.getElement().remove();
+    document.removeEventListener(`keydown`, popupEscHandler);
   };
 
   const popupEscHandler = (event) => {
-    if (event.key === Keys.ESC) {
-      filmDetailsComponent.getElement().remove();
-      document.removeEventListener(`keydown`, popupEscHandler);
+    const isEscapeKey = event.key === Keys.ESC || event.key === Keys.ESCAPE;
+
+    if (isEscapeKey) {
+      console.log(`123`);
+      popupCloseClickHandler();
+      // document.removeEventListener(`keydown`, popupEscHandler);
     }
   };
 
   const filmComponent = new FilmComponent(film);
   const popupButtons = filmComponent.getElement().querySelectorAll(`.film-card__poster, .film-card__title, .film-card__comments`);
   for (const button of popupButtons) {
-    button.addEventListener(`click`, popupClickHandler);
+    button.addEventListener(`click`, () => {
+      popupClickHandler();
+      document.addEventListener(`keydown`, popupEscHandler);
+    });
   }
 
   const filmDetailsComponent = new FilmDetails(film);
   const closeButton = filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`);
-  closeButton.addEventListener(`click`, popupCloseClickHandler);
+  closeButton.addEventListener(`click`, (event) => {
+    event.preventDefault();
+    popupCloseClickHandler();
+    // document.removeEventListener(`keydown`, popupEscHandler);
+  });
 
   render(container, filmComponent.getElement());
 };

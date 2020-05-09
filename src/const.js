@@ -1,5 +1,6 @@
 export const Keys = {
-  ESC: `Escape`,
+  ESC: `Esc`,
+  ESCAPE: `Escape`,
 };
 
 export const NavigationType = {

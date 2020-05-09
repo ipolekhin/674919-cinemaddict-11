@@ -1,5 +1,5 @@
 import {COMMENT_AUTHORS, COMMENT_TEXTS} from "../mock/const";
-import {EMOJI_SMILE} from "../const";
+import {EMOJI_SMILES} from "../const";
 import {getRandomDate, getRandomItem} from "../utils";
 
 const START_YEAR = 2020;
@@ -10,7 +10,7 @@ const generateComment = () => {
   return {
     author: getRandomItem(COMMENT_AUTHORS),
     date: commentDate,
-    emoji: getRandomItem(EMOJI_SMILE),
+    emoji: getRandomItem(EMOJI_SMILES),
     text: getRandomItem(COMMENT_TEXTS),
   };
 };

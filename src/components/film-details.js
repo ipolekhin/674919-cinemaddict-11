@@ -1,6 +1,6 @@
 import {MONTH_NAMES} from "../const";
-import {castTimeFormat, getHoursMinutes} from "../utils";
-import {createCommentsTemplate} from "./comments";
+import {castTimeFormat, createElement, getHoursMinutes} from "../utils";
+import CommentsComponent from "./comments";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -111,6 +111,7 @@ const createDetailsTopMarkup = (film) => {
 
 const createFilmDetailsTemplate = (film) => {
   const detailsTopMarkup = createDetailsTopMarkup(film);
+  const commentsComponent = new CommentsComponent(film.comments).getTemplate();
 
   return (
     `<section class="film-details">
@@ -118,11 +119,32 @@ const createFilmDetailsTemplate = (film) => {
         ${detailsTopMarkup}
 
         <div class="form-details__bottom-container">
-          ${createCommentsTemplate(film.comments)}
+          ${commentsComponent}
         </div>
       </form>
     </section>`
   );
 };
 
-export {createFilmDetailsTemplate};
+export default class FilmDetails {
+  constructor(film) {
+    this._film = film;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

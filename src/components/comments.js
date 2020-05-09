@@ -1,5 +1,5 @@
-import {EMOJI_SMILE} from "../const";
-import {castTimeFormat} from "../utils";
+import {EMOJI_SMILES} from "../const";
+import {castTimeFormat, createElement} from "../utils";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -37,7 +37,7 @@ const createCommentsMarkup = (comments) => {
 };
 
 const createCommentsAddMarkup = () => {
-  return EMOJI_SMILE
+  return EMOJI_SMILES
     .map((name) => {
       return (
         `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${name}" value="${name}">
@@ -75,4 +75,25 @@ const createCommentsTemplate = (comments) => {
   );
 };
 
-export {createCommentsTemplate};
+export default class Comments {
+  constructor(comments) {
+    this._comments = comments;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createCommentsTemplate(this._comments);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

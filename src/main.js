@@ -1,16 +1,17 @@
 import {EXTRA_BLOCK_NAMES, NavigationType, Keys} from "./const";
 import {calculateStatistics, generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
+import {getExtraBlocksFilms, render, RenderPosition} from "./utils";
 import ContainerComponent from "./components/films-container";
+import FilmComponent from "./components/film-card";
+import FilmsContainerExtraComponent from "./components/films-container-extra";
+import FilmDetailsComponent from "./components/film-details";
 import FooterStatisticsComponents from "./components/footer-statistics";
 import NavigationComponents from "./components/navigation";
+import NoMovieComponent from "./components/no-films";
 import ProfileRatingComponents from "./components/profile";
-import {getExtraBlocksFilms, render, RenderPosition} from "./utils";
-import SortComponents from "./components/sort";
-import FilmComponent from "./components/film-card";
 import ShowMoreButtonComponent from "./components/show-more-button";
-import FilmsContainerExtraComponent from "./components/films-container-extra";
-import FilmDetails from "./components/film-details";
+import SortComponents from "./components/sort";
 
 const FILMS_COUNT = 25;
 const SHOWING_FILMS_COUNT_ON_START = 5;
@@ -48,7 +49,6 @@ const renderFilm = (container, film) => {
     const isEscapeKey = event.key === Keys.ESC || event.key === Keys.ESCAPE;
 
     if (isEscapeKey) {
-      console.log(`123`);
       popupCloseClickHandler();
       // document.removeEventListener(`keydown`, popupEscHandler);
     }
@@ -63,7 +63,7 @@ const renderFilm = (container, film) => {
     });
   }
 
-  const filmDetailsComponent = new FilmDetails(film);
+  const filmDetailsComponent = new FilmDetailsComponent(film);
   const closeButton = filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`);
   closeButton.addEventListener(`click`, (event) => {
     event.preventDefault();
@@ -77,7 +77,15 @@ const renderFilm = (container, film) => {
 const renderContainer = (containerComponent, movie) => {
   const filmsElement = containerComponent.getElement();
   const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
+  const filmsList = filmsElement.querySelector(`.films-list`);
   let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
+
+  const isMovieInSystem = movie.length;
+  if (!isMovieInSystem) {
+    filmsElement.replaceChild(new NoMovieComponent().getElement(), filmsList);
+
+    return;
+  }
 
   collectMovieCards(filmsListContainerElement, movie, SHOWING_FILMS_COUNT_ON_START);
 

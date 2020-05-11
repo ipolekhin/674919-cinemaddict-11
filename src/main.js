@@ -2,7 +2,7 @@ import {EXTRA_BLOCK_NAMES, NavigationType, Keys} from "./const";
 import {calculateStatistics, generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {getExtraBlocksFilms} from "./utils/common";
-import {render, RenderPosition, replace} from "./utils/render";
+import {remove, render, RenderPosition, replace} from "./utils/render";
 import ContainerComponent from "./components/films-container";
 import FilmComponent from "./components/film-card";
 import FilmsContainerExtraComponent from "./components/films-container-extra";
@@ -42,7 +42,7 @@ const renderFilm = (container, film) => {
   };
 
   const popupCloseClickHandler = () => {
-    filmDetailsComponent.getElement().remove();
+    remove(filmDetailsComponent.getElement());
     document.removeEventListener(`keydown`, popupEscHandler);
   };
 
@@ -84,7 +84,7 @@ const renderContainer = (containerComponent, movie) => {
   const isMovieInSystem = !(movie.length);
   if (isMovieInSystem) {
     replace(filmsElement, new NoMovieComponent().getElement(), filmsList);
-    
+
     return;
   }
 
@@ -100,7 +100,7 @@ const renderContainer = (containerComponent, movie) => {
     collectMovieCards(filmsListContainerElement, movie, showingFilmsCount, prevTasksCount);
 
     if (showingFilmsCount >= movie.length) {
-      showMoreButton.getElement().style.display = `none`;
+      remove(showMoreButton.getElement());
       showMoreButton.removeElement();
     }
   });

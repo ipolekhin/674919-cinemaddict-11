@@ -1,4 +1,5 @@
-import {getHoursMinutes, createElement} from "../utils";
+import {getHoursMinutes} from "../utils";
+import AbstractComponent from "./abstract-component";
 
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
@@ -44,25 +45,13 @@ const createMovieCardMarkup = (film) => {
   );
 };
 
-export default class Film {
+export default class Film extends AbstractComponent {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   getTemplate() {
     return createMovieCardMarkup(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

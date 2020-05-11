@@ -1,6 +1,7 @@
 import {MONTH_NAMES} from "../const";
-import {castTimeFormat, createElement, getHoursMinutes} from "../utils";
+import {castTimeFormat, getHoursMinutes} from "../utils";
 import CommentsComponent from "./comments";
+import AbstractComponent from "./abstract-component";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -126,25 +127,13 @@ const createFilmDetailsTemplate = (film) => {
   );
 };
 
-export default class FilmDetails {
+export default class FilmDetails extends AbstractComponent {
   constructor(film) {
+    super();
     this._film = film;
-    this._element = null;
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._film);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

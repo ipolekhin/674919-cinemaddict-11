@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractComponent from "./abstract-component";
 
 const createExtraBlockMarkup = (name) => {
   return (
@@ -10,25 +10,13 @@ const createExtraBlockMarkup = (name) => {
   );
 };
 
-export default class FilmsContainerExtra {
+export default class FilmsContainerExtra extends AbstractComponent {
   constructor(name) {
+    super();
     this._name = name;
-    this._element = null;
   }
 
   getTemplate() {
     return createExtraBlockMarkup(this._name);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

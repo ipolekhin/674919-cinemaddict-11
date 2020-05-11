@@ -30,8 +30,14 @@ const render = (container, component, place = RenderPosition.BEFOREEND) => {
   }
 };
 
-const replace = (parent, newElement, oldElement) => {
-  parent.replaceChild(newElement, oldElement);
+const replace = (newComponent, oldElement) => {
+  const parentElement = oldElement.parentElement;
+  const newElement = newComponent.getElement();
+  const isExistElements = !!(parentElement && newElement && oldElement);
+
+  if (isExistElements && parentElement.contains(oldElement)) {
+    parentElement.replaceChild(newElement, oldElement);
+  }
 };
 
 export {

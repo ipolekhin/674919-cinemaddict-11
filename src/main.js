@@ -79,11 +79,11 @@ const renderContainer = (containerComponent, movie) => {
   const filmsElement = containerComponent.getElement();
   const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
   const filmsList = filmsElement.querySelector(`.films-list`);
+  const isMovieInSystem = !(movie.length);
   let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
-  const isMovieInSystem = !(movie.length);
   if (isMovieInSystem) {
-    replace(filmsElement, new NoMovieComponent().getElement(), filmsList);
+    replace(new NoMovieComponent(), filmsList);
 
     return;
   }

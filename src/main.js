@@ -42,7 +42,7 @@ const renderFilm = (container, film) => {
   };
 
   const popupCloseClickHandler = () => {
-    remove(filmDetailsComponent.getElement());
+    filmDetailsComponent.getElement().remove();
     document.removeEventListener(`keydown`, popupEscHandler);
   };
 
@@ -100,8 +100,7 @@ const renderContainer = (containerComponent, movie) => {
     collectMovieCards(filmsListContainerElement, movie, showingFilmsCount, prevTasksCount);
 
     if (showingFilmsCount >= movie.length) {
-      remove(showMoreButton.getElement());
-      showMoreButton.removeElement();
+      remove(showMoreButton);
     }
   });
 

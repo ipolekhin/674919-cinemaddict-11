@@ -1,6 +1,6 @@
 import {COMMENT_AUTHORS, COMMENT_TEXTS} from "../mock/const";
 import {EMOJI_SMILES} from "../const";
-import {getRandomDate, getRandomItem} from "../utils";
+import {getRandomDate, getRandomItem} from "../utils/common";
 
 const START_YEAR = 2020;
 

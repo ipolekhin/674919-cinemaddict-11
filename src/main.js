@@ -1,7 +1,8 @@
 import {EXTRA_BLOCK_NAMES, NavigationType, Keys} from "./const";
 import {calculateStatistics, generateNavigations} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
-import {getExtraBlocksFilms, render, RenderPosition} from "./utils";
+import {getExtraBlocksFilms} from "./utils/common";
+import {render, RenderPosition} from "./utils/render";
 import ContainerComponent from "./components/films-container";
 import FilmComponent from "./components/film-card";
 import FilmsContainerExtraComponent from "./components/films-container-extra";

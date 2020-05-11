@@ -1,4 +1,4 @@
-import {getHoursMinutes} from "../utils";
+import {getHoursMinutes} from "../utils/common";
 import AbstractComponent from "./abstract-component";
 
 const MAX_LENGTH_DESCRIPTION = 140;

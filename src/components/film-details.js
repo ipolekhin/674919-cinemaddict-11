@@ -1,5 +1,5 @@
 import {MONTH_NAMES} from "../const";
-import {castTimeFormat, getHoursMinutes} from "../utils";
+import {castTimeFormat, getHoursMinutes} from "../utils/common";
 import CommentsComponent from "./comments";
 import AbstractComponent from "./abstract-component";
 

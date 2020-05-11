@@ -1,33 +1,6 @@
-import {ExtraBlockNames} from "./const";
+import {ExtraBlockNames} from "../const";
 
 const FILM_QUANTITY = 2;
-
-export const RenderPosition = {
-  AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`,
-  AFTEREND: `afterEnd`,
-};
-
-const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
-
-  return newElement.firstElementChild;
-};
-
-const render = (container, element, place = RenderPosition.BEFOREEND) => {
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.AFTEREND:
-      container.after(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-  }
-};
 
 const castTimeFormat = (value) => {
   return value.toString().padStart(2, `0`);
@@ -103,7 +76,6 @@ const getExtraBlocksFilms = (films) => {
 
 export {
   castTimeFormat,
-  createElement,
   getExtraBlocksFilms,
   getHoursMinutes,
   getRandomBooleanValue,
@@ -112,6 +84,5 @@ export {
   getRandomFractionalNumbers,
   getRandomDate,
   removeElement,
-  render,
   reshuffle,
 };

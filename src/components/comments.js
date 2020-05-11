@@ -1,5 +1,5 @@
 import {EMOJI_SMILES} from "../const";
-import {castTimeFormat} from "../utils";
+import {castTimeFormat} from "../utils/common";
 import AbstractComponent from "./abstract-component";
 
 const formattedDate = (value) => {

@@ -1,5 +1,5 @@
 import {NavigationType, TAGS_NAMES, TagsType} from "../const";
-import {createElement} from "../utils";
+import AbstractComponent from "./abstract-component";
 
 const createNavigationMarkup = ({name, count}, index) => {
   const isFirstChild = !index;
@@ -31,25 +31,13 @@ const createNavigationTemplate = (navigations) => {
   );
 };
 
-export default class Navigation {
+export default class Navigation extends AbstractComponent {
   constructor(navigations) {
+    super();
     this._navigations = navigations;
-    this._element = null;
   }
 
   getTemplate() {
     return createNavigationTemplate(this._navigations);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

@@ -1,5 +1,6 @@
 import {EMOJI_SMILES} from "../const";
-import {castTimeFormat, createElement} from "../utils";
+import {castTimeFormat} from "../utils/common";
+import AbstractComponent from "./abstract-component";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -75,25 +76,13 @@ const createCommentsTemplate = (comments) => {
   );
 };
 
-export default class Comments {
+export default class Comments extends AbstractComponent {
   constructor(comments) {
+    super();
     this._comments = comments;
-    this._element = null;
   }
 
   getTemplate() {
     return createCommentsTemplate(this._comments);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

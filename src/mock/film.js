@@ -13,7 +13,7 @@ import {
   getRandomIntegerNumber,
   getRandomItem,
   reshuffle,
-} from "../utils";
+} from "../utils/common";
 import {
   AGE_RESTRICTIONS,
   COUNTRY_NAMES,

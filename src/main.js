@@ -38,7 +38,7 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
 
 const renderFilm = (container, film) => {
   const popupClickHandler = () => {
-    siteFooterElement.after(filmDetailsComponent.getElement());
+    render(siteFooterElement, filmDetailsComponent, RenderPosition.AFTEREND);
   };
 
   const popupCloseClickHandler = () => {
@@ -72,7 +72,7 @@ const renderFilm = (container, film) => {
     // document.removeEventListener(`keydown`, popupEscHandler);
   });
 
-  render(container, filmComponent.getElement());
+  render(container, filmComponent);
 };
 
 const renderContainer = (containerComponent, movie) => {
@@ -91,7 +91,7 @@ const renderContainer = (containerComponent, movie) => {
   collectMovieCards(filmsListContainerElement, movie, SHOWING_FILMS_COUNT_ON_START);
 
   const showMoreButton = new ShowMoreButtonComponent();
-  render(filmsListContainerElement, showMoreButton.getElement(), RenderPosition.AFTEREND);
+  render(filmsListContainerElement, showMoreButton, RenderPosition.AFTEREND);
 
   showMoreButton.getElement().addEventListener(`click`, () => {
     const prevTasksCount = showingFilmsCount;
@@ -107,20 +107,20 @@ const renderContainer = (containerComponent, movie) => {
 
   const extraBlocks = getExtraBlocksFilms(movie);
   EXTRA_BLOCK_NAMES.map((name) => {
-    const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]).getElement();
-    const filmsListContainer = filmsContainerExtra.querySelector(`.films-list__container`);
+    const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]);
+    const filmsListContainer = filmsContainerExtra.getElement().querySelector(`.films-list__container`);
     render(filmsElement, filmsContainerExtra);
     collectMovieCards(filmsListContainer, extraBlocks[name], extraBlocks[name].length);
   });
 };
 
-render(siteHeaderElement, new ProfileRatingComponents(statistics[NavigationType.HISTORY]).getElement());
-render(siteMainElement, new NavigationComponents(navigations).getElement());
-render(siteMainElement, new SortComponents().getElement());
+render(siteHeaderElement, new ProfileRatingComponents(statistics[NavigationType.HISTORY]));
+render(siteMainElement, new NavigationComponents(navigations));
+render(siteMainElement, new SortComponents());
 
 const containerComponent = new ContainerComponent();
 renderContainer(containerComponent, films);
-render(siteMainElement, containerComponent.getElement());
-render(siteFooterStatisticsElement, new FooterStatisticsComponents(statistics[NavigationType.ALL]).getElement());
+render(siteMainElement, containerComponent);
+render(siteFooterStatisticsElement, new FooterStatisticsComponents(statistics[NavigationType.ALL]));
 
 

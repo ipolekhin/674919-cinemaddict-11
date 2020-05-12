@@ -9,7 +9,6 @@ import ShowMoreButtonComponent from "../components/show-more-button";
 
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
-const siteFooterElement = document.querySelector(`.footer`);
 
 const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
   return movie
@@ -18,9 +17,8 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
 };
 
 const renderFilm = (container, film) => {
-  console.log(container);
   const openPopupClickHandler = () => {
-    render(siteFooterElement, filmDetailsComponent, RenderPosition.AFTEREND);
+    render(document.body, filmDetailsComponent);
   };
 
   const closePopupClickHandler = () => {
@@ -62,9 +60,9 @@ export default class PageController {
   }
 
   render(movies) {
-    const filmsElement = this._container.getElement();
-    const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
-    const filmsList = filmsElement.querySelector(`.films-list`);
+    const container = this._container.getElement();
+    const filmsListContainerElement = container.querySelector(`.films-list__container`);
+    const filmsList = container.querySelector(`.films-list`);
     const isMovieInSystem = !(movies.length);
     let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
@@ -93,7 +91,7 @@ export default class PageController {
     EXTRA_BLOCK_NAMES.map((name) => {
       const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]);
       const filmsListContainer = filmsContainerExtra.getElement().querySelector(`.films-list__container`);
-      render(filmsElement, filmsContainerExtra);
+      render(container, filmsContainerExtra);
       collectMovieCards(filmsListContainer, extraBlocks[name], extraBlocks[name].length);
     });
   }

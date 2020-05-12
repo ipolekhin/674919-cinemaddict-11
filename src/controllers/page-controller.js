@@ -1,4 +1,4 @@
-import {EXTRA_BLOCK_NAMES, Keys} from "../const";
+import {EXTRA_BLOCK_NAMES, Keys, SortType} from "../const";
 import {getExtraBlocksFilms} from "../utils/common";
 import {remove, render, RenderPosition, replace} from "../utils/render";
 import FilmComponent from "../components/film-card";
@@ -13,7 +13,9 @@ const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
   return movie
     .slice(beginCount, endCount)
-    .forEach((film) => renderFilm(container, film));
+    .forEach((film) => {
+      renderFilm(container, film);
+    });
 };
 
 const renderFilm = (container, film) => {
@@ -50,6 +52,25 @@ const renderFilm = (container, film) => {
   });
 
   render(container, filmComponent);
+};
+
+const getSortedMovies = (movies, sortType) => {
+  let sortedMovies = [];
+  const showingMovies = movies.slice();
+
+  switch (sortType) {
+    case SortType.DATE:
+      sortedMovies = showingMovies.sort((a, b) => a.info.releaseDate - b.info.releaseDate);
+      break;
+    case SortType.RATING:
+      sortedMovies = showingMovies.sort((a, b) => b.rating * 10 - a.rating * 10);
+      break;
+    case SortType.DEFAULT:
+      sortedMovies = showingMovies;
+      break;
+  }
+
+  return sortedMovies;
 };
 
 export default class PageController {
@@ -96,12 +117,14 @@ export default class PageController {
 
     renderShowMoreButton();
 
-    this._srotComponent.setSortTypeChangeHandler(() => {
+    this._srotComponent.setSortTypeChangeHandler((sortType) => {
       showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
-      taskListElement.innerHTML = ``;
+      const sortedMovies = getSortedMovies(movies, sortType);
 
-      collectMovieCards(filmsListContainerElement, movies, showingFilmsCount);
+      filmsListContainerElement.innerHTML = ``;
+
+      collectMovieCards(filmsListContainerElement, sortedMovies, showingFilmsCount);
 
       renderShowMoreButton();
     });

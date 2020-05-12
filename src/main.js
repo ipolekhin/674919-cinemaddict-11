@@ -34,5 +34,3 @@ const pageController = new PageController(containerComponent);
 pageController.render(films, sortComponent);
 render(siteMainElement, containerComponent);
 render(siteFooterStatisticsElement, new FooterStatisticsComponents(statistics[NavigationType.ALL]));
-
-

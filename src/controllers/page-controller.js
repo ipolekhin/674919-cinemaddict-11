@@ -18,11 +18,12 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
 };
 
 const renderFilm = (container, film) => {
-  const popupClickHandler = () => {
+  console.log(container);
+  const openPopupClickHandler = () => {
     render(siteFooterElement, filmDetailsComponent, RenderPosition.AFTEREND);
   };
 
-  const popupCloseClickHandler = () => {
+  const closePopupClickHandler = () => {
     filmDetailsComponent.getElement().remove();
     document.removeEventListener(`keydown`, popupEscHandler);
   };
@@ -31,7 +32,7 @@ const renderFilm = (container, film) => {
     const isEscapeKey = event.key === Keys.ESC || event.key === Keys.ESCAPE;
 
     if (isEscapeKey) {
-      popupCloseClickHandler();
+      closePopupClickHandler();
       // document.removeEventListener(`keydown`, popupEscHandler);
     }
   };
@@ -40,13 +41,13 @@ const renderFilm = (container, film) => {
   const filmDetailsComponent = new FilmDetailsComponent(film);
 
   filmComponent.setPopupElementsClickHandler(() => {
-    popupClickHandler();
+    openPopupClickHandler();
     document.addEventListener(`keydown`, popupEscHandler);
   });
 
   filmDetailsComponent.setCloseHandler((event) => {
     event.preventDefault();
-    popupCloseClickHandler();
+    closePopupClickHandler();
     // document.removeEventListener(`keydown`, popupEscHandler);
   });
 
@@ -60,11 +61,11 @@ export default class PageController {
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
   }
 
-  render(movie) {
+  render(movies) {
     const filmsElement = this._container.getElement();
     const filmsListContainerElement = filmsElement.querySelector(`.films-list__container`);
     const filmsList = filmsElement.querySelector(`.films-list`);
-    const isMovieInSystem = !(movie.length);
+    const isMovieInSystem = !(movies.length);
     let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
     if (isMovieInSystem) {
@@ -73,7 +74,7 @@ export default class PageController {
       return;
     }
 
-    collectMovieCards(filmsListContainerElement, movie, SHOWING_FILMS_COUNT_ON_START);
+    collectMovieCards(filmsListContainerElement, movies, SHOWING_FILMS_COUNT_ON_START);
 
     render(filmsListContainerElement, this._showMoreButtonComponent, RenderPosition.AFTEREND);
 
@@ -81,14 +82,14 @@ export default class PageController {
       const prevTasksCount = showingFilmsCount;
       showingFilmsCount = showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
 
-      collectMovieCards(filmsListContainerElement, movie, showingFilmsCount, prevTasksCount);
+      collectMovieCards(filmsListContainerElement, movies, showingFilmsCount, prevTasksCount);
 
-      if (showingFilmsCount >= movie.length) {
+      if (showingFilmsCount >= movies.length) {
         remove(this._showMoreButtonComponent);
       }
     });
 
-    const extraBlocks = getExtraBlocksFilms(movie);
+    const extraBlocks = getExtraBlocksFilms(movies);
     EXTRA_BLOCK_NAMES.map((name) => {
       const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]);
       const filmsListContainer = filmsContainerExtra.getElement().querySelector(`.films-list__container`);

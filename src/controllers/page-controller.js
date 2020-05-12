@@ -59,7 +59,7 @@ export default class PageController {
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
   }
 
-  render(movies) {
+  render(movies, sortComponent) {
     const container = this._container.getElement();
     const filmsListContainerElement = container.querySelector(`.films-list__container`);
     const filmsList = container.querySelector(`.films-list`);
@@ -85,6 +85,10 @@ export default class PageController {
       if (showingFilmsCount >= movies.length) {
         remove(this._showMoreButtonComponent);
       }
+    });
+
+    sortComponent.setSortTypeChangeHandler(() => {
+      console.log(sortComponent);
     });
 
     const extraBlocks = getExtraBlocksFilms(movies);

@@ -35,8 +35,16 @@ export const TAGS_NAMES = [
   TagsType.STATS,
 ];
 
+export const SortType = {
+  DEFAULT: `default`,
+  DATE: `date`,
+  RATING: `rating`,
+};
+
 export const SORT_NAMES = [
-  `default`, `date`, `rating`
+  SortType.DEFAULT,
+  SortType.DATE,
+  SortType.RATING,
 ];
 
 export const GENRE_NAMES = [

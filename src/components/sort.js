@@ -1,12 +1,12 @@
 import {SORT_NAMES, SortType} from "../const";
 import AbstractComponent from "./abstract-component";
 
-const createSortMarkup = (name, isFirstChild) => {
+const createSortMarkup = (name) => {
   return (
     `<li>
       <a
         href="#"
-        class="sort__button ${isFirstChild ? `sort__button--active` : ``}"
+        class="sort__button"
         data-sort-type="${name}">
       Sort by ${name}</a>
     </li>`
@@ -14,7 +14,7 @@ const createSortMarkup = (name, isFirstChild) => {
 };
 
 const createSortTemplate = () => {
-  const sortMarkup = SORT_NAMES.map((name, i) => createSortMarkup(name, i === 0)).join(`\n`);
+  const sortMarkup = SORT_NAMES.map((name) => createSortMarkup(name)).join(`\n`);
 
   return (
     `<ul class="sort">
@@ -51,9 +51,22 @@ export default class Sort extends AbstractComponent {
         return;
       }
 
+      this.removeActiveClass();
       this._currentSortType = sortType;
-
+      this.setActiveClass();
       handler(this._currentSortType);
     });
+  }
+
+  getCurrentElement() {
+    return this._element.querySelector(`a[data-sort-type="${this._currentSortType}"]`);
+  }
+
+  setActiveClass() {
+    this.getCurrentElement().classList.add(`sort__button--active`);
+  }
+
+  removeActiveClass() {
+    this.getCurrentElement().classList.remove(`sort__button--active`);
   }
 }

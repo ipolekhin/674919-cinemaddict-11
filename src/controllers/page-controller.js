@@ -6,6 +6,7 @@ import FilmsContainerExtraComponent from "../components/films-container-extra";
 import FilmDetailsComponent from "../components/film-details";
 import NoMovieComponent from "../components/no-films";
 import ShowMoreButtonComponent from "../components/show-more-button";
+import SortComponent from "../components/sort";
 
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
@@ -19,11 +20,11 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
 };
 
 const renderFilm = (container, film) => {
-  const openPopupClickHandler = () => {
+  const openPopup = () => {
     render(document.body, filmDetailsComponent);
   };
 
-  const closePopupClickHandler = () => {
+  const closePopup = () => {
     filmDetailsComponent.getElement().remove();
     document.removeEventListener(`keydown`, popupEscHandler);
   };
@@ -32,7 +33,7 @@ const renderFilm = (container, film) => {
     const isEscapeKey = event.key === Keys.ESC || event.key === Keys.ESCAPE;
 
     if (isEscapeKey) {
-      closePopupClickHandler();
+      closePopup();
       // document.removeEventListener(`keydown`, popupEscHandler);
     }
   };
@@ -41,13 +42,13 @@ const renderFilm = (container, film) => {
   const filmDetailsComponent = new FilmDetailsComponent(film);
 
   filmComponent.setPopupElementsClickHandler(() => {
-    openPopupClickHandler();
+    openPopup();
     document.addEventListener(`keydown`, popupEscHandler);
   });
 
   filmDetailsComponent.setCloseHandler((event) => {
     event.preventDefault();
-    closePopupClickHandler();
+    closePopup();
     // document.removeEventListener(`keydown`, popupEscHandler);
   });
 
@@ -78,24 +79,25 @@ export default class PageController {
     this._container = container;
     this._noMovieComponent = new NoMovieComponent();
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
+    this._sortComponent = new SortComponent();
   }
 
-  render(movies, sortComponent) {
-    this._srotComponent = sortComponent;
+  render(movies, sortContainer) {
     const container = this._container.getElement();
     const filmsListContainerElement = container.querySelector(`.films-list__container`);
     const filmsList = container.querySelector(`.films-list`);
-    const isMovieInSystem = !(movies.length);
+    const isMovieInSystem = !!(movies.length);
     let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
-    if (isMovieInSystem) {
+    if (!isMovieInSystem) {
       replace(this._noMovieComponent, filmsList);
 
       return;
     }
 
+    render(sortContainer, this._sortComponent);
+    this._sortComponent.setActiveClass();
     collectMovieCards(filmsListContainerElement, movies, SHOWING_FILMS_COUNT_ON_START);
-
     render(filmsListContainerElement, this._showMoreButtonComponent, RenderPosition.AFTEREND);
 
     const renderShowMoreButton = () => {
@@ -107,7 +109,9 @@ export default class PageController {
         const prevTasksCount = showingFilmsCount;
         showingFilmsCount = showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
 
-        collectMovieCards(filmsListContainerElement, movies, showingFilmsCount, prevTasksCount);
+        const sortedMovies = getSortedMovies(movies, this._sortComponent.getSortType());
+
+        collectMovieCards(filmsListContainerElement, sortedMovies, showingFilmsCount, prevTasksCount);
 
         if (showingFilmsCount >= movies.length) {
           remove(this._showMoreButtonComponent);
@@ -117,7 +121,7 @@ export default class PageController {
 
     renderShowMoreButton();
 
-    this._srotComponent.setSortTypeChangeHandler((sortType) => {
+    this._sortComponent.setSortTypeChangeHandler((sortType) => {
       showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
 
       const sortedMovies = getSortedMovies(movies, sortType);
@@ -126,7 +130,7 @@ export default class PageController {
 
       collectMovieCards(filmsListContainerElement, sortedMovies, showingFilmsCount);
 
-      renderShowMoreButton();
+      renderShowMoreButton(sortedMovies);
     });
 
     const extraBlocks = getExtraBlocksFilms(movies);

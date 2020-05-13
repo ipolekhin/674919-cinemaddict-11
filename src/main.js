@@ -6,7 +6,6 @@ import ContainerComponent from "./components/films-container";
 import FooterStatisticsComponents from "./components/footer-statistics";
 import NavigationComponents from "./components/navigation";
 import ProfileRatingComponents from "./components/profile";
-import SortComponent from "./components/sort";
 
 import PageController from "./controllers/page-controller";
 
@@ -26,11 +25,9 @@ const navigations = generateNavigations(statistics);
 
 render(siteHeaderElement, new ProfileRatingComponents(statistics[NavigationType.HISTORY]));
 render(siteMainElement, new NavigationComponents(navigations));
-const sortComponent = new SortComponent();
-render(siteMainElement, sortComponent);
 
 const containerComponent = new ContainerComponent();
 const pageController = new PageController(containerComponent);
-pageController.render(films, sortComponent);
+pageController.render(films, siteMainElement);
 render(siteMainElement, containerComponent);
 render(siteFooterStatisticsElement, new FooterStatisticsComponents(statistics[NavigationType.ALL]));

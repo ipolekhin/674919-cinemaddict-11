@@ -4,8 +4,9 @@ import FilmDetailsComponent from "../components/film-details";
 import {Keys} from "../const";
 
 export default class MovieController {
-  constructor(container) {
+  constructor(container, onDataChange) {
     this._container = container;
+    this._onDataChange = onDataChange;
     this._filmComponent = null;
     this._filmDetailsComponent = null;
     this._popupEscHandler = this._popupEscHandler.bind(this);
@@ -21,12 +22,21 @@ export default class MovieController {
     });
 
     this._filmComponent.setWatchlistButtonClickHandler(() => {
+      this._onDataChange(this, movie, Object.assign({}, movie, {
+        isWatchlist: !movie.isWatchlist,
+      }));
     });
 
     this._filmComponent.setWatchedButtonClickHandler(() => {
+      this._onDataChange(this, movie, Object.assign({}, movie, {
+        isWatched: !movie.isWatched,
+      }));
     });
 
     this._filmComponent.setFavoritesButtonClickHandler(() => {
+      this._onDataChange(this, movie, Object.assign({}, movie, {
+        isFavorite: !movie.isFavorite,
+      }));
     });
 
     this._filmDetailsComponent.setCloseHandler((event) => {

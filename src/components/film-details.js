@@ -1,7 +1,7 @@
 import {MONTH_NAMES} from "../const";
 import {castTimeFormat, getHoursMinutes} from "../utils/common";
 import CommentsComponent from "./comments";
-import AbstractComponent from "./abstract-component";
+import AbstractSmartComponent from "./abstract-smart-component.js";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -127,18 +127,49 @@ const createFilmDetailsTemplate = (film) => {
   );
 };
 
-export default class FilmDetails extends AbstractComponent {
+export default class FilmDetails extends AbstractSmartComponent {
   constructor(film) {
     super();
     this._film = film;
+    this._closeHandler = null;
+    this._watchlistClickHandler = null;
+    this._watchedClickHandler = null;
+    this._favoriteClickHandler = null;
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._film);
   }
 
+  recoveryListeners() {
+    this.setCloseHandler(this._closeHandler);
+    this._subscribeOnEvents();
+  }
+
+  rerender() {
+    super.rerender();
+  }
+
   setCloseHandler(handler) {
-    this.getElement().querySelector(`.film-details__close-btn`)
+    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, handler);
+    this._closeHandler = handler;
+  }
+
+  setWatchlistButtonClickHandler(handler) {
+    this.getElement()
+      .querySelector(`.film-details__control-label--watchlist`).addEventListener(`click`, handler);
+    this._watchlistClickHandler = handler;
+  }
+
+  setWatchedButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__control-label--watched`)
       .addEventListener(`click`, handler);
+    this._watchedClickHandler = handler;
+  }
+
+  setFavoritesButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__control-label--favorite`)
+      .addEventListener(`click`, handler);
+    this._favoriteClickHandler = handler;
   }
 }

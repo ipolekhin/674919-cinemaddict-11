@@ -20,6 +20,15 @@ export default class MovieController {
       document.addEventListener(`keydown`, this._popupEscHandler);
     });
 
+    this._filmComponent.setWatchlistButtonClickHandler(() => {
+    });
+
+    this._filmComponent.setWatchedButtonClickHandler(() => {
+    });
+
+    this._filmComponent.setFavoritesButtonClickHandler(() => {
+    });
+
     this._filmDetailsComponent.setCloseHandler((event) => {
       event.preventDefault();
       this._closePopup();

@@ -1,3 +1,20 @@
+export const ButtonTagType = {
+  WATCHLIST: `add-to-watchlist`,
+  WATCHED: `mark-as-watched`,
+  FAVORITE: `favorite`,
+};
+
+export const BUTTON_TAG_NAMES = [
+  ButtonTagType.WATCHLIST,
+  ButtonTagType.WATCHED,
+  ButtonTagType.FAVORITE,
+];
+export const ButtonType = {
+  WATCHLIST: `Add to watchlist`,
+  WATCHED: `Mark as watched`,
+  FAVORITE: `Mark as favorite`,
+};
+
 export const Keys = {
   ESC: `Esc`,
   ESCAPE: `Escape`,

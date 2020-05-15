@@ -1,16 +1,51 @@
+import {BUTTON_TAG_NAMES, ButtonTagType, ButtonType} from "../const";
 import {getHoursMinutes} from "../utils/common";
 import AbstractComponent from "./abstract-component";
 
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
 
+const createButtonsMarkup = (isWatchlist, isWatched, isFavorite) => {
+
+  return BUTTON_TAG_NAMES
+    .map((tagName) => {
+      let controlActive = null;
+      let buttonName = null;
+      const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
+
+      switch (tagName) {
+        case ButtonTagType.WATCHLIST:
+          controlActive = setControlsActive(isWatchlist);
+          buttonName = ButtonType.WATCHLIST;
+          break;
+        case ButtonTagType.WATCHED:
+          controlActive = setControlsActive(isWatched);
+          buttonName = ButtonType.WATCHED;
+          break;
+        case ButtonTagType.FAVORITE:
+          controlActive = setControlsActive(isFavorite);
+          buttonName = ButtonType.FAVORITE;
+          break;
+      }
+
+      return (
+        `<button
+          class="film-card__controls-item button film-card__controls-item--${tagName}
+          ${controlActive}">
+          ${buttonName}
+        </button>`
+      );
+    })
+    .join(`\n`);
+};
+
 const createMovieCardMarkup = (film) => {
   const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, comments} = film;
-  const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
   const duration = getHoursMinutes(info.duration);
   const shortDescription = description.length > MAX_LENGTH_DESCRIPTION
     ? description.slice(0, MAX_LENGTH_DESCRIPTION)
     .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description;
+  const buttonsMarkup = createButtonsMarkup(isWatchlist, isWatched, isFavorite);
 
   return (
     `<article class="film-card">
@@ -25,21 +60,7 @@ const createMovieCardMarkup = (film) => {
       <p class="film-card__description">${shortDescription}</p>
       <a class="film-card__comments">${comments.length} comments</a>
       <form class="film-card__controls">
-        <button
-          class="film-card__controls-item button film-card__controls-item--add-to-watchlist
-          ${setControlsActive(isWatchlist)}">
-          Add to watchlist
-        </button>
-        <button
-          class="film-card__controls-item button film-card__controls-item--mark-as-watched
-          ${setControlsActive(isWatched)}">
-            Mark as watched
-        </button>
-        <button
-          class="film-card__controls-item button film-card__controls-item--favorite
-          ${setControlsActive(isFavorite)}">
-          Mark as favorite
-        </button>
+        ${buttonsMarkup}
       </form>
     </article>`
   );
@@ -60,5 +81,20 @@ export default class Film extends AbstractComponent {
       .forEach((element) => {
         element.addEventListener(`click`, handler);
       });
+  }
+
+  setWatchlistButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`)
+      .addEventListener(`click`, handler);
+  }
+
+  setWatchedButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`)
+      .addEventListener(`click`, handler);
+  }
+
+  setFavoritesButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-card__controls-item--favorite`)
+      .addEventListener(`click`, handler);
   }
 }

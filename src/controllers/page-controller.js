@@ -10,8 +10,8 @@ import SortComponent from "../components/sort";
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 
-const collectMovieCards = (container, movie, onDataChange, endCount, beginCount = 0) => {
-  return movie
+const collectMovieCards = (container, movies, onDataChange, endCount, beginCount = 0) => {
+  return movies
     .slice(beginCount, endCount)
     .map((movie) => {
       const filmController = new FilmController(container, onDataChange);

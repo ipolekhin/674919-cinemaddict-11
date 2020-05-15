@@ -1,4 +1,4 @@
-import {render, replace} from "../utils/render";
+import {render} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
 import {Keys} from "../const";

@@ -1,9 +1,8 @@
-import {EXTRA_BLOCK_NAMES, Keys, SortType} from "../const";
+import {EXTRA_BLOCK_NAMES, SortType} from "../const";
 import {getExtraBlocksFilms} from "../utils/common";
 import {remove, render, RenderPosition, replace} from "../utils/render";
-import FilmComponent from "../components/film-card";
+import FilmController from "./movie";
 import FilmsContainerExtraComponent from "../components/films-container-extra";
-import FilmDetailsComponent from "../components/film-details";
 import NoMovieComponent from "../components/no-films";
 import ShowMoreButtonComponent from "../components/show-more-button";
 import SortComponent from "../components/sort";
@@ -17,42 +16,6 @@ const collectMovieCards = (container, movie, endCount, beginCount = 0) => {
     .forEach((film) => {
       renderFilm(container, film);
     });
-};
-
-const renderFilm = (container, film) => {
-  const openPopup = () => {
-    render(document.body, filmDetailsComponent);
-  };
-
-  const closePopup = () => {
-    filmDetailsComponent.getElement().remove();
-    document.removeEventListener(`keydown`, popupEscHandler);
-  };
-
-  const popupEscHandler = (event) => {
-    const isEscapeKey = event.key === Keys.ESC || event.key === Keys.ESCAPE;
-
-    if (isEscapeKey) {
-      closePopup();
-      // document.removeEventListener(`keydown`, popupEscHandler);
-    }
-  };
-
-  const filmComponent = new FilmComponent(film);
-  const filmDetailsComponent = new FilmDetailsComponent(film);
-
-  filmComponent.setPopupElementsClickHandler(() => {
-    openPopup();
-    document.addEventListener(`keydown`, popupEscHandler);
-  });
-
-  filmDetailsComponent.setCloseHandler((event) => {
-    event.preventDefault();
-    closePopup();
-    // document.removeEventListener(`keydown`, popupEscHandler);
-  });
-
-  render(container, filmComponent);
 };
 
 const getSortedMovies = (movies, sortType) => {

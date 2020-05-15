@@ -40,17 +40,25 @@ const getSortedMovies = (movies, sortType) => {
 export default class PageController {
   constructor(container) {
     this._container = container;
+    this._movies = [];
+    this._showingMoviesCount = SHOWING_FILMS_COUNT_ON_START;
+    this._sortContainer = null;
+    this._filmsListContainerElement = null;
     this._noMovieComponent = new NoMovieComponent();
     this._showMoreButtonComponent = new ShowMoreButtonComponent();
     this._sortComponent = new SortComponent();
+    this._setSortTypeChangeHandler = this._setSortTypeChangeHandler.bind(this);
+    this._sortComponent.setSortTypeChangeHandler(this._setSortTypeChangeHandler);
   }
 
   render(movies, sortContainer) {
+    this._movies = movies;
     const container = this._container.getElement();
-    const filmsListContainerElement = container.querySelector(`.films-list__container`);
     const filmsList = container.querySelector(`.films-list`);
-    const isMovieInSystem = !!(movies.length);
-    let showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
+    const isMovieInSystem = !!(this._movies.length);
+    this._sortContainer = sortContainer;
+    this._filmsListContainerElement = container.querySelector(`.films-list__container`);
+
 
     if (!isMovieInSystem) {
       replace(this._noMovieComponent, filmsList);
@@ -58,12 +66,15 @@ export default class PageController {
       return;
     }
 
-    render(sortContainer, this._sortComponent);
+    render(this._sortContainer, this._sortComponent);
     this._sortComponent.setActiveClass();
-    collectMovieCards(filmsListContainerElement, movies, SHOWING_FILMS_COUNT_ON_START);
-    render(filmsListContainerElement, this._showMoreButtonComponent, RenderPosition.AFTEREND);
 
-    const extraBlocks = getExtraBlocksFilms(movies);
+    collectMovieCards(this._filmsListContainerElement, movies, this._showingMoviesCount);
+    render(this._filmsListContainerElement, this._showMoreButtonComponent, RenderPosition.AFTEREND);
+
+    this._renderShowMoreButton();
+
+    const extraBlocks = getExtraBlocksFilms(this._movies);
     EXTRA_BLOCK_NAMES.map((name) => {
       const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]);
       const filmsListContainer = filmsContainerExtra.getElement().querySelector(`.films-list__container`);
@@ -73,34 +84,34 @@ export default class PageController {
   }
 
   _renderShowMoreButton() {
-    if (showingFilmsCount >= movies.length) {
+    if (this._showingMoviesCount >= this._movies.length) {
       return;
     }
 
-    render(container, this._showMoreButtonComponent);
+    render(this._container, this._showMoreButtonComponent);
 
     this._showMoreButtonComponent.setClickHandler(() => {
-      const prevTasksCount = showingFilmsCount;
-      showingFilmsCount = showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
+      const prevMoviesCount = this._showingMoviesCount;
+      this._showingMoviesCount = this._showingMoviesCount + SHOWING_FILMS_COUNT_BY_BUTTON;
 
-      const sortedMovies = getSortedMovies(movies, this._sortComponent.getSortType());
+      const sortedMovies = getSortedMovies(this._movies, this._sortComponent.getSortType());
 
-      collectMovieCards(filmsListContainerElement, sortedMovies, showingFilmsCount, prevTasksCount);
+      collectMovieCards(this._filmsListContainerElement, sortedMovies, this._showingMoviesCount, prevMoviesCount);
 
-      if (showingFilmsCount >= movies.length) {
+      if (this._showingMoviesCount >= this._movies.length) {
         remove(this._showMoreButtonComponent);
       }
     });
   }
 
-  setSortTypeChangeHandler(sortType) {
-    showingFilmsCount = SHOWING_FILMS_COUNT_BY_BUTTON;
+  _setSortTypeChangeHandler(sortType) {
+    this._showingFilmsCount = SHOWING_FILMS_COUNT_ON_START;
 
-    const sortedMovies = getSortedMovies(movies, sortType);
+    const sortedMovies = getSortedMovies(this._movies, sortType);
 
-    filmsListContainerElement.innerHTML = ``;
+    this._filmsListContainerElement.innerHTML = ``;
 
-    collectMovieCards(filmsListContainerElement, sortedMovies, showingFilmsCount);
-    renderShowMoreButton(sortedMovies);
+    collectMovieCards(this._filmsListContainerElement, sortedMovies, this._showingFilmsCount);
+    this._renderShowMoreButton(sortedMovies);
   }
 }

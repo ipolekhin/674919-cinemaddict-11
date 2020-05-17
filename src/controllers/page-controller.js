@@ -1,7 +1,7 @@
 import {EXTRA_BLOCK_NAMES, SortType} from "../const";
 import {getExtraBlocksFilms} from "../utils/common";
 import {remove, render, RenderPosition, replace} from "../utils/render";
-import FilmController from "./movie";
+import FilmController from "./movie-controller";
 import FilmsContainerExtraComponent from "../components/films-container-extra";
 import NoMovieComponent from "../components/no-films";
 import ShowMoreButtonComponent from "../components/show-more-button";
@@ -77,11 +77,7 @@ export default class PageController {
 
     const newMovies = collectMovieCards(this._filmsListContainerElement, this._movies, this._onDataChange, this._showingMoviesCount);
     this._showedMovieControllers = this._showedMovieControllers.concat(newMovies);
-
-    render(this._filmsListContainerElement, this._showMoreButtonComponent, RenderPosition.AFTEREND);
-
     this._renderShowMoreButton();
-
     this._renderExtraBlocks();
   }
 

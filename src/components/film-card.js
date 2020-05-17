@@ -6,25 +6,21 @@ const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
 
 const createButtonsMarkup = (isWatchlist, isWatched, isFavorite) => {
+  const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
 
   return BUTTON_TAG_NAMES
     .map((tagName) => {
       let controlActive = null;
-      let buttonName = null;
-      const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
 
       switch (tagName) {
         case ButtonTagType.WATCHLIST:
           controlActive = setControlsActive(isWatchlist);
-          buttonName = ButtonType.WATCHLIST;
           break;
         case ButtonTagType.WATCHED:
           controlActive = setControlsActive(isWatched);
-          buttonName = ButtonType.WATCHED;
           break;
         case ButtonTagType.FAVORITE:
           controlActive = setControlsActive(isFavorite);
-          buttonName = ButtonType.FAVORITE;
           break;
       }
 
@@ -32,7 +28,7 @@ const createButtonsMarkup = (isWatchlist, isWatched, isFavorite) => {
         `<button
           class="film-card__controls-item button film-card__controls-item--${tagName}
           ${controlActive}">
-          ${buttonName}
+          ${ButtonType[tagName]}
         </button>`
       );
     })

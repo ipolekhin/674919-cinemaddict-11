@@ -151,13 +151,14 @@ export default class FilmDetails extends AbstractSmartComponent {
   }
 
   setCloseHandler(handler) {
-    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, handler);
+    this.getElement().querySelector(`.film-details__close-btn`)
+      .addEventListener(`click`, handler);
     this._closeHandler = handler;
   }
 
   setWatchlistButtonClickHandler(handler) {
-    this.getElement()
-      .querySelector(`.film-details__control-label--watchlist`).addEventListener(`click`, handler);
+    this.getElement().querySelector(`.film-details__control-label--watchlist`)
+      .addEventListener(`click`, handler);
     this._watchlistClickHandler = handler;
   }
 

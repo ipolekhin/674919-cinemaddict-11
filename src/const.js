@@ -10,9 +10,9 @@ export const BUTTON_TAG_NAMES = [
   ButtonTagType.FAVORITE,
 ];
 export const ButtonType = {
-  WATCHLIST: `Add to watchlist`,
-  WATCHED: `Mark as watched`,
-  FAVORITE: `Mark as favorite`,
+  [ButtonTagType.WATCHLIST]: `Add to watchlist`,
+  [ButtonTagType.WATCHED]: `Mark as watched`,
+  [ButtonTagType.FAVORITE]: `Mark as favorite`,
 };
 
 export const Keys = {

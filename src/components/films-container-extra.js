@@ -21,7 +21,7 @@ export default class FilmsContainerExtra extends AbstractComponent {
   }
 
   getFilmsListContainer() {
-    return  this.getElement().querySelector(`.films-list__container`);
+    return this.getElement().querySelector(`.films-list__container`);
   }
 
   render() {

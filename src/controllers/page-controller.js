@@ -1,6 +1,6 @@
 import {EXTRA_BLOCK_NAMES, SortType} from "../const";
 import {getExtraBlocksFilms} from "../utils/common";
-import {remove, render, RenderPosition, replace} from "../utils/render";
+import {remove, render, replace} from "../utils/render";
 import FilmController from "./movie-controller";
 import FilmsContainerExtraComponent from "../components/films-container-extra";
 import NoMovieComponent from "../components/no-films";

@@ -46,6 +46,7 @@ export default class PageController {
     this._container = container;
     this._movies = [];
     this._showedMovieControllers = [];
+    this._showedExtraMovies = [];
     this._showingMoviesCount = SHOWING_FILMS_COUNT_ON_START;
     this._sortContainer = null;
     this._filmsListContainerElement = null;
@@ -130,10 +131,11 @@ export default class PageController {
   _renderExtraBlocks() {
     const extraBlocks = getExtraBlocksFilms(this._movies);
     EXTRA_BLOCK_NAMES.map((name) => {
-      const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]);
+      const filmsContainerExtra = new FilmsContainerExtraComponent(name);
       const container = this._container.getElement();
       render(container, filmsContainerExtra);
-      collectMovieCards(filmsContainerExtra.getFilmsListContainer(), extraBlocks[name], this._onDataChange, extraBlocks[name].length);
+      const newMovies = collectMovieCards(filmsContainerExtra.getFilmsListContainer(), extraBlocks[name], this._onDataChange, extraBlocks[name].length);
+      this._showedExtraMovies = this._showedExtraMovies.concat(newMovies);
     });
   }
 }

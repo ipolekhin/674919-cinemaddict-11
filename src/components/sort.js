@@ -51,22 +51,23 @@ export default class Sort extends AbstractComponent {
         return;
       }
 
-      this.removeActiveClass();
+      this._removeActiveClass();
       this._currentSortType = sortType;
       this.setActiveClass();
       handler(this._currentSortType);
     });
   }
 
-  getCurrentElement() {
+  _getCurrentElement() {
     return this._element.querySelector(`a[data-sort-type="${this._currentSortType}"]`);
   }
 
+  // Публичный метод, используется в page-controller.js
   setActiveClass() {
-    this.getCurrentElement().classList.add(`sort__button--active`);
+    this._getCurrentElement().classList.add(`sort__button--active`);
   }
 
-  removeActiveClass() {
-    this.getCurrentElement().classList.remove(`sort__button--active`);
+  _removeActiveClass() {
+    this._getCurrentElement().classList.remove(`sort__button--active`);
   }
 }

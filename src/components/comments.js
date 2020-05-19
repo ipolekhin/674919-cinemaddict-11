@@ -94,16 +94,16 @@ export default class Comments extends AbstractSmartComponent {
   }
 
   _selectEmoji() {
+    // console.log(`1223`);
     const element = this.getElement();
-
     const emojiSmilesList = element.querySelector(`.film-details__emoji-list`);
-    if (emojiSmilesList) {
-      emojiSmilesList.addEventListener(`change`, (event) => {
-        event.preventDefault();
-        this._currentEmojiForComment = event.target.value;
+    // console.log(emojiSmilesList);
+    emojiSmilesList.addEventListener(`change`, (event) => {
+      event.preventDefault();
+      // console.log(`эмоция`);
+      this._currentEmojiForComment = event.target.value;
 
-        this.rerender();
-      });
-    }
+      this.rerender();
+    });
   }
 }

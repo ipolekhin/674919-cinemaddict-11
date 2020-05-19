@@ -1,6 +1,5 @@
 import {MONTH_NAMES} from "../const";
 import {castTimeFormat, getHoursMinutes} from "../utils/common";
-import CommentsComponent from "./comments";
 import AbstractSmartComponent from "./abstract-smart-component.js";
 
 const formattedDate = (value) => {
@@ -112,7 +111,6 @@ const createDetailsTopMarkup = (film) => {
 
 const createFilmDetailsTemplate = (film) => {
   const detailsTopMarkup = createDetailsTopMarkup(film);
-  const commentsComponent = new CommentsComponent(film.comments).getTemplate();
 
   return (
     `<section class="film-details">
@@ -120,7 +118,6 @@ const createFilmDetailsTemplate = (film) => {
         ${detailsTopMarkup}
 
         <div class="form-details__bottom-container">
-          ${commentsComponent}
         </div>
       </form>
     </section>`
@@ -140,6 +137,10 @@ export default class FilmDetails extends AbstractSmartComponent {
 
   recoveryListeners() {
     this.setCloseHandler(this._closeHandler);
+  }
+
+  getFilmCommentsContainer() {
+    return this.getElement().querySelector(`.form-details__bottom-container`);
   }
 
   setCloseHandler(handler) {

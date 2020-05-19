@@ -2,6 +2,7 @@ import {render, replace} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
 import {Keys, Mode} from "../const";
+import CommentsComponent from "../components/comments";
 
 export default class MovieController {
   constructor(container, onDataChange, onViewChange) {
@@ -11,14 +12,22 @@ export default class MovieController {
     this._mode = Mode.DEFAULT;
     this._filmComponent = null;
     this._filmDetailsComponent = null;
+    this._commentsComponent = null;
     this._popupEscHandler = this._popupEscHandler.bind(this);
   }
 
   render(movie) {
-    const oldFilmComponent = this._taskComponent;
-    const oldFilmDetailsComponent = this._taskEditComponent;
+    const oldFilmComponent = this._filmComponent;
+    const oldFilmDetailsComponent = this._filmDetailsComponent;
     this._filmComponent = new FilmComponent(movie);
+
+    // Передали комментарии в компонент
+    this._commentsComponent = new CommentsComponent(movie.comments);
+
     this._filmDetailsComponent = new FilmDetailsComponent(movie);
+
+    render(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsComponent);
+
 
     this._filmComponent.setPopupElementsClickHandler(() => {
       this._openPopup();

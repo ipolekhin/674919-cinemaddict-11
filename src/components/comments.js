@@ -49,9 +49,10 @@ const createCommentsAddMarkup = () => {
     });
 };
 
-const createCommentsTemplate = (comments) => {
+const createCommentsTemplate = (comments, emoji) => {
   const commentsMarkup = createCommentsMarkup(comments);
   const commentsAddMarkup = createCommentsAddMarkup(comments.length);
+  const emojiMarkup = emoji ? `<img src="images/emoji/${emoji}.png" alt="emoji-${emoji}" width="55" height="55">` : ``;
 
   return (
     `<section class="film-details__comments-wrap">
@@ -62,7 +63,7 @@ const createCommentsTemplate = (comments) => {
         </ul>
 
         <div class="film-details__new-comment">
-          <div for="add-emoji" class="film-details__add-emoji-label"></div>
+          <div for="add-emoji" class="film-details__add-emoji-label">${emoji}</div>
 
           <label class="film-details__comment-label">
             <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
@@ -85,7 +86,7 @@ export default class Comments extends AbstractSmartComponent {
   }
 
   getTemplate() {
-    return createCommentsTemplate(this._comments);
+    return createCommentsTemplate(this._comments, this._currentEmojiForComment);
   }
 
   recoveryListeners() {

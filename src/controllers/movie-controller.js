@@ -1,18 +1,22 @@
-import {render} from "../utils/render";
+import {render, replace} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
-import {Keys} from "../const";
+import {Keys, Mode} from "../const";
 
 export default class MovieController {
-  constructor(container, onDataChange) {
+  constructor(container, onDataChange, onViewChange) {
     this._container = container;
     this._onDataChange = onDataChange;
+    this._onViewChange = onViewChange;
+    this._mode = Mode.DEFAULT;
     this._filmComponent = null;
     this._filmDetailsComponent = null;
     this._popupEscHandler = this._popupEscHandler.bind(this);
   }
 
   render(movie) {
+    const oldFilmComponent = this._taskComponent;
+    const oldFilmDetailsComponent = this._taskEditComponent;
     this._filmComponent = new FilmComponent(movie);
     this._filmDetailsComponent = new FilmDetailsComponent(movie);
 
@@ -44,16 +48,31 @@ export default class MovieController {
       this._closePopup();
     });
 
-    render(this._container, this._filmComponent);
+
+    if (oldFilmDetailsComponent && oldFilmComponent) {
+      replace(this._filmComponent, oldFilmComponent);
+      replace(this._filmDetailsComponent, oldFilmDetailsComponent);
+    } else {
+      render(this._container, this._filmComponent);
+    }
+  }
+
+  setDefaultView() {
+    if (this._mode !== Mode.DEFAULT) {
+      this._closePopup();
+    }
   }
 
   _openPopup() {
+    this._onViewChange();
     render(document.body, this._filmDetailsComponent);
+    this._mode = Mode.EDIT;
   }
 
   _closePopup() {
     this._filmDetailsComponent.getElement().remove();
     document.removeEventListener(`keydown`, this._popupEscHandler);
+    this._mode = Mode.DEFAULT;
   }
 
   _popupEscHandler(event) {

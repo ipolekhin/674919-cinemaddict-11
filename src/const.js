@@ -114,6 +114,11 @@ export const COUNTRY_NAMES = [
   `USA`,
 ];
 
+export const Mode = {
+  DEFAULT: `default`,
+  EDIT: `edit`,
+};
+
 export const ProfileType = {
   NOVICE: `Novice`,
   FAN: `Fan`,

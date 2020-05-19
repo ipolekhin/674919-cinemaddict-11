@@ -19,4 +19,8 @@ export default class FilmsContainerExtra extends AbstractComponent {
   getTemplate() {
     return createExtraBlockMarkup(this._name);
   }
+
+  getFilmsListContainer() {
+    return  this.getElement().querySelector(`.films-list__container`);
+  }
 }

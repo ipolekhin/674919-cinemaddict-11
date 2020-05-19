@@ -131,10 +131,9 @@ export default class PageController {
     const extraBlocks = getExtraBlocksFilms(this._movies);
     EXTRA_BLOCK_NAMES.map((name) => {
       const filmsContainerExtra = new FilmsContainerExtraComponent(name, extraBlocks[name]);
-      const filmsListContainer = filmsContainerExtra.getElement().querySelector(`.films-list__container`);
       const container = this._container.getElement();
       render(container, filmsContainerExtra);
-      collectMovieCards(filmsListContainer, extraBlocks[name], this._onDataChange, extraBlocks[name].length);
+      collectMovieCards(filmsContainerExtra.getFilmsListContainer(), extraBlocks[name], this._onDataChange, extraBlocks[name].length);
     });
   }
 }

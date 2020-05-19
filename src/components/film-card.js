@@ -5,24 +5,17 @@ import AbstractComponent from "./abstract-component";
 const MAX_LENGTH_DESCRIPTION = 140;
 const ELLIPSIS = `...`;
 
-const createButtonsMarkup = (isWatchlist, isWatched, isFavorite) => {
+const createButtonsMarkup = ({isWatchlist, isWatched, isFavorite}) => {
   const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
 
   return BUTTON_TAG_NAMES
     .map((tagName) => {
-      let controlActive = null;
-
-      switch (tagName) {
-        case ButtonTagType.WATCHLIST:
-          controlActive = setControlsActive(isWatchlist);
-          break;
-        case ButtonTagType.WATCHED:
-          controlActive = setControlsActive(isWatched);
-          break;
-        case ButtonTagType.FAVORITE:
-          controlActive = setControlsActive(isFavorite);
-          break;
-      }
+      const activeButton = {
+        [ButtonTagType.WATCHLIST]: isWatchlist,
+        [ButtonTagType.WATCHED]: isWatched,
+        [ButtonTagType.FAVORITE]: isFavorite,
+      };
+      const controlActive = setControlsActive(activeButton[tagName]);
 
       return (
         `<button
@@ -41,7 +34,7 @@ const createMovieCardMarkup = (film) => {
   const shortDescription = description.length > MAX_LENGTH_DESCRIPTION
     ? description.slice(0, MAX_LENGTH_DESCRIPTION)
     .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description;
-  const buttonsMarkup = createButtonsMarkup(isWatchlist, isWatched, isFavorite);
+  const buttonsMarkup = createButtonsMarkup({isWatchlist, isWatched, isFavorite});
 
   return (
     `<article class="film-card">

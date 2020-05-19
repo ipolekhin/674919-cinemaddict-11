@@ -1,6 +1,6 @@
 import {EMOJI_SMILES} from "../const";
 import {castTimeFormat} from "../utils/common";
-import AbstractComponent from "./abstract-component";
+import AbstractSmartComponent from "./abstract-smart-component";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -76,13 +76,33 @@ const createCommentsTemplate = (comments) => {
   );
 };
 
-export default class Comments extends AbstractComponent {
+export default class Comments extends AbstractSmartComponent {
   constructor(comments) {
     super();
     this._comments = comments;
+    this._currentEmojiForComment = null;
+    this._selectEmoji();
   }
 
   getTemplate() {
     return createCommentsTemplate(this._comments);
+  }
+
+  recoveryListeners() {
+    this._selectEmoji();
+  }
+
+  _selectEmoji() {
+    const element = this.getElement();
+
+    const emojiSmilesList = element.querySelector(`.film-details__emoji-list`);
+    if (emojiSmilesList) {
+      emojiSmilesList.addEventListener(`change`, (event) => {
+        event.preventDefault();
+        this._currentEmojiForComment = event.target.value;
+
+        this.rerender();
+      });
+    }
   }
 }

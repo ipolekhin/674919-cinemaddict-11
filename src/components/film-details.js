@@ -140,11 +140,6 @@ export default class FilmDetails extends AbstractSmartComponent {
 
   recoveryListeners() {
     this.setCloseHandler(this._closeHandler);
-    this._subscribeOnEvents();
-  }
-
-  rerender() {
-    super.rerender();
   }
 
   setCloseHandler(handler) {

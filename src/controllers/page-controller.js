@@ -1,13 +1,12 @@
 import {EXTRA_BLOCK_NAMES, SortType} from "../const";
 import {getExtraBlocksFilms} from "../utils/common";
-import {remove, render, RenderPosition, replace} from "../utils/render";
+import {remove, render} from "../utils/render";
 import MovieController from "./movie-controller";
 import FilmsComponent from "../components/films";
 import FilmsContainerExtraComponent from "../components/films-container-extra";
 import NoMovieComponent from "../components/no-films";
 import ShowMoreButtonComponent from "../components/show-more-button";
 import SortComponent from "../components/sort";
-import TasksComponent from "../../../674919-taskmanager-11/src/components/tasks";
 
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;

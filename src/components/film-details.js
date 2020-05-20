@@ -1,6 +1,6 @@
 import {MONTH_NAMES} from "../const";
 import {castTimeFormat, getHoursMinutes} from "../utils/common";
-import AbstractSmartComponent from "./abstract-smart-component.js";
+import AbstractComponent from "./abstract-component";
 
 const formattedDate = (value) => {
   const year = value.getUTCFullYear();
@@ -124,7 +124,7 @@ const createFilmDetailsTemplate = (film) => {
   );
 };
 
-export default class FilmDetails extends AbstractSmartComponent {
+export default class FilmDetails extends AbstractComponent {
   constructor(film) {
     super();
     this._film = film;
@@ -133,10 +133,6 @@ export default class FilmDetails extends AbstractSmartComponent {
 
   getTemplate() {
     return createFilmDetailsTemplate(this._film);
-  }
-
-  recoveryListeners() {
-    this.setCloseHandler(this._closeHandler);
   }
 
   getFilmCommentsContainer() {

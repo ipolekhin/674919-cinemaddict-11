@@ -1,7 +1,7 @@
 import {EXTRA_BLOCK_NAMES, SortType} from "../const";
 import {getExtraBlocksFilms} from "../utils/common";
 import {remove, render, replace} from "../utils/render";
-import FilmController from "./movie-controller";
+import MovieController from "./movie-controller";
 import FilmsContainerExtraComponent from "../components/films-container-extra";
 import NoMovieComponent from "../components/no-films";
 import ShowMoreButtonComponent from "../components/show-more-button";
@@ -14,7 +14,7 @@ const collectMovieCards = (container, movies, onDataChange, onViewChange, endCou
   return movies
     .slice(beginCount, endCount)
     .map((movie) => {
-      const filmController = new FilmController(container, onDataChange, onViewChange);
+      const filmController = new MovieController(container, onDataChange, onViewChange);
 
       filmController.render(movie);
 

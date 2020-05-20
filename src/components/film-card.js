@@ -7,14 +7,14 @@ const ELLIPSIS = `...`;
 
 const createButtonsMarkup = ({isWatchlist, isWatched, isFavorite}) => {
   const setControlsActive = (isActive) => isActive ? `film-card__controls-item--active` : ``;
+  const activeButton = {
+    [ButtonTagType.WATCHLIST]: isWatchlist,
+    [ButtonTagType.WATCHED]: isWatched,
+    [ButtonTagType.FAVORITE]: isFavorite,
+  };
 
   return BUTTON_TAG_NAMES
     .map((tagName) => {
-      const activeButton = {
-        [ButtonTagType.WATCHLIST]: isWatchlist,
-        [ButtonTagType.WATCHED]: isWatched,
-        [ButtonTagType.FAVORITE]: isFavorite,
-      };
       const controlActive = setControlsActive(activeButton[tagName]);
 
       return (
@@ -74,16 +74,25 @@ export default class Film extends AbstractComponent {
 
   setWatchlistButtonClickHandler(handler) {
     this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`)
-      .addEventListener(`click`, handler);
+      .addEventListener(`click`, (event) => {
+        event.preventDefault();
+        handler();
+      });
   }
 
   setWatchedButtonClickHandler(handler) {
     this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`)
-      .addEventListener(`click`, handler);
+      .addEventListener(`click`, (event) => {
+        event.preventDefault();
+        handler();
+      });
   }
 
   setFavoritesButtonClickHandler(handler) {
     this.getElement().querySelector(`.film-card__controls-item--favorite`)
-      .addEventListener(`click`, handler);
+      .addEventListener(`click`, (event) => {
+        event.preventDefault();
+        handler();
+      });
   }
 }

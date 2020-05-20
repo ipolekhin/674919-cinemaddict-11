@@ -52,6 +52,24 @@ export default class MovieController {
       }));
     });
 
+    this._filmDetailsComponent.setWatchlistButtonClickHandler(() => {
+      this._onDataChange(this, movie, Object.assign({}, movie, {
+        isWatchlist: !movie.isWatchlist,
+      }));
+    });
+
+    this._filmDetailsComponent.setWatchedButtonClickHandler(() => {
+      this._onDataChange(this, movie, Object.assign({}, movie, {
+        isWatched: !movie.isWatched,
+      }));
+    });
+
+    this._filmDetailsComponent.setFavoritesButtonClickHandler(() => {
+      this._onDataChange(this, movie, Object.assign({}, movie, {
+        isFavorite: !movie.isFavorite,
+      }));
+    });
+
     this._filmDetailsComponent.setCloseHandler((event) => {
       event.preventDefault();
       this._closePopup();

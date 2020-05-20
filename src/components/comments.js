@@ -82,7 +82,7 @@ export default class Comments extends AbstractSmartComponent {
     super();
     this._comments = comments;
     this._currentEmojiForComment = null;
-    this._selectEmoji();
+    this._subscribeOnEvent();
   }
 
   getTemplate() {
@@ -90,10 +90,10 @@ export default class Comments extends AbstractSmartComponent {
   }
 
   recoveryListeners() {
-    this._selectEmoji();
+    this._subscribeOnEvent();
   }
 
-  _selectEmoji() {
+  _subscribeOnEvent() {
     const element = this.getElement();
     const emojiSmilesList = element.querySelector(`.film-details__emoji-list`);
     emojiSmilesList.addEventListener(`change`, (event) => {

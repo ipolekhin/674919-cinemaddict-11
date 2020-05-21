@@ -90,21 +90,6 @@ export const MonthType = {
 
 };
 
-export const MONTH_NAMES = [
-  MonthType.JANUARY,
-  MonthType.FEBRUARY,
-  MonthType.MARCH,
-  MonthType.APRIL,
-  MonthType.MAY,
-  MonthType.JUNE,
-  MonthType.JULE,
-  MonthType.AUGUST,
-  MonthType.SEPTEMBER,
-  MonthType.OCTOBER,
-  MonthType.NOVEMBER,
-  MonthType.DECEMBER,
-];
-
 export const COUNTRY_NAMES = [
   `Australia`,
   `France`,

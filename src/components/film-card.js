@@ -1,5 +1,5 @@
 import {BUTTON_TAG_NAMES, ButtonTagType, ButtonType} from "../const";
-import {getHoursMinutes} from "../utils/common";
+import {formatDateYear, formatDuration} from "../utils/common";
 import AbstractComponent from "./abstract-component";
 
 const MAX_LENGTH_DESCRIPTION = 140;
@@ -30,7 +30,8 @@ const createButtonsMarkup = ({isWatchlist, isWatched, isFavorite}) => {
 
 const createMovieCardMarkup = (film) => {
   const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, comments} = film;
-  const duration = getHoursMinutes(info.duration);
+  const dateYear = formatDateYear(info.releaseDate);
+  const duration = formatDuration(info.duration);
   const shortDescription = description.length > MAX_LENGTH_DESCRIPTION
     ? description.slice(0, MAX_LENGTH_DESCRIPTION)
     .padEnd(MAX_LENGTH_DESCRIPTION + ELLIPSIS.length, ELLIPSIS) : description;
@@ -41,7 +42,7 @@ const createMovieCardMarkup = (film) => {
       <h3 class="film-card__title">${title}</h3>
       <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
-        <span class="film-card__year">${info.releaseDate.getUTCFullYear()}</span>
+        <span class="film-card__year">${dateYear}</span>
         <span class="film-card__duration">${duration}</span>
         <span class="film-card__genre">${info.genres[0]}</span>
       </p>

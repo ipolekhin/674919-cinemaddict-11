@@ -1,14 +1,5 @@
-import {MONTH_NAMES} from "../const";
-import {castTimeFormat, getHoursMinutes} from "../utils/common";
+import {formatDate, formatDuration} from "../utils/common";
 import AbstractComponent from "./abstract-component";
-
-const formattedDate = (value) => {
-  const year = value.getUTCFullYear();
-  const month = MONTH_NAMES[value.getMonth()];
-  const date = castTimeFormat(value.getDate());
-
-  return `${date} ${month} ${year} `;
-};
 
 const createDetailsTopMarkup = (film) => {
   const {
@@ -24,8 +15,8 @@ const createDetailsTopMarkup = (film) => {
   } = film;
   const setControlsActive = (isActive) => isActive ? `checked` : ``;
   const genreKey = info.genres.length > 1 ? `Genres` : `Genre`;
-  const duration = getHoursMinutes(info.duration);
-  const formatDate = formattedDate(info.releaseDate);
+  const duration = formatDuration(info.duration);
+  const date = formatDate(info.releaseDate);
 
   return (
     `<div class="form-details__top-container">
@@ -67,7 +58,7 @@ const createDetailsTopMarkup = (film) => {
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
-                <td class="film-details__cell">${formatDate}</td>
+                <td class="film-details__cell">${date}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>

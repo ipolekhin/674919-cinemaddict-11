@@ -1,22 +1,12 @@
 import {EMOJI_SMILES} from "../const";
-import {castTimeFormat} from "../utils/common";
+import {fullFormatDate} from "../utils/common";
 import AbstractSmartComponent from "./abstract-smart-component";
-
-const formattedDate = (value) => {
-  const year = value.getUTCFullYear();
-  const month = castTimeFormat(value.getMonth() + 1);
-  const date = castTimeFormat(value.getDate());
-  const hours = castTimeFormat(value.getHours() % 24);
-  const minutes = castTimeFormat(value.getMinutes());
-
-  return `${year}/${month}/${date} ${hours}:${minutes}`;
-};
 
 const createCommentsMarkup = (comments) => {
   return comments
     .map((comment) => {
       const {author, emoji, text, date} = comment;
-      const formatDate = formattedDate(date);
+      const formatDate = fullFormatDate(date);
 
       return (
         `<li class="film-details__comment">

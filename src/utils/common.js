@@ -1,16 +1,25 @@
 import {ExtraBlockNames} from "../const";
+import moment from "moment";
 
 const FILM_QUANTITY = 2;
 
-const castTimeFormat = (value) => {
-  return value.toString().padStart(2, `0`);
+const fullFormatDate = (date) => {
+  return moment(date).format(`YYYY/MM/DD HH:mm`);
 };
 
-const getHoursMinutes = (minutes) => {
-  const hours = Math.floor(minutes / 60);
-  const min = castTimeFormat(minutes - (hours * 60));
+const formatDate = (date) => {
+  return moment(date).format(`DD MMMM YYYY`);
+};
 
-  return hours ? `${hours}h ${min}m` : `${min}m`;
+const formatDateYear = (date) => {
+  return moment(date).format(`YYYY`);
+};
+
+const formatDuration = (valueMinutes) => {
+  const duration = moment.duration(valueMinutes, `minutes`);
+  const hours = duration.hours();
+  const minutes = duration.minutes();
+  return hours ? `${hours}h ${minutes}m` : `${minutes}m`;
 };
 
 const getRandomBooleanValue = () => Math.random() > 0.5;
@@ -75,9 +84,11 @@ const getExtraBlocksFilms = (films) => {
 };
 
 export {
-  castTimeFormat,
+  formatDate,
+  formatDateYear,
+  formatDuration,
+  fullFormatDate,
   getExtraBlocksFilms,
-  getHoursMinutes,
   getRandomBooleanValue,
   getRandomIntegerNumber,
   getRandomItem,

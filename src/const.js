@@ -1,3 +1,21 @@
+export const ButtonTagType = {
+  WATCHLIST: `add-to-watchlist`,
+  WATCHED: `mark-as-watched`,
+  FAVORITE: `favorite`,
+};
+
+export const BUTTON_TAG_NAMES = [
+  ButtonTagType.WATCHLIST,
+  ButtonTagType.WATCHED,
+  ButtonTagType.FAVORITE,
+];
+
+export const ButtonType = {
+  [ButtonTagType.WATCHLIST]: `Add to watchlist`,
+  [ButtonTagType.WATCHED]: `Mark as watched`,
+  [ButtonTagType.FAVORITE]: `Mark as favorite`,
+};
+
 export const Keys = {
   ESC: `Esc`,
   ESCAPE: `Escape`,
@@ -95,6 +113,11 @@ export const COUNTRY_NAMES = [
   `UK`,
   `USA`,
 ];
+
+export const Mode = {
+  DEFAULT: `default`,
+  EDIT: `edit`,
+};
 
 export const ProfileType = {
   NOVICE: `Novice`,

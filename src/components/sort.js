@@ -28,6 +28,7 @@ export default class Sort extends AbstractComponent {
     super();
 
     this._currentSortType = SortType.DEFAULT;
+    this._setActiveClass();
   }
   getTemplate() {
     return createSortTemplate();
@@ -51,22 +52,22 @@ export default class Sort extends AbstractComponent {
         return;
       }
 
-      this.removeActiveClass();
+      this._removeActiveClass();
       this._currentSortType = sortType;
-      this.setActiveClass();
+      this._setActiveClass();
       handler(this._currentSortType);
     });
   }
 
-  getCurrentElement() {
-    return this._element.querySelector(`a[data-sort-type="${this._currentSortType}"]`);
+  _getCurrentElement() {
+    return this.getElement().querySelector(`a[data-sort-type="${this._currentSortType}"]`);
   }
 
-  setActiveClass() {
-    this.getCurrentElement().classList.add(`sort__button--active`);
+  _setActiveClass() {
+    this._getCurrentElement().classList.add(`sort__button--active`);
   }
 
-  removeActiveClass() {
-    this.getCurrentElement().classList.remove(`sort__button--active`);
+  _removeActiveClass() {
+    this._getCurrentElement().classList.remove(`sort__button--active`);
   }
 }

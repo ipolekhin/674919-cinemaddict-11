@@ -1,6 +1,5 @@
 import {MONTH_NAMES} from "../const";
 import {castTimeFormat, getHoursMinutes} from "../utils/common";
-import CommentsComponent from "./comments";
 import AbstractComponent from "./abstract-component";
 
 const formattedDate = (value) => {
@@ -112,7 +111,6 @@ const createDetailsTopMarkup = (film) => {
 
 const createFilmDetailsTemplate = (film) => {
   const detailsTopMarkup = createDetailsTopMarkup(film);
-  const commentsComponent = new CommentsComponent(film.comments).getTemplate();
 
   return (
     `<section class="film-details">
@@ -120,7 +118,6 @@ const createFilmDetailsTemplate = (film) => {
         ${detailsTopMarkup}
 
         <div class="form-details__bottom-container">
-          ${commentsComponent}
         </div>
       </form>
     </section>`
@@ -131,14 +128,35 @@ export default class FilmDetails extends AbstractComponent {
   constructor(film) {
     super();
     this._film = film;
+    this._closeHandler = null;
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._film);
   }
 
+  getFilmCommentsContainer() {
+    return this.getElement().querySelector(`.form-details__bottom-container`);
+  }
+
   setCloseHandler(handler) {
     this.getElement().querySelector(`.film-details__close-btn`)
+      .addEventListener(`click`, handler);
+    this._closeHandler = handler;
+  }
+
+  setWatchlistButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__control-label--watchlist`)
+      .addEventListener(`click`, handler);
+  }
+
+  setWatchedButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__control-label--watched`)
+      .addEventListener(`click`, handler);
+  }
+
+  setFavoritesButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__control-label--favorite`)
       .addEventListener(`click`, handler);
   }
 }

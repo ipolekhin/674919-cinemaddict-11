@@ -66,7 +66,7 @@ export default class PageController {
     const container = this._container.getElement();
     const isMovieInSystem = !!(this._movies.length);
     this._sortContainer = sortContainer;
-    this._filmsListContainerElement = this._filmsComponent.getElement().querySelector(`.films-list__container`);
+    this._filmsListContainerElement = this._filmsComponent.getFilmsContainer();
 
     render(this._sortContainer, this._sortComponent);
 
@@ -137,7 +137,7 @@ export default class PageController {
 
   _renderExtraBlocks() {
     const extraBlocks = getExtraBlocksFilms(this._movies);
-    EXTRA_BLOCK_NAMES.map((name) => {
+    EXTRA_BLOCK_NAMES.forEach((name) => {
       const filmsContainerExtra = new FilmsContainerExtraComponent(name);
       const container = this._container.getElement();
       render(container, filmsContainerExtra);

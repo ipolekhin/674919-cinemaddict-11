@@ -43,9 +43,9 @@ const getSortedMovies = (movies, sortType) => {
 };
 
 export default class PageController {
-  constructor(container) {
+  constructor(container, moviesModel) {
     this._container = container;
-    this._movies = [];
+    this._moviesModel = moviesModel;
     this._showedMovieControllers = [];
     this._showedExtraMovies = [];
     this._showingMoviesCount = SHOWING_FILMS_COUNT_ON_START;
@@ -62,7 +62,7 @@ export default class PageController {
   }
 
   render(movies, sortContainer) {
-    this._movies = movies;
+    // this._movies = movies;
     const container = this._container.getElement();
     const isMovieInSystem = !!(this._movies.length);
     this._sortContainer = sortContainer;

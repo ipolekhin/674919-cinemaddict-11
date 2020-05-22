@@ -44,6 +44,7 @@ const generateFilm = () => {
     description,
     title,
     comments,
+    id: String(new Date() + Math.random()),
     info: {
       actors,
       ageRating,

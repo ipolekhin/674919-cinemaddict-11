@@ -4,7 +4,7 @@ import {generateFilms} from "./mock/film";
 import {render} from "./utils/render";
 import ContainerComponent from "./components/films-container";
 import FooterStatisticsComponents from "./components/footer-statistics";
-import MoviesModel from "./models/movies"
+import MoviesModel from "./models/movies";
 import NavigationComponents from "./components/navigation";
 import ProfileRatingComponents from "./components/profile";
 import PageController from "./controllers/page-controller";

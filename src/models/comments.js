@@ -13,18 +13,18 @@ export default class Comments {
     this._callHandlers(this._dataChangeHandlers);
   }
 
-  updateComments(id, comment) {
-    const index = this._comments.findIndex((value) => value.id === id);
-
-    if (index === -1) {
-      return;
-    }
-
-    this._comments = [].concat(this._comments.slice(0, index), comment, this._comments.slice(index + 1));
-    this._callHandlers(this._dataChangeHandlers);
-
-    return true;
-  }
+  // updateComments(id, comment) {
+  //   const index = this._comments.findIndex((value) => value.id === id);
+  //
+  //   if (index === -1) {
+  //     return;
+  //   }
+  //
+  //   this._comments = [].concat(this._comments.slice(0, index), comment, this._comments.slice(index + 1));
+  //   this._callHandlers(this._dataChangeHandlers);
+  //
+  //   return true;
+  // }
 
   setDataChangeHandler(handler) {
     this._dataChangeHandlers.push(handler);

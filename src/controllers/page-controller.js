@@ -130,14 +130,9 @@ export default class PageController {
 
   _setSortTypeChangeHandler(sortType) {
     this._showingMoviesCount = SHOWING_FILMS_COUNT_ON_START;
-
     const sortedMovies = getSortedMovies(this._moviesModel.getMovies(), sortType);
-
-    this._filmsListContainerElement.innerHTML = ``;
-
-    const newMovies = collectMovieCards(this._filmsListContainerElement, sortedMovies, this._onDataChange, this._onViewChange, this._showingMoviesCount);
-    this._showedMovieControllers = newMovies;
-
+    this._removeMovies();
+    this._renderMovies(sortedMovies);
     this._renderShowMoreButton();
   }
 

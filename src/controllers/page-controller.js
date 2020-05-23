@@ -58,6 +58,7 @@ export default class PageController {
     this._filmsComponent = new FilmsComponent();
     this._setSortTypeChangeHandler = this._setSortTypeChangeHandler.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
+    this._onShowMoreButtonClick = this._onShowMoreButtonClick.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
     this._sortComponent.setSortTypeChangeHandler(this._setSortTypeChangeHandler);
     this._moviesModel.setFilterChangeHandler(this._onFilterChange);
@@ -105,15 +106,7 @@ export default class PageController {
     const filmListElement = this._filmsComponent.getElement();
     render(filmListElement, this._showMoreButtonComponent);
 
-    this._showMoreButtonComponent.setClickHandler(() => {
-      const prevMoviesCount = this._showingMoviesCount;
-      const movies = this._moviesModel.getMovies();
-      this._showingMoviesCount = this._showingMoviesCount + SHOWING_FILMS_COUNT_BY_BUTTON;
-
-      const sortedMovies = getSortedMovies(movies, this._sortComponent.getSortType());
-      const newMovies = collectMovieCards(this._filmsListContainerElement, sortedMovies, this._onDataChange, this._onViewChange, this._showingMoviesCount, prevMoviesCount);
-      this._showedMovieControllers = this._showedMovieControllers.concat(newMovies);
-    });
+    this._showMoreButtonComponent.setClickHandler(this._onShowMoreButtonClick);
   }
 
   _updateMovies(count) {
@@ -146,6 +139,20 @@ export default class PageController {
     this._showedMovieControllers = newMovies;
 
     this._renderShowMoreButton();
+  }
+
+  _onShowMoreButtonClick() {
+    const prevMoviesCount = this._showingMoviesCount;
+    const movies = this._moviesModel.getMovies();
+
+    this._showingMoviesCount = this._showingMoviesCount + SHOWING_FILMS_COUNT_BY_BUTTON;
+
+    const sortedMovies = getSortedMovies(movies, this._sortComponent.getSortType());
+    this._renderMovies(sortedMovies);
+
+    if (this._showingMoviesCount >= sortedMovies.length) {
+      remove(this._showMoreButtonComponent);
+    }
   }
 
   _onFilterChange() {

@@ -37,7 +37,7 @@ export const NAVIGATION_NAMES = [
   NavigationType.STATS,
 ];
 
-export const TagsType = {
+export const NavigationTagsType = {
   ALL: `all`,
   WATCHLIST: `watchlist`,
   HISTORY: `history`,
@@ -45,13 +45,20 @@ export const TagsType = {
   STATS: `stats`,
 };
 
-export const TAGS_NAMES = [
-  TagsType.ALL,
-  TagsType.WATCHLIST,
-  TagsType.HISTORY,
-  TagsType.FAVORITES,
-  TagsType.STATS,
+export const NAVIGATION_TAGS_NAMES = [
+  NavigationTagsType.ALL,
+  NavigationTagsType.WATCHLIST,
+  NavigationTagsType.HISTORY,
+  NavigationTagsType.FAVORITES,
+  NavigationTagsType.STATS,
 ];
+
+export const FilterType = {
+  ALL: `all`,
+  WATCHLIST: `watchlist`,
+  HISTORY: `history`,
+  FAVORITES: `favorites`,
+};
 
 export const SortType = {
   DEFAULT: `default`,

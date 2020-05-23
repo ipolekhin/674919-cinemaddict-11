@@ -4,11 +4,11 @@ export default class Comments {
     this._dataChangeHandlers = [];
   }
 
-  getFilms() {
+  getComments() {
     return this._movies;
   }
 
-  setFilms(comments) {
+  setComments(comments) {
     this._comments = Array.from(comments);
     this._callHandlers(this._dataChangeHandlers);
   }

@@ -13,7 +13,7 @@ const getWatchedMovies = (movies) => {
 };
 
 const getFavoriteMovies = (movies) => {
-  return movies.filter((movies) => movies.isFavorite);
+  return movies.filter((movie) => movie.isFavorite);
 };
 
 const getMoviesByFilter = (movies, filterType) => {

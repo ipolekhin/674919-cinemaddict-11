@@ -1,13 +1,7 @@
 import {NavigationTagsType} from "../const";
 import AbstractComponent from "./abstract-component";
 
-const FILTER_ID_PREFIX = `filter__`;
-
-const getFilterNameById = (id) => {
-  return id.substring(FILTER_ID_PREFIX.length);
-};
-
-const createFilterMarkup = ({name, filterName, count, checked} ) => {
+const createFilterMarkup = ({name, filterName, count, checked}) => {
   const check = checked ? `main-navigation__item--active` : ``;
 
   return (
@@ -20,9 +14,9 @@ const createFilterMarkup = ({name, filterName, count, checked} ) => {
   );
 };
 
-const createFilterTemplate = (navigation) => {
-  const [navigationStats] = navigation.slice(-1);
-  const navigationMarkup = navigation
+const createFilterTemplate = (navigations) => {
+  const [navigationStats] = navigations.slice(-1);
+  const navigationMarkup = navigations
     .slice(0, -1)
     .map((navigation) => createFilterMarkup(navigation))
     .join(`\n`);
@@ -55,7 +49,7 @@ export default class Filter extends AbstractComponent {
         return;
       }
 
-      const filterName = event.target.href.split('#').pop();
+      const filterName = event.target.href.split(`#`).pop();
 
       handler(filterName);
     });

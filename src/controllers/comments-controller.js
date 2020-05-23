@@ -1,5 +1,5 @@
-import {EmojiType} from "../const";
-import {render, replace} from "../utils/render";
+// import {EmojiType} from "../const";
+// import {render, replace} from "../utils/render";
 
 export default class FilterController {
   constructor(container, commentsModel) {
@@ -12,8 +12,8 @@ export default class FilterController {
   }
 
   render() {
-    const container = this._container;
-    const allComments = this._commentsModel.getComments();
+    // const container = this._container;
+    // const allComments = this._commentsModel.getComments();
   }
 
   _onDataChange() {

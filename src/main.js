@@ -1,5 +1,5 @@
 import {NavigationType} from "./const";
-import {calculateStatistics, generateNavigations} from "./mock/navigation";
+import {calculateStatistics} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {render} from "./utils/render";
 import ContainerComponent from "./components/films-container";

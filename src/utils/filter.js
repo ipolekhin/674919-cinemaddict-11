@@ -16,7 +16,7 @@ const getFavoriteMovies = (movies) => {
   return movies.filter((task) => task.isFavorite);
 };
 
-export const getMoviesByFilter = (movies, filterType) => {
+const getMoviesByFilter = (movies, filterType) => {
   switch (filterType) {
     case FilterType.ALL:
       return getAllMovies(movies);
@@ -36,4 +36,5 @@ export {
   getWatchlistMovies,
   getWatchedMovies,
   getFavoriteMovies,
+  getMoviesByFilter,
 };

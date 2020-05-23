@@ -1,16 +1,30 @@
+import {FilterType} from "../const";
+import {getMoviesByFilter} from "../utils/filter";
+
 export default class Movies {
   constructor() {
     this._movies = [];
+    this._activeFilterType = FilterType.ALL;
     this._dataChangeHandlers = [];
+    this._filterChangeHandlers = [];
   }
 
   getMovies() {
+    return getMoviesByFilter(this._movies, this._activeFilterType);
+  }
+
+  getMoviesAll() {
     return this._movies;
   }
 
   setMovies(movies) {
     this._movies = Array.from(movies);
     this._callHandlers(this._dataChangeHandlers);
+  }
+
+  setFilter(filterType) {
+    this._activeFilterType = filterType;
+    this._callHandlers(this._filterChangeHandlers);
   }
 
   // updateMovies(id, film) {

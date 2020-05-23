@@ -1,4 +1,4 @@
-import {FilterType} from "../const.js";
+import {NavigationTagsType} from "../const.js";
 
 const getAllMovies = (movies) => {
   return movies;
@@ -13,18 +13,18 @@ const getWatchedMovies = (movies) => {
 };
 
 const getFavoriteMovies = (movies) => {
-  return movies.filter((task) => task.isFavorite);
+  return movies.filter((movies) => movies.isFavorite);
 };
 
 const getMoviesByFilter = (movies, filterType) => {
   switch (filterType) {
-    case FilterType.ALL:
+    case NavigationTagsType.ALL:
       return getAllMovies(movies);
-    case FilterType.WATCHLIST:
+    case NavigationTagsType.WATCHLIST:
       return getWatchlistMovies(movies);
-    case FilterType.HISTORY:
+    case NavigationTagsType.HISTORY:
       return getWatchedMovies(movies);
-    case FilterType.FAVORITES:
+    case NavigationTagsType.FAVORITES:
       return getFavoriteMovies(movies);
   }
 

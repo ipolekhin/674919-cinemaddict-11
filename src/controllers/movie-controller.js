@@ -1,4 +1,4 @@
-import {render, replace} from "../utils/render";
+import {render, replace, remove} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
 import {Keys, Mode} from "../const";
@@ -100,6 +100,12 @@ export default class MovieController {
     this._filmDetailsComponent.getElement().remove();
     document.removeEventListener(`keydown`, this._popupEscHandler);
     this._mode = Mode.DEFAULT;
+  }
+
+  destroy() {
+    remove(this._filmDetailsComponent);
+    remove(this._filmComponent);
+    document.removeEventListener(`keydown`, this._popupEscHandler);
   }
 
   _popupEscHandler(event) {

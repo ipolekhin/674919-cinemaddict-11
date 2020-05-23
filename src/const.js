@@ -21,12 +21,20 @@ export const Keys = {
   ESCAPE: `Escape`,
 };
 
+export const NavigationTagsType = {
+  ALL: `all`,
+  WATCHLIST: `watchlist`,
+  HISTORY: `history`,
+  FAVORITES: `favorites`,
+  STATS: `stats`,
+};
+
 export const NavigationType = {
-  ALL: `All movies`,
-  WATCHLIST: `Watchlist`,
-  HISTORY: `History`,
-  FAVORITES: `Favorites`,
-  STATS: `Stats`,
+  [NavigationTagsType.ALL]: `All movies`,
+  [NavigationTagsType.WATCHLIST]: `Watchlist`,
+  [NavigationTagsType.HISTORY]: `History`,
+  [NavigationTagsType.FAVORITES]: `Favorites`,
+  [NavigationTagsType.STATS]: `Stats`,
 };
 
 export const NAVIGATION_NAMES = [
@@ -36,29 +44,6 @@ export const NAVIGATION_NAMES = [
   NavigationType.FAVORITES,
   NavigationType.STATS,
 ];
-
-export const NavigationTagsType = {
-  ALL: `all`,
-  WATCHLIST: `watchlist`,
-  HISTORY: `history`,
-  FAVORITES: `favorites`,
-  STATS: `stats`,
-};
-
-export const NAVIGATION_TAGS_NAMES = [
-  NavigationTagsType.ALL,
-  NavigationTagsType.WATCHLIST,
-  NavigationTagsType.HISTORY,
-  NavigationTagsType.FAVORITES,
-  NavigationTagsType.STATS,
-];
-
-export const FilterType = {
-  ALL: `all`,
-  WATCHLIST: `watchlist`,
-  HISTORY: `history`,
-  FAVORITES: `favorites`,
-};
 
 export const SortType = {
   DEFAULT: `default`,

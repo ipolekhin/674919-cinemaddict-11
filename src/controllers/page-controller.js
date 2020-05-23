@@ -58,7 +58,9 @@ export default class PageController {
     this._filmsComponent = new FilmsComponent();
     this._setSortTypeChangeHandler = this._setSortTypeChangeHandler.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
     this._sortComponent.setSortTypeChangeHandler(this._setSortTypeChangeHandler);
+    this._moviesModel.setFilterChangeHandler(this._onFilterChange);
   }
 
   render(sortContainer) {
@@ -80,6 +82,11 @@ export default class PageController {
     this._renderMovies(movies.slice(0, this._showingMoviesCount));
     this._renderShowMoreButton();
     this._renderExtraBlocks();
+  }
+
+  _removeMovies() {
+    this._showedMovieControllers.forEach((movieController) => movieController.destroy());
+    this._showedMovieControllers = [];
   }
 
   _renderMovies(movies) {
@@ -109,8 +116,14 @@ export default class PageController {
     });
   }
 
+  _updateMovies(count) {
+    this._removeMovies();
+    this._renderMovies(this._moviesModel.getMovies().slice(0, count));
+    this._renderShowMoreButton();
+  }
+
   _onDataChange(movieController, oldData, newData) {
-    const isSuccess = this._moviesModel.updateTask(oldData.id, newData);
+    const isSuccess = this._moviesModel.updateMovies(oldData.id, newData);
 
     if (isSuccess) {
       movieController.render(newData);
@@ -133,6 +146,10 @@ export default class PageController {
     this._showedMovieControllers = newMovies;
 
     this._renderShowMoreButton();
+  }
+
+  _onFilterChange() {
+    this._updateMovies(SHOWING_FILMS_COUNT_ON_START);
   }
 
   _renderExtraBlocks() {

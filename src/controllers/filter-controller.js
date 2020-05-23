@@ -1,29 +1,30 @@
 import FilterComponent from "../components/filter";
-import {FilterType} from "../const";
+import {NavigationTagsType, NavigationType} from "../const";
 import {render, replace} from "../utils/render";
-import {getTasksByFilter} from "../utils/filter";
+import {getMoviesByFilter} from "../utils/filter";
 
 export default class FilterController {
-  constructor(container, tasksModel) {
+  constructor(container, moviesModel) {
     this._container = container;
-    this._tasksModel = tasksModel;
+    this._moviesModel = moviesModel;
 
-    this._activeFilterType = FilterType.ALL;
+    this._activeFilterType = NavigationTagsType.ALL;
     this._filterComponent = null;
 
     this._onDataChange = this._onDataChange.bind(this);
     this._onFilterChange = this._onFilterChange.bind(this);
 
-    this._tasksModel.setDataChangeHandler(this._onDataChange);
+    this._moviesModel.setDataChangeHandler(this._onDataChange);
   }
 
   render() {
     const container = this._container;
-    const allTasks = this._tasksModel.getTasksAll();
-    const filters = Object.values(FilterType).map((filterType) => {
+    const allMovies = this._moviesModel.getMoviesAll();
+    const filters = Object.values(NavigationTagsType).map((filterType) => {
       return {
-        name: filterType,
-        count: getTasksByFilter(allTasks, filterType).length,
+        name: NavigationType[filterType],
+        filterName: filterType,
+        count: getMoviesByFilter(allMovies, filterType).length,
         checked: filterType === this._activeFilterType,
       };
     });
@@ -35,12 +36,12 @@ export default class FilterController {
     if (oldComponent) {
       replace(this._filterComponent, oldComponent);
     } else {
-      render(container, this._filterComponent, RenderPosition.BEFOREEND);
+      render(container, this._filterComponent);
     }
   }
 
   _onFilterChange(filterType) {
-    this._tasksModel.setFilter(filterType);
+    this._moviesModel.setFilter(filterType);
     this._activeFilterType = filterType;
   }
 

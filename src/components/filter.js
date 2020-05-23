@@ -1,4 +1,4 @@
-import {NavigationType, NAVIGATION_TAGS_NAMES, NavigationTagsType} from "../const";
+import {NavigationTagsType} from "../const";
 import AbstractComponent from "./abstract-component";
 
 const FILTER_ID_PREFIX = `filter__`;
@@ -7,15 +7,15 @@ const getFilterNameById = (id) => {
   return id.substring(FILTER_ID_PREFIX.length);
 };
 
-const createFilterMarkup = ({name, count}, isChecked, index) => {
-  const check = isChecked ? `checked` : ``;
+const createFilterMarkup = ({name, filterName, count, checked} ) => {
+  const check = checked ? `main-navigation__item--active` : ``;
 
   return (
     `<a
-      href="#${NAVIGATION_TAGS_NAMES[index]}"
+      href="#${filterName}"
       class="main-navigation__item ${check}">
       ${name}
-      ${name !== NavigationType.ALL ? `<span class="main-navigation__item-count">${count}</span>` : ``}
+      ${filterName !== NavigationTagsType.ALL ? `<span class="main-navigation__item-count">${count}</span>` : ``}
     </a>`
   );
 };
@@ -24,7 +24,7 @@ const createFilterTemplate = (navigation) => {
   const [navigationStats] = navigation.slice(-1);
   const navigationMarkup = navigation
     .slice(0, -1)
-    .map((navigation, index) => createFilterMarkup(navigation, navigation.checked, index))
+    .map((navigation) => createFilterMarkup(navigation))
     .join(`\n`);
 
   return (
@@ -48,8 +48,15 @@ export default class Filter extends AbstractComponent {
   }
 
   setFilterChangeHandler(handler) {
-    this.getElement().addEventListener(`change`, (event) => {
-      const filterName = getFilterNameById(event.target.id);
+    this.getElement().addEventListener(`click`, (event) => {
+      event.preventDefault();
+
+      if (event.target.tagName !== `A`) {
+        return;
+      }
+
+      const filterName = event.target.href.split('#').pop();
+
       handler(filterName);
     });
   }

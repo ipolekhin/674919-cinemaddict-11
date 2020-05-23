@@ -5,7 +5,8 @@ import {render} from "./utils/render";
 import ContainerComponent from "./components/films-container";
 import FooterStatisticsComponents from "./components/footer-statistics";
 import MoviesModel from "./models/movies";
-import NavigationComponents from "./components/filter";
+import FilterController from "./controllers/filter-controller";
+// import NavigationComponents from "./components/filter";
 import ProfileRatingComponents from "./components/profile";
 import PageController from "./controllers/page-controller";
 
@@ -23,10 +24,12 @@ moviesModel.setMovies(movies);
 
 // 3.5;
 const statistics = calculateStatistics(movies);
-const navigations = generateNavigations(statistics);
+// const navigations = generateNavigations(statistics);
 
 render(siteHeaderElement, new ProfileRatingComponents(statistics[NavigationType.HISTORY]));
-render(siteMainElement, new NavigationComponents(navigations));
+// render(siteMainElement, new NavigationComponents(navigations));
+const filterController = new FilterController(siteMainElement, moviesModel);
+filterController.render();
 
 const containerComponent = new ContainerComponent();
 const pageController = new PageController(containerComponent, moviesModel);

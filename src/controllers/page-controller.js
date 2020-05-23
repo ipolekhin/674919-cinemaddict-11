@@ -11,9 +11,8 @@ import SortComponent from "../components/sort";
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 
-const collectMovieCards = (container, movies, onDataChange, onViewChange, endCount, beginCount = 0) => {
+const collectMovieCards = (container, movies, onDataChange, onViewChange) => {
   return movies
-    .slice(beginCount, endCount)
     .map((movie) => {
       const filmController = new MovieController(container, onDataChange, onViewChange);
 
@@ -132,7 +131,7 @@ export default class PageController {
     this._showingMoviesCount = SHOWING_FILMS_COUNT_ON_START;
     const sortedMovies = getSortedMovies(this._moviesModel.getMovies(), sortType);
     this._removeMovies();
-    this._renderMovies(sortedMovies);
+    this._renderMovies(sortedMovies.slice(0, this._showingMoviesCount));
     this._renderShowMoreButton();
   }
 
@@ -143,7 +142,7 @@ export default class PageController {
     this._showingMoviesCount = this._showingMoviesCount + SHOWING_FILMS_COUNT_BY_BUTTON;
 
     const sortedMovies = getSortedMovies(movies, this._sortComponent.getSortType());
-    this._renderMovies(sortedMovies);
+    this._renderMovies(sortedMovies.slice(prevMoviesCount, this._showingMoviesCount));
 
     if (this._showingMoviesCount >= sortedMovies.length) {
       remove(this._showMoreButtonComponent);

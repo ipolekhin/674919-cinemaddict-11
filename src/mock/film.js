@@ -5,9 +5,10 @@ import {
   POSTERS_IMAGES,
   TITLE_ITEMS,
   WRITER_NAMES
-} from "../mock/const";
+} from "./const";
 import {
   getRandomBooleanValue,
+  getRandomCommentsListId,
   getRandomDate,
   getRandomFractionalNumbers,
   getRandomIntegerNumber,
@@ -29,11 +30,16 @@ const MIN_MINUTES_DURATION = 30;
 const MAX_MINUTES_DURATION = 180;
 const MAX_COMMENTS = 17;
 const MAX_DESCRIPTIONS = 5;
+const COMMENTS_COUNT = 250;
+const MAX_COMMENTS_COUNT = 15;
+const commentsList = generateComments(COMMENTS_COUNT);
+const commentsListCopy = commentsList.slice();
 
 const generateFilm = () => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
   const comments = generateComments(getRandomIntegerNumber(0, MAX_COMMENTS));
+  const commentsListId = getRandomCommentsListId(MAX_COMMENTS_COUNT, commentsListCopy);
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
   const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
@@ -44,6 +50,7 @@ const generateFilm = () => {
     description,
     title,
     comments,
+    commentsListId,
     id: String(new Date() + Math.random()),
     info: {
       actors,

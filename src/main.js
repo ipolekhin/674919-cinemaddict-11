@@ -19,6 +19,8 @@ const siteFooterStatisticsElement = siteFooterElement.querySelector(`.footer__st
 
 // 3.1 - 3.2; Генерируем фильмы
 const movies = generateFilms(FILMS_COUNT);
+console.log(movies);
+
 const moviesModel = new MoviesModel();
 moviesModel.setMovies(movies);
 

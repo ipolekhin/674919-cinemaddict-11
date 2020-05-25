@@ -26,9 +26,9 @@ export default class MovieController {
     this._filmDetailsComponent = new FilmDetailsComponent(movie);
 
     const commentsController = new CommentsController(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsModel);
-    commentsController.render(movie.comments);
+    commentsController.render(movie.commentsId);
     // console.log(movie);
-    // console.log(movie.commentsListIds);
+    // console.log(movie.comments);
 
     // console.log(commentsController);
     // Передали комментарии в компонент

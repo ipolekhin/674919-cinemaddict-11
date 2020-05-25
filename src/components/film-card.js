@@ -29,7 +29,7 @@ const createButtonsMarkup = ({isWatchlist, isWatched, isFavorite}) => {
 };
 
 const createMovieCardMarkup = (film) => {
-  const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, rating, info, description, isWatchlist, isWatched, isFavorite, commentsId} = film;
   const dateYear = formatDateYear(info.releaseDate);
   const duration = formatDuration(info.duration);
   const shortDescription = description.length > MAX_LENGTH_DESCRIPTION
@@ -48,7 +48,7 @@ const createMovieCardMarkup = (film) => {
       </p>
       <img src="${poster}" alt="" class="film-card__poster">
       <p class="film-card__description">${shortDescription}</p>
-      <a class="film-card__comments">${comments.length} comments</a>
+      <a class="film-card__comments">${commentsId.length} comments</a>
       <form class="film-card__controls">
         ${buttonsMarkup}
       </form>

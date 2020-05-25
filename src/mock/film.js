@@ -8,7 +8,7 @@ import {
 } from "./const";
 import {
   getRandomBooleanValue,
-  getRandomCommentsListId,
+  getRandomComments,
   getRandomDate,
   getRandomFractionalNumbers,
   getRandomIntegerNumber,
@@ -30,10 +30,9 @@ const MAX_MINUTES_DURATION = 180;
 const MAX_DESCRIPTIONS = 5;
 const MAX_COMMENTS_COUNT = 15;
 
-const generateFilm = (commentsList) => {
+const generateFilm = (commentsId) => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
-  const comments = commentsList;
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
   const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
@@ -43,7 +42,7 @@ const generateFilm = (commentsList) => {
   return {
     description,
     title,
-    comments,
+    commentsId,
     id: String(new Date() + Math.random()),
     info: {
       actors,
@@ -71,9 +70,9 @@ const generateFilms = (count, commentsModel) => {
   return new Array(count)
     .fill(``)
     .map(() => {
-      const commentsListId = getRandomCommentsListId(MAX_COMMENTS_COUNT, commentsListCopy);
+      const comments = getRandomComments(MAX_COMMENTS_COUNT, commentsListCopy);
 
-      return generateFilm(commentsListId);
+      return generateFilm(comments);
     });
 };
 

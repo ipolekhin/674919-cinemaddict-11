@@ -8,6 +8,10 @@ export default class Comments {
     return this._comments;
   }
 
+  getCommentById(id) {
+    return this._comments.find((comment) => comment.id === id);
+  }
+
   setComments(comments) {
     this._comments = Array.from(comments);
     this._callHandlers(this._dataChangeHandlers);

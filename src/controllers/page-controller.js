@@ -82,7 +82,7 @@ export default class PageController {
     render(container, this._filmsComponent);
     this._renderMovies(movies.slice(0, this._showingMoviesCount));
     this._renderShowMoreButton();
-    this._renderExtraBlocks();
+    // this._renderExtraBlocks();
   }
 
   _removeMovies() {

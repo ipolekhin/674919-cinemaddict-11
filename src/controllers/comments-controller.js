@@ -13,7 +13,11 @@ export default class CommentsController {
     // this._container.setDataChangeHandler(this._onDataChange);
   }
 
-  render(comments) {
+  render(commentsId) {
+    const comments = commentsId.map((id) => {
+      return this._commentsModel.getCommentById(id);
+    });
+
     this._commentComponent = new CommentsComponent(comments);
     render(this._container, this._commentComponent);
   }

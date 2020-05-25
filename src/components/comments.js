@@ -71,6 +71,7 @@ export default class Comments extends AbstractSmartComponent {
   constructor(comments) {
     super();
     this._comments = comments;
+    // this._comments = comments;
     this._currentEmojiForComment = null;
     this._subscribeOnEvent();
   }

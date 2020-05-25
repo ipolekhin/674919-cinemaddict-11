@@ -20,7 +20,6 @@ import {
   COUNTRY_NAMES,
   GENRE_NAMES,
 } from "../const";
-import {generateComments} from "./comments";
 
 const MIN_RATING = 1;
 const MAX_RATING = 10;
@@ -28,18 +27,13 @@ const COUNT_AFTER_COMMA = 1;
 const START_YEAR = 1929;
 const MIN_MINUTES_DURATION = 30;
 const MAX_MINUTES_DURATION = 180;
-const MAX_COMMENTS = 17;
 const MAX_DESCRIPTIONS = 5;
-const COMMENTS_COUNT = 250;
 const MAX_COMMENTS_COUNT = 15;
-const commentsList = generateComments(COMMENTS_COUNT);
-const commentsListCopy = commentsList.slice();
 
-const generateFilm = () => {
+const generateFilm = (commentsList) => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
-  const comments = generateComments(getRandomIntegerNumber(0, MAX_COMMENTS));
-  const commentsListId = getRandomCommentsListId(MAX_COMMENTS_COUNT, commentsListCopy);
+  const comments = commentsList;
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
   const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
@@ -50,7 +44,6 @@ const generateFilm = () => {
     description,
     title,
     comments,
-    commentsListId,
     id: String(new Date() + Math.random()),
     info: {
       actors,
@@ -71,10 +64,17 @@ const generateFilm = () => {
   };
 };
 
-const generateFilms = (count) => {
+const generateFilms = (count, commentsModel) => {
+  const commentsList = commentsModel.getComments();
+  const commentsListCopy = commentsList.slice();
+
   return new Array(count)
     .fill(``)
-    .map(generateFilm);
+    .map(() => {
+      const commentsListId = getRandomCommentsListId(MAX_COMMENTS_COUNT, commentsListCopy);
+
+      return generateFilm(commentsListId);
+    });
 };
 
 export {generateFilms};

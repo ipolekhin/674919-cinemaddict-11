@@ -2,10 +2,11 @@ import {render, replace, remove} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
 import {Keys, Mode} from "../const";
-import CommentsComponent from "../components/comments";
+// import CommentsComponent from "../components/comments";
+import CommentsController from "./comments-controller";
 
 export default class MovieController {
-  constructor(container, onDataChange, onViewChange) {
+  constructor(container, onDataChange, onViewChange, commentsModel) {
     this._container = container;
     this._onDataChange = onDataChange;
     this._onViewChange = onViewChange;
@@ -14,19 +15,26 @@ export default class MovieController {
     this._filmDetailsComponent = null;
     this._commentsComponent = null;
     this._popupEscHandler = this._popupEscHandler.bind(this);
+    this._commentsModel = commentsModel;
   }
 
   render(movie) {
     const oldFilmComponent = this._filmComponent;
     const oldFilmDetailsComponent = this._filmDetailsComponent;
     this._filmComponent = new FilmComponent(movie);
-
-    // Передали комментарии в компонент
-    this._commentsComponent = new CommentsComponent(movie.comments);
-
+    // console.log(this._filmComponent);
     this._filmDetailsComponent = new FilmDetailsComponent(movie);
 
-    render(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsComponent);
+    const commentsController = new CommentsController(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsModel);
+    commentsController.render(movie.comments);
+    // console.log(movie);
+    // console.log(movie.commentsListIds);
+
+    // console.log(commentsController);
+    // Передали комментарии в компонент
+    // this._commentsComponent = new CommentsComponent();
+
+    // render(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsComponent);
 
 
     this._filmComponent.setPopupElementsClickHandler(() => {

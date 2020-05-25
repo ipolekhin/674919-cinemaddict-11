@@ -1,19 +1,21 @@
-// import {EmojiType} from "../const";
-// import {render, replace} from "../utils/render";
+import {render} from "../utils/render";
+import CommentsComponent from "../components/comments";
 
-export default class FilterController {
+export default class CommentsController {
   constructor(container, commentsModel) {
     this._container = container;
     this._commentsModel = commentsModel;
+    this._commentComponent = null;
+    this._showedCommentsControllers = [];
 
     this._onDataChange = this._onDataChange.bind(this);
 
-    this._container.setDataChangeHandler(this._onDataChange);
+    // this._container.setDataChangeHandler(this._onDataChange);
   }
 
-  render() {
-    // const container = this._container;
-    // const allComments = this._commentsModel.getComments();
+  render(comments) {
+    this._commentComponent = new CommentsComponent(comments);
+    render(this._container, this._commentComponent);
   }
 
   _onDataChange() {

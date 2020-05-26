@@ -71,8 +71,8 @@ export default class Comments extends AbstractSmartComponent {
   constructor(comments) {
     super();
     this._comments = comments;
-    // this._comments = comments;
     this._currentEmojiForComment = null;
+    this._deleteButtonClickHandler = null;
     this._subscribeOnEvent();
   }
 
@@ -82,6 +82,17 @@ export default class Comments extends AbstractSmartComponent {
 
   recoveryListeners() {
     this._subscribeOnEvent();
+  }
+
+  setDeleteButtonClickHandler(handler) {
+    this.getElement().querySelectorAll(`.film-details__comment-delete`)
+      .forEach((button, index) => {
+        button.addEventListener(`click`, (event) => {
+          handler(event, index);
+        });
+      });
+
+    this._deleteButtonCLickHandler = handler;
   }
 
   _subscribeOnEvent() {

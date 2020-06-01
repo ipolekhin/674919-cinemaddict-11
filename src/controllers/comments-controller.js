@@ -10,11 +10,9 @@ export default class CommentsController {
     this._container = container;
     this._commentsModel = commentsModel;
     this._commentsComponent = null;
-    this._showedCommetnsControllers = [];
-    this._onDataChange = this._onDataChange.bind(this);
   }
 
-  render(commentsId) {
+  render(commentsId, onDelete, addId) {
     const comments = commentsId.map((id) => {
       return this._commentsModel.getCommentById(id);
     });
@@ -25,6 +23,14 @@ export default class CommentsController {
     this._commentsComponent.setDeleteButtonClickHandler((event, index) => {
       event.preventDefault();
       this._onDataChange(comments[index], comments);
+      onDelete(comments[index].id);
+    });
+
+    this._commentsComponent.setAddedCommentHandler((event) => {
+      event.preventDefault();
+      const data = this._commentsComponent.getData();
+      this._onDataChange(null, data);
+      addId(data.id);
     });
 
     if (oldCommentsComponent) {
@@ -34,25 +40,20 @@ export default class CommentsController {
     }
   }
 
-  // _renderComments(commentsId) {
-  //   // const newComments = render(this._container, this._commentsComponent);
-  //   // this._showedCommetnsControllers = this._showedCommetnsControllers.concat(newComments);
-  // }
-
-  _removeComments() {
-    // this._showedCommetnsControllers.forEach((commentsController) => commentsController.destroy());
-    // this._showedCommetnsControllers = [];
+  _addComment(comment) {
+    this._commentsModel.addComment(comment);
   }
 
-  _updateComments() {
-    this._removeComments();
-    // this._renderComments(this._commentsModel.getComments());
+  _removeComment(comment) {
+    this._commentsModel.removeComment(comment.id);
   }
 
-  _onDataChange(oldData) {
-    // Удаление
-    this._commentsModel.removeComment(oldData.id);
-    this._updateComments(oldData);
+  _onDataChange(oldData, newData) {
+    if (oldData === null) {
+      this._addComment(newData);
+    } else {
+      this._removeComment(oldData);
+    }
   }
 
   destroy() {

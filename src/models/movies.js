@@ -34,6 +34,7 @@ export default class Movies {
       return false;
     }
 
+    // debugger;
     this._movies = [].concat(this._movies.slice(0, index), movie, this._movies.slice(index + 1));
     this._callHandlers(this._dataChangeHandlers);
 
@@ -45,10 +46,15 @@ export default class Movies {
   }
 
   setDataChangeHandler(handler) {
+    // debugger;
+    // console.log(`modelmovie1`);
     this._dataChangeHandlers.push(handler);
   }
 
   _callHandlers(handlers) {
-    handlers.forEach((handler) => handler());
+    handlers.forEach((handler) => {
+      // console.log(`modelmovie2`);
+      handler();
+    });
   }
 }

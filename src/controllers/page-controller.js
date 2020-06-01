@@ -61,6 +61,9 @@ export default class PageController {
     this._onFilterChange = this._onFilterChange.bind(this);
     this._sortComponent.setSortTypeChangeHandler(this._setSortTypeChangeHandler);
     this._moviesModel.setFilterChangeHandler(this._onFilterChange);
+    this._moviesModel.setDataChangeHandler(() => {
+      // console.log(`обновление фильма`);
+    });
     this._commentsModel = commentsModel;
   }
 

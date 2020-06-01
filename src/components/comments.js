@@ -67,12 +67,26 @@ const createCommentsTemplate = (comments, emoji) => {
   );
 };
 
+const parseFormData = () => {
+  // console.log(`parseFormData`);
+  // console.log(formData.get(`comment-emoji`));
+  return {
+    date: new Date(),
+    emoji: `smile`,
+    id: String(new Date() + Math.random()),
+    message: `message1`,
+    userName: `Anonymous`,
+  };
+};
+
 export default class Comments extends AbstractSmartComponent {
   constructor(comments) {
     super();
     this._comments = comments;
     this._currentEmojiForComment = null;
     this._deleteButtonClickHandler = null;
+    this._addedButtonClickHandler = null;
+    // this._keydownHandler = this._keydownHandler.bind(this);
     this._subscribeOnEvent();
   }
 
@@ -82,6 +96,8 @@ export default class Comments extends AbstractSmartComponent {
 
   recoveryListeners() {
     this._subscribeOnEvent();
+    this.setDeleteButtonClickHandler(this._deleteButtonClickHandler);
+    this.setAddedCommentHandler(this._addedButtonClickHandler);
   }
 
   setDeleteButtonClickHandler(handler) {
@@ -93,6 +109,25 @@ export default class Comments extends AbstractSmartComponent {
       });
 
     this._deleteButtonCLickHandler = handler;
+  }
+
+  getData() {
+    const form = document.querySelector(`.film-details__inner`);
+    const formData = new FormData(form);
+    // console.log(parseFormData(formData));
+
+    return parseFormData(formData);
+  }
+
+  setAddedCommentHandler(handler) {
+    // повесил обработчик на компонент комментариев, так как элемент form общий ко всей карточки фильма и собирается в другом компоненте.
+    this.getElement().addEventListener(`keydown`, (event) => {
+      if (event.key === `Enter` && event.ctrlKey) {
+        handler(event);
+      }
+    });
+
+    this._addedButtonClickHandler = handler;
   }
 
   _subscribeOnEvent() {

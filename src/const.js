@@ -93,7 +93,7 @@ export const COUNTRY_NAMES = [
 
 export const Mode = {
   DEFAULT: `default`,
-  EDIT: `edit`,
+  OPEN: `edit`,
 };
 
 export const ProfileType = {

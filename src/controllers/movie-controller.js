@@ -1,18 +1,20 @@
-import {render, replace} from "../utils/render";
+import {render, replace, remove} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
 import {Keys, Mode} from "../const";
-import CommentsComponent from "../components/comments";
+import CommentsController from "./comments-controller";
 
 export default class MovieController {
-  constructor(container, onDataChange, onViewChange) {
+  constructor(container, onDataChange, onViewChange, commentsModel) {
     this._container = container;
+    this._commentsModel = commentsModel;
     this._onDataChange = onDataChange;
     this._onViewChange = onViewChange;
     this._mode = Mode.DEFAULT;
+    this._movie = null;
     this._filmComponent = null;
     this._filmDetailsComponent = null;
-    this._commentsComponent = null;
+    this._commentsController = null;
     this._popupEscHandler = this._popupEscHandler.bind(this);
   }
 
@@ -20,18 +22,16 @@ export default class MovieController {
     const oldFilmComponent = this._filmComponent;
     const oldFilmDetailsComponent = this._filmDetailsComponent;
     this._filmComponent = new FilmComponent(movie);
-
-    // Передали комментарии в компонент
-    this._commentsComponent = new CommentsComponent(movie.comments);
-
     this._filmDetailsComponent = new FilmDetailsComponent(movie);
+    this._commentsController = new CommentsController(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsModel);
+    this._movie = movie;
 
-    render(this._filmDetailsComponent.getFilmCommentsContainer(), this._commentsComponent);
-
+    this._renderComments(movie);
 
     this._filmComponent.setPopupElementsClickHandler(() => {
       this._openPopup();
       document.addEventListener(`keydown`, this._popupEscHandler);
+      // console.log(`открыть попап`);
     });
 
     this._filmComponent.setWatchlistButtonClickHandler(() => {
@@ -75,13 +75,24 @@ export default class MovieController {
       this._closePopup();
     });
 
-
     if (oldFilmDetailsComponent && oldFilmComponent) {
       replace(this._filmComponent, oldFilmComponent);
       replace(this._filmDetailsComponent, oldFilmDetailsComponent);
     } else {
       render(this._container, this._filmComponent);
     }
+  }
+
+  _renderComments(movie) {
+    this._commentsController.render(movie.commentsId, (id) => {
+      movie.commentsId.splice(movie.commentsId.indexOf(id), 1);
+      this._onDataChange(this, movie, Object.assign({}, movie, {}));
+    },
+    (id) => {
+      movie.commentsId.unshift(id);
+      this._onDataChange(this, movie, Object.assign({}, movie, {}));
+    }
+    );
   }
 
   setDefaultView() {
@@ -93,13 +104,21 @@ export default class MovieController {
   _openPopup() {
     this._onViewChange();
     render(document.body, this._filmDetailsComponent);
-    this._mode = Mode.EDIT;
+    this._mode = Mode.OPEN;
   }
 
   _closePopup() {
     this._filmDetailsComponent.getElement().remove();
     document.removeEventListener(`keydown`, this._popupEscHandler);
+    this._commentsController.resetForm();
+    // this._onDataChange(this, this._movie, Object.assign({}, this._movie, {}));
     this._mode = Mode.DEFAULT;
+  }
+
+  destroy() {
+    remove(this._filmDetailsComponent);
+    remove(this._filmComponent);
+    document.removeEventListener(`keydown`, this._popupEscHandler);
   }
 
   _popupEscHandler(event) {

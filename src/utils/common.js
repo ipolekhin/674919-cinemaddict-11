@@ -36,6 +36,15 @@ const getRandomItem = (items) => {
   return items[randomIndex];
 };
 
+const getRandomComments = (commentsCount, comments) => {
+  const randomLength = getRandomIntegerNumber(0, commentsCount);
+  const newComments = comments.splice(0, randomLength);
+  const commentsId = newComments.map((comment) => {
+    return comment.id;
+  });
+  return commentsId;
+};
+
 const removeElement = (selector) => {
   const removerElement = document.querySelector(selector);
   if (removerElement) {
@@ -90,6 +99,7 @@ export {
   fullFormatDate,
   getExtraBlocksFilms,
   getRandomBooleanValue,
+  getRandomComments,
   getRandomIntegerNumber,
   getRandomItem,
   getRandomFractionalNumbers,

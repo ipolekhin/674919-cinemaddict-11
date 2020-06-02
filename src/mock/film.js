@@ -5,9 +5,10 @@ import {
   POSTERS_IMAGES,
   TITLE_ITEMS,
   WRITER_NAMES
-} from "../mock/const";
+} from "./const";
 import {
   getRandomBooleanValue,
+  getRandomComments,
   getRandomDate,
   getRandomFractionalNumbers,
   getRandomIntegerNumber,
@@ -19,7 +20,6 @@ import {
   COUNTRY_NAMES,
   GENRE_NAMES,
 } from "../const";
-import {generateComments} from "./comments";
 
 const MIN_RATING = 1;
 const MAX_RATING = 10;
@@ -27,13 +27,12 @@ const COUNT_AFTER_COMMA = 1;
 const START_YEAR = 1929;
 const MIN_MINUTES_DURATION = 30;
 const MAX_MINUTES_DURATION = 180;
-const MAX_COMMENTS = 17;
 const MAX_DESCRIPTIONS = 5;
+const MAX_COMMENTS_COUNT = 15;
 
-const generateFilm = () => {
+const generateFilm = (commentsId) => {
   const actors = reshuffle(ACTOR_NAMES, ACTOR_NAMES.length).join(`, `);
   const ageRating = getRandomBooleanValue() ? `<p class="film-details__age">${AGE_RESTRICTIONS}</p>` : ``;
-  const comments = generateComments(getRandomIntegerNumber(0, MAX_COMMENTS));
   const description = reshuffle(DESCRIPTION_ITEMS, MAX_DESCRIPTIONS).join(`\n`);
   const genres = reshuffle(GENRE_NAMES, GENRE_NAMES.length);
   const myDate = getRandomDate(new Date(START_YEAR, 0), new Date());
@@ -43,7 +42,8 @@ const generateFilm = () => {
   return {
     description,
     title,
-    comments,
+    commentsId,
+    id: String(new Date() + Math.random()),
     info: {
       actors,
       ageRating,
@@ -63,10 +63,17 @@ const generateFilm = () => {
   };
 };
 
-const generateFilms = (count) => {
+const generateFilms = (count, commentsModel) => {
+  const commentsList = commentsModel.getComments();
+  const commentsListCopy = commentsList.slice();
+
   return new Array(count)
     .fill(``)
-    .map(generateFilm);
+    .map(() => {
+      const comments = getRandomComments(MAX_COMMENTS_COUNT, commentsListCopy);
+
+      return generateFilm(comments);
+    });
 };
 
 export {generateFilms};

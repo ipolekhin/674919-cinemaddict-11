@@ -1,4 +1,5 @@
 import {EMOJI_SMILES} from "../const";
+import {encode} from "he";
 import {fullFormatDate} from "../utils/common";
 import AbstractSmartComponent from "./abstract-smart-component";
 
@@ -67,29 +68,102 @@ const createCommentsTemplate = (comments, emoji) => {
   );
 };
 
+const parseFormData = (formData) => {
+  return {
+    author: `Anonymous`,
+    date: new Date(),
+    emoji: formData.get(`comment-emoji`),
+    id: String(new Date() + Math.random()),
+    text: encode(formData.get(`comment`)),
+  };
+};
+
 export default class Comments extends AbstractSmartComponent {
   constructor(comments) {
     super();
     this._comments = comments;
     this._currentEmojiForComment = null;
+    this._deleteButtonClickHandler = null;
+    this._addedButtonClickHandler = null;
+    // this._keydownHandler = this._keydownHandler.bind(this);
     this._subscribeOnEvent();
+    this._userComment = ``;
   }
 
   getTemplate() {
     return createCommentsTemplate(this._comments, this._currentEmojiForComment);
   }
 
+  reset() {
+    const element = this.getElement();
+    const emojiLabel = element.querySelector(`.film-details__add-emoji-label img`);
+    element.querySelector(`.film-details__comment-input`).value = ``;
+    this._userComment = ``;
+    if (emojiLabel) {
+      emojiLabel.remove();
+    }
+    if (this._currentEmojiForComment) {
+      element.querySelector(`input#emoji-${this._currentEmojiForComment}`).checked = ``;
+    }
+  }
+
   recoveryListeners() {
     this._subscribeOnEvent();
+    this.setDeleteButtonClickHandler(this._deleteButtonClickHandler);
+    this.setAddedCommentHandler(this._addedButtonClickHandler);
+  }
+
+  setDeleteButtonClickHandler(handler) {
+    this.getElement().querySelectorAll(`.film-details__comment-delete`)
+      .forEach((button, index) => {
+        button.addEventListener(`click`, (event) => {
+          handler(event, index);
+        });
+      });
+
+    this._deleteButtonCLickHandler = handler;
+  }
+
+  getData() {
+    const form = document.querySelector(`.film-details__inner`);
+    const formData = new FormData(form);
+
+    // console.log(parseFormData(formData));
+    return parseFormData(formData);
+  }
+
+  setAddedCommentHandler(handler) {
+    // повесил обработчик на компонент комментариев, так как элемент form общий ко всей карточки фильма и собирается в другом компоненте.
+    this.getElement().addEventListener(`keydown`, (event) => {
+      if (event.key === `Enter` && event.ctrlKey) {
+        handler(event);
+      }
+    });
+
+    this._addedButtonClickHandler = handler;
   }
 
   _subscribeOnEvent() {
     const element = this.getElement();
     const emojiSmilesList = element.querySelector(`.film-details__emoji-list`);
-    emojiSmilesList.addEventListener(`change`, (event) => {
-      event.preventDefault();
-      this._currentEmojiForComment = event.target.value;
+    const commentTextarea = element.querySelector(`.film-details__comment-input`);
 
+    if (this._currentEmojiForComment) {
+      const currentEmojiChecked = element.querySelector(`input#emoji-${this._currentEmojiForComment}`);
+      currentEmojiChecked.checked = `checked`;
+    }
+
+    if (this._userComment) {
+      commentTextarea.value = this._userComment;
+    }
+
+    commentTextarea.addEventListener(`input`, () => {
+      this._userComment = commentTextarea.value;
+    });
+
+    emojiSmilesList.addEventListener(`change`, (event) => {
+      // event.preventDefault();
+      this._currentEmojiForComment = event.target.value;
       this.rerender();
     });
   }

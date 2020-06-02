@@ -115,7 +115,7 @@ export default class Comments extends AbstractSmartComponent {
     const form = document.querySelector(`.film-details__inner`);
     const formData = new FormData(form);
 
-    console.log(parseFormData(formData));
+    // console.log(parseFormData(formData));
     return parseFormData(formData);
   }
 

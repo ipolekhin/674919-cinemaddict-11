@@ -1,4 +1,5 @@
 import {EMOJI_SMILES} from "../const";
+import {encode} from "he";
 import {fullFormatDate} from "../utils/common";
 import AbstractSmartComponent from "./abstract-smart-component";
 
@@ -67,15 +68,13 @@ const createCommentsTemplate = (comments, emoji) => {
   );
 };
 
-const parseFormData = () => {
-  // console.log(`parseFormData`);
-  // console.log(formData.get(`comment-emoji`));
+const parseFormData = (formData) => {
   return {
+    author: `Anonymous`,
     date: new Date(),
-    emoji: `smile`,
+    emoji: formData.get(`comment-emoji`),
     id: String(new Date() + Math.random()),
-    message: `message1`,
-    userName: `Anonymous`,
+    text: encode(formData.get(`comment`)),
   };
 };
 
@@ -114,8 +113,8 @@ export default class Comments extends AbstractSmartComponent {
   getData() {
     const form = document.querySelector(`.film-details__inner`);
     const formData = new FormData(form);
-    // console.log(parseFormData(formData));
 
+    // console.log(parseFormData(formData));
     return parseFormData(formData);
   }
 

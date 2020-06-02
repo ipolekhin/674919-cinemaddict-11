@@ -1,10 +1,6 @@
 import {render, remove, replace} from "../utils/render";
 import CommentsComponent from "../components/comments";
 
-export const EmptyComment = {
-
-};
-
 export default class CommentsController {
   constructor(container, commentsModel) {
     this._container = container;

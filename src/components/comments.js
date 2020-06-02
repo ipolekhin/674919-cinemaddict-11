@@ -86,7 +86,8 @@ export default class Comments extends AbstractSmartComponent {
     this._deleteButtonClickHandler = null;
     this._addedButtonClickHandler = null;
     // this._keydownHandler = this._keydownHandler.bind(this);
-    this._subscribeOnEvent();
+    this._subscribeOnEvent(this._currentEmojiForComment);
+    this._userComment = ``;
   }
 
   getTemplate() {
@@ -114,7 +115,7 @@ export default class Comments extends AbstractSmartComponent {
     const form = document.querySelector(`.film-details__inner`);
     const formData = new FormData(form);
 
-    // console.log(parseFormData(formData));
+    console.log(parseFormData(formData));
     return parseFormData(formData);
   }
 
@@ -132,10 +133,24 @@ export default class Comments extends AbstractSmartComponent {
   _subscribeOnEvent() {
     const element = this.getElement();
     const emojiSmilesList = element.querySelector(`.film-details__emoji-list`);
-    emojiSmilesList.addEventListener(`change`, (event) => {
-      event.preventDefault();
-      this._currentEmojiForComment = event.target.value;
+    const commentTextarea = element.querySelector(`.film-details__comment-input`);
 
+    if (this._currentEmojiForComment) {
+      const currentEmojiChecked = element.querySelector(`input#emoji-${this._currentEmojiForComment}`);
+      currentEmojiChecked.checked = `checked`;
+    }
+
+    if (this._userComment) {
+      commentTextarea.value = this._userComment;
+    }
+
+    commentTextarea.addEventListener(`input`, () => {
+      this._userComment = commentTextarea.value;
+    });
+
+    emojiSmilesList.addEventListener(`change`, (event) => {
+      // event.preventDefault();
+      this._currentEmojiForComment = event.target.value;
       this.rerender();
     });
   }

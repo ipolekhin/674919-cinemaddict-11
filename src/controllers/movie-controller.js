@@ -2,7 +2,6 @@ import {render, replace, remove} from "../utils/render";
 import FilmComponent from "../components/film-card";
 import FilmDetailsComponent from "../components/film-details";
 import {Keys, Mode} from "../const";
-// import CommentsComponent from "../components/comments";
 import CommentsController from "./comments-controller";
 
 export default class MovieController {

@@ -44,6 +44,10 @@ export default class CommentsController {
     this._commentsModel.removeComment(comment.id);
   }
 
+  resetForm() {
+    this._commentsComponent.reset();
+  }
+
   _onDataChange(oldData, newData) {
     if (oldData === null) {
       this._addComment(newData);

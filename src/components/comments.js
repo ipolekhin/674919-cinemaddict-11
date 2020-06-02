@@ -86,12 +86,25 @@ export default class Comments extends AbstractSmartComponent {
     this._deleteButtonClickHandler = null;
     this._addedButtonClickHandler = null;
     // this._keydownHandler = this._keydownHandler.bind(this);
-    this._subscribeOnEvent(this._currentEmojiForComment);
+    this._subscribeOnEvent();
     this._userComment = ``;
   }
 
   getTemplate() {
     return createCommentsTemplate(this._comments, this._currentEmojiForComment);
+  }
+
+  reset() {
+    const element = this.getElement();
+    const emojiLabel = element.querySelector(`.film-details__add-emoji-label img`);
+    element.querySelector(`.film-details__comment-input`).value = ``;
+    this._userComment = ``;
+    if (emojiLabel) {
+      emojiLabel.remove();
+    }
+    if (this._currentEmojiForComment) {
+      element.querySelector(`input#emoji-${this._currentEmojiForComment}`).checked = ``;
+    }
   }
 
   recoveryListeners() {

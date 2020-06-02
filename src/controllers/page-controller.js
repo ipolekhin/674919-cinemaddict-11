@@ -67,6 +67,14 @@ export default class PageController {
     this._commentsModel = commentsModel;
   }
 
+  hide() {
+    this._container.hide();
+  }
+
+  show() {
+    this._container.show();
+  }
+
   render(sortContainer) {
     // this._movies = movies;
     const container = this._container.getElement();

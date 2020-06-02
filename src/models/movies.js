@@ -45,6 +45,14 @@ export default class Movies {
     this._filterChangeHandlers.push(handler);
   }
 
+  addedCommentsId(movie, id) {
+    movie.commentsId.unshift(id);
+  }
+
+  removeCommentsId(movie, id) {
+    movie.commentsId.splice(movie.commentsId.indexOf(id), 1);
+  }
+
   setDataChangeHandler(handler) {
     // debugger;
     // console.log(`modelmovie1`);

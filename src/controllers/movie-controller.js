@@ -5,8 +5,9 @@ import {Keys, Mode} from "../const";
 import CommentsController from "./comments-controller";
 
 export default class MovieController {
-  constructor(container, onDataChange, onViewChange, commentsModel) {
+  constructor(container, onDataChange, onViewChange, moviesModel, commentsModel) {
     this._container = container;
+    this._moviesModel = moviesModel;
     this._commentsModel = commentsModel;
     this._onDataChange = onDataChange;
     this._onViewChange = onViewChange;
@@ -85,11 +86,11 @@ export default class MovieController {
 
   _renderComments(movie) {
     this._commentsController.render(movie.commentsId, (id) => {
-      movie.commentsId.splice(movie.commentsId.indexOf(id), 1);
+      this._moviesModel.removeCommentsId(movie, id);
       this._onDataChange(this, movie, Object.assign({}, movie, {}));
     },
     (id) => {
-      movie.commentsId.unshift(id);
+      this._moviesModel.addedCommentsId(movie, id);
       this._onDataChange(this, movie, Object.assign({}, movie, {}));
     }
     );

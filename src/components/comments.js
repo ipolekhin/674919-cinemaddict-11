@@ -37,7 +37,7 @@ const createCommentsAddMarkup = () => {
           <img src="./images/emoji/${name}.png" alt="emoji" width="30" height="30">
         </label>`
       );
-    });
+    }).join(`\n`);
 };
 
 const createCommentsTemplate = (comments, emoji) => {
@@ -84,8 +84,7 @@ export default class Comments extends AbstractSmartComponent {
     this._comments = comments;
     this._currentEmojiForComment = null;
     this._deleteButtonClickHandler = null;
-    this._addedButtonClickHandler = null;
-    // this._keydownHandler = this._keydownHandler.bind(this);
+    this._addedKeydownHandler = null;
     this._subscribeOnEvent();
     this._userComment = ``;
   }
@@ -103,14 +102,14 @@ export default class Comments extends AbstractSmartComponent {
       emojiLabel.remove();
     }
     if (this._currentEmojiForComment) {
-      element.querySelector(`input#emoji-${this._currentEmojiForComment}`).checked = ``;
+      element.querySelector(`input#emoji-${this._currentEmojiForComment}`).checked = false;
     }
   }
 
   recoveryListeners() {
     this._subscribeOnEvent();
     this.setDeleteButtonClickHandler(this._deleteButtonClickHandler);
-    this.setAddedCommentHandler(this._addedButtonClickHandler);
+    this.setAddedCommentHandler(this._addedKeydownHandler);
   }
 
   setDeleteButtonClickHandler(handler) {
@@ -128,7 +127,6 @@ export default class Comments extends AbstractSmartComponent {
     const form = document.querySelector(`.film-details__inner`);
     const formData = new FormData(form);
 
-    // console.log(parseFormData(formData));
     return parseFormData(formData);
   }
 
@@ -140,7 +138,7 @@ export default class Comments extends AbstractSmartComponent {
       }
     });
 
-    this._addedButtonClickHandler = handler;
+    this._addedKeydownHandler = handler;
   }
 
   _subscribeOnEvent() {
@@ -150,7 +148,7 @@ export default class Comments extends AbstractSmartComponent {
 
     if (this._currentEmojiForComment) {
       const currentEmojiChecked = element.querySelector(`input#emoji-${this._currentEmojiForComment}`);
-      currentEmojiChecked.checked = `checked`;
+      currentEmojiChecked.checked = true;
     }
 
     if (this._userComment) {

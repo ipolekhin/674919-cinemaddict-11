@@ -11,10 +11,10 @@ import SortComponent from "../components/sort";
 const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 
-const collectMovieCards = (container, movies, onDataChange, onViewChange, commentsModel) => {
+const collectMovieCards = (container, movies, onDataChange, onViewChange, moviesModel, commentsModel) => {
   return movies
     .map((movie) => {
-      const filmController = new MovieController(container, onDataChange, onViewChange, commentsModel);
+      const filmController = new MovieController(container, onDataChange, onViewChange, moviesModel, commentsModel);
 
       filmController.render(movie);
 
@@ -95,7 +95,7 @@ export default class PageController {
 
   _renderMovies(movies) {
     this._filmsListContainerElement = this._filmsComponent.getFilmsContainer();
-    const newMovies = collectMovieCards(this._filmsListContainerElement, movies, this._onDataChange, this._onViewChange, this._commentsModel);
+    const newMovies = collectMovieCards(this._filmsListContainerElement, movies, this._onDataChange, this._onViewChange, this._moviesModel, this._commentsModel);
     // console.log(newMovies);
     this._showedMovieControllers = this._showedMovieControllers.concat(newMovies);
     this._showingMoviesCount = this._showedMovieControllers.length;

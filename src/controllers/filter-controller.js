@@ -20,6 +20,7 @@ export default class FilterController {
   render() {
     const container = this._container;
     const allMovies = this._moviesModel.getMoviesAll();
+    // console.log(allMovies);
     const filters = Object.values(NavigationTagsType).map((filterType) => {
       return {
         name: NavigationType[filterType],

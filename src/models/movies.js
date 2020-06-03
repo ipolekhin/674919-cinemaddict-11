@@ -1,5 +1,6 @@
 import {NavigationTagsType} from "../const";
 import {getMoviesByFilter} from "../utils/filter";
+import {setProfileRating} from "../utils/common";
 
 export default class Movies {
   constructor() {
@@ -25,6 +26,24 @@ export default class Movies {
   setFilter(filterType) {
     this._activeFilterType = filterType;
     this._callHandlers(this._filterChangeHandlers);
+  }
+
+  updateStatistics() {
+    const rank = () => {
+      return this._movies.reduce((result, {isWatched}) => {
+        if (isWatched) {
+          result++
+        }
+        return result;
+      }, 0);
+    }
+    const countWatched = rank();
+    const profileRank = setProfileRating(countWatched);
+
+    return {
+      countWatched,
+      rank: profileRank,
+    }
   }
 
   updateMovies(id, movie) {

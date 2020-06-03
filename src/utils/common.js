@@ -1,4 +1,5 @@
 import {ExtraBlockNames} from "../const";
+import {PROFILE_RATING, ProfileIntervals} from "../const";
 import moment from "moment";
 
 const FILM_QUANTITY = 2;
@@ -58,6 +59,13 @@ const reshuffle = (data, maxNumber) => {
   return shuffle;
 };
 
+const setProfileRating = (count) => {
+  const indexProfile = ProfileIntervals.findIndex((interval) =>
+    (count > interval.MIN && count <= interval.MAX));
+
+  return PROFILE_RATING[indexProfile];
+};
+
 const collectTopFilms = (films) => {
   return films.sort((first, second) => {
     if (first[`rating`].padStart(4, `0`) < second[`rating`].padStart(4, `0`)) {
@@ -106,4 +114,5 @@ export {
   getRandomDate,
   removeElement,
   reshuffle,
+  setProfileRating,
 };

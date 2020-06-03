@@ -37,13 +37,13 @@ export const NavigationType = {
   [NavigationTagsType.STATS]: `Stats`,
 };
 
-export const NAVIGATION_NAMES = [
-  NavigationType.ALL,
-  NavigationType.WATCHLIST,
-  NavigationType.HISTORY,
-  NavigationType.FAVORITES,
-  NavigationType.STATS,
-];
+export const NAVIGATION_NAMES = {
+  ALL: `All movies`,
+  WATCHLIST: `Watchlist`,
+  HISTORY: `History`,
+  FAVORITES: `Favorites`,
+  STATS: `Stats`,
+};
 
 export const SortType = {
   DEFAULT: `default`,

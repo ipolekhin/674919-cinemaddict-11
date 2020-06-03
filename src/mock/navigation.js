@@ -1,35 +1,26 @@
-import {NAVIGATION_NAMES, NavigationType} from "../const";
+import {NAVIGATION_NAMES} from "../const";
 
 // Функция считатет статиститку
 const calculateStatistics = (films) => {
   return films.reduce((result, {isWatchlist, isWatched, isFavorite}) => {
-    result[NavigationType.ALL]++;
+    result[NAVIGATION_NAMES.ALL]++;
     if (isWatchlist) {
-      result[NavigationType.WATCHLIST]++;
+      result[NAVIGATION_NAMES.WATCHLIST]++;
     }
     if (isWatched) {
-      result[NavigationType.HISTORY]++;
+      result[NAVIGATION_NAMES.HISTORY]++;
     }
     if (isFavorite) {
-      result[NavigationType.FAVORITES]++;
+      result[NAVIGATION_NAMES.FAVORITES]++;
     }
 
     return result;
   }, {
-    [NavigationType.ALL]: 0,
-    [NavigationType.FAVORITES]: 0,
-    [NavigationType.HISTORY]: 0,
-    [NavigationType.WATCHLIST]: 0,
+    [NAVIGATION_NAMES.ALL]: 0,
+    [NAVIGATION_NAMES.FAVORITES]: 0,
+    [NAVIGATION_NAMES.HISTORY]: 0,
+    [NAVIGATION_NAMES.WATCHLIST]: 0,
   });
 };
 
-const generateNavigations = (stat) => {
-  return NAVIGATION_NAMES.map((name) => {
-    return {
-      name,
-      'count': stat[name],
-    };
-  });
-};
-
-export {generateNavigations, calculateStatistics};
+export {calculateStatistics};

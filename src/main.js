@@ -1,18 +1,16 @@
-import {NavigationType} from "./const";
+import {NAVIGATION_NAMES} from "./const";
 import {calculateStatistics} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {render} from "./utils/render";
 import ContainerComponent from "./components/films-container";
-import FooterStatisticsComponents from "./components/footer-statistics";
+import FooterStatisticsComponent from "./components/footer-statistics";
 import MoviesModel from "./models/movies";
-
+import StatisticsComponent from "./components/statistics";
 // Точка входа модели комментов
 import CommentsModel from "./models/comments";
-
 // Генерируем комментарии
 import {generateComments} from "./mock/comments";
 import FilterController from "./controllers/filter-controller";
-// import NavigationComponents from "./components/filter";
 import ProfileRatingComponents from "./components/profile";
 import PageController from "./controllers/page-controller";
 
@@ -30,22 +28,23 @@ commentsModel.setComments(comments);
 
 // 3.1 - 3.2; Генерируем фильмы
 const movies = generateFilms(FILMS_COUNT, commentsModel);
-// console.log(movies);
-
 const moviesModel = new MoviesModel();
 moviesModel.setMovies(movies);
 
-// 3.5;
 const statistics = calculateStatistics(movies);
-// const navigations = generateNavigations(statistics);
+// console.log(statistics);
 
-render(siteHeaderElement, new ProfileRatingComponents(statistics[NavigationType.HISTORY]));
-// render(siteMainElement, new NavigationComponents(navigations));
-const filterController = new FilterController(siteMainElement, moviesModel);
-filterController.render();
+render(siteHeaderElement, new ProfileRatingComponents(statistics[NAVIGATION_NAMES.HISTORY]));
 
 const containerComponent = new ContainerComponent();
 const pageController = new PageController(containerComponent, moviesModel, commentsModel);
+const filterController = new FilterController(siteMainElement, moviesModel, pageController);
+
+filterController.render();
 pageController.render(siteMainElement);
 render(siteMainElement, containerComponent);
-render(siteFooterStatisticsElement, new FooterStatisticsComponents(statistics[NavigationType.ALL]));
+
+const statisticsComponent = new StatisticsComponent();
+render(siteMainElement, statisticsComponent);
+
+render(siteFooterStatisticsElement, new FooterStatisticsComponent(statistics[NAVIGATION_NAMES.ALL]));

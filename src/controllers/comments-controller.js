@@ -17,7 +17,6 @@ export default class CommentsController {
     this._commentsComponent = new CommentsComponent(comments);
 
     this._commentsComponent.setDeleteButtonClickHandler((event, index) => {
-      event.preventDefault();
       this._onDataChange(comments[index], comments);
       onDelete(comments[index].id);
     });

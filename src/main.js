@@ -38,7 +38,7 @@ render(siteHeaderElement, new ProfileRatingComponents(statistics[NAVIGATION_NAME
 
 const containerComponent = new ContainerComponent();
 const pageController = new PageController(containerComponent, moviesModel, commentsModel);
-const filterController = new FilterController(siteMainElement, moviesModel, pageController);
+const filterController = new FilterController(siteMainElement, moviesModel);
 
 filterController.render();
 pageController.render(siteMainElement);

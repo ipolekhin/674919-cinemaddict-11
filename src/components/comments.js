@@ -112,19 +112,19 @@ export default class Comments extends AbstractSmartComponent {
     this.setAddedCommentHandler(this._addedKeydownHandler);
   }
 
-  setDeleteButtonClickHandler(handler) {
+  setDeleteButtonClickHandler(handler, comments) {
     this.getElement().querySelectorAll(`.film-details__comment-delete`)
       .forEach((button, index) => {
         button.addEventListener(`click`, (event) => {
           event.preventDefault();
-          handler(event, index);
+          handler(comments[index].id);
         });
       });
 
     this._deleteButtonCLickHandler = handler;
   }
 
-  getData() {
+  _getData() {
     const form = document.querySelector(`.film-details__inner`);
     const formData = new FormData(form);
 
@@ -135,7 +135,9 @@ export default class Comments extends AbstractSmartComponent {
     // повесил обработчик на компонент комментариев, так как элемент form общий ко всей карточки фильма и собирается в другом компоненте.
     this.getElement().addEventListener(`keydown`, (event) => {
       if (event.key === `Enter` && event.ctrlKey) {
-        handler(event);
+        event.preventDefault();
+        const data = this._getData();
+        handler(data);
       }
     });
 

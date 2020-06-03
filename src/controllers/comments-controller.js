@@ -16,14 +16,12 @@ export default class CommentsController {
     const oldCommentsComponent = this._commentsComponent;
     this._commentsComponent = new CommentsComponent(comments);
 
-    this._commentsComponent.setDeleteButtonClickHandler((event, index) => {
-      this._onDataChange(comments[index], comments);
-      onDelete(comments[index].id);
-    });
+    this._commentsComponent.setDeleteButtonClickHandler((commendId) => {
+      this._onDataChange(commendId, null);
+      onDelete(commendId);
+    }, comments);
 
-    this._commentsComponent.setAddedCommentHandler((event) => {
-      event.preventDefault();
-      const data = this._commentsComponent.getData();
+    this._commentsComponent.setAddedCommentHandler((data) => {
       this._onDataChange(null, data);
       addId(data.id);
     });

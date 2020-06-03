@@ -32,18 +32,18 @@ export default class Movies {
     const rank = () => {
       return this._movies.reduce((result, {isWatched}) => {
         if (isWatched) {
-          result++
+          result++;
         }
         return result;
       }, 0);
-    }
+    };
     const countWatched = rank();
     const profileRank = setProfileRating(countWatched);
 
     return {
       countWatched,
       rank: profileRank,
-    }
+    };
   }
 
   updateMovies(id, movie) {

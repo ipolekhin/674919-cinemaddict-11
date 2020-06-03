@@ -1,6 +1,3 @@
-import {NAVIGATION_NAMES} from "./const";
-// возможно удалить
-// import {calculateStatistics} from "./mock/navigation";
 import {generateFilms} from "./mock/film";
 import {render, replace} from "./utils/render";
 import ContainerComponent from "./components/films-container";
@@ -32,9 +29,6 @@ commentsModel.setComments(comments);
 const movies = generateFilms(FILMS_COUNT, commentsModel);
 const moviesModel = new MoviesModel();
 moviesModel.setMovies(movies);
-
-// const statistics = calculateStatistics(movies);
-// console.log(statistics);
 
 const changeProfileRank = (flag = false) => {
   const userRank = moviesModel.updateStatistics().rank;

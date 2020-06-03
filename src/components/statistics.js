@@ -1,15 +1,13 @@
 import AbstractSmartComponent from "./abstract-smart-component";
 import Chart from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import moment from "moment";
 
 const renderChart = (statisticCtx) => {
   const BAR_HEIGHT = 50;
 
-// Обязательно рассчитайте высоту canvas, она зависит от количества элементов диаграммы
   statisticCtx.height = BAR_HEIGHT * 5;
 
-  const myChart = new Chart(statisticCtx, {
+  return new Chart(statisticCtx, {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
     data: {
@@ -28,8 +26,8 @@ const renderChart = (statisticCtx) => {
             size: 20
           },
           color: `#ffffff`,
-          anchor: 'start',
-          align: 'start',
+          anchor: `start`,
+          align: `start`,
           offset: 40,
         }
       },
@@ -68,8 +66,6 @@ const renderChart = (statisticCtx) => {
 };
 
 const createStatisticTemplate = (statistic) => {
-  console.log(`statisticComponent`);
-  console.log(statistic.rank);
   return (
     `<section class="statistic">
       <p class="statistic__rank">

@@ -19,8 +19,7 @@ export default class StatisticsController {
     const statistic = this._moviesModel.updateStatistics();
     const oldComponent = this._statisticsComponent;
 
-    this._statisticsComponent = new  StatisticsComponent(statistic);
-    // this._statisticsComponent.setFilterChangeHandler(this._onStatisticsChange);
+    this._statisticsComponent = new StatisticsComponent(statistic);
 
     if (oldComponent) {
       replace(this._statisticsComponent, oldComponent);
